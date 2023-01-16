@@ -162,7 +162,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Yk-aX-GZB">
-                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RTn-ys-NwR">
                                         <rect key="frame" x="0.0" y="31" width="393" height="151"/>
@@ -692,7 +692,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8WS-Sd-fIr">
-                                <rect key="frame" x="16" y="613" width="361" height="55"/>
+                                <rect key="frame" x="16" y="564" width="361" height="55"/>
                                 <color key="backgroundColor" red="0.9882352941176471" green="0.42352941176470588" blue="0.42352941176470588" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="Mhi-cA-mKv"/>
@@ -702,12 +702,9 @@
                                 <buttonConfiguration key="configuration" style="plain" title="시작하기">
                                     <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
                                 </buttonConfiguration>
-                                <connections>
-                                    <segue destination="BxP-6M-tb3" kind="show" id="I2d-2i-a2B"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C4v-DG-KCp">
-                                <rect key="frame" x="16" y="676" width="361" height="55"/>
+                                <rect key="frame" x="16" y="627" width="361" height="55"/>
                                 <color key="backgroundColor" systemColor="systemGray3Color"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="AqS-My-62v"/>
@@ -744,11 +741,12 @@
                             <constraint firstItem="C4v-DG-KCp" firstAttribute="top" secondItem="8WS-Sd-fIr" secondAttribute="bottom" constant="8" id="z3P-8W-Eto"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="tZT-nh-bLd"/>
                     <navigationItem key="navigationItem" title="메인" id="PXU-Bf-he4"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lag-mP-I7g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1709.1603053435115" y="-27.464788732394368"/>
+            <point key="canvasLocation" x="3141" y="-357"/>
         </scene>
         <!--Item 2-->
         <scene sceneID="aEz-ur-oa3">
@@ -985,7 +983,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kK3-yx-nD4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8116.7938931297704" y="-401.40845070422534"/>
+            <point key="canvasLocation" x="7021" y="-373"/>
         </scene>
         <!--Write Record View Controller-->
         <scene sceneID="Irb-IY-HgU">
@@ -1198,22 +1196,6 @@
             </objects>
             <point key="canvasLocation" x="6860.3053435114498" y="275.35211267605638"/>
         </scene>
-        <!--Item 1-->
-        <scene sceneID="Z1M-Dm-qKT">
-            <objects>
-                <viewController modalPresentationStyle="fullScreen" id="QsY-nv-vqc" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="iqT-iB-Lap">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="sxk-fj-WzG"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="K3L-V6-oo5"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eYJ-CZ-cb4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3380.9160305343512" y="-373.23943661971833"/>
-        </scene>
         <!--View Controller-->
         <scene sceneID="Ocz-O3-tEu">
             <objects>
@@ -1330,7 +1312,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SsA-NP-lxt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6176.3358778625952" y="-327.46478873239437"/>
+            <point key="canvasLocation" x="6161" y="-357"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="qCW-HP-iZ8">
@@ -1343,14 +1325,14 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="QsY-nv-vqc" kind="relationship" relationship="viewControllers" id="mcz-Il-2fl"/>
                         <segue destination="tyb-Dj-e93" kind="relationship" relationship="viewControllers" id="AKa-Bk-WSw"/>
                         <segue destination="Ebi-NF-vdQ" kind="relationship" relationship="viewControllers" id="qCw-Dn-3f1"/>
+                        <segue destination="H11-OK-8dm" kind="relationship" relationship="viewControllers" id="kPM-Zs-Oin"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VGI-ww-Ac5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2462" y="-27"/>
+            <point key="canvasLocation" x="1669" y="-27"/>
         </scene>
         <!--로그인-->
         <scene sceneID="Wgz-gy-Ewa">
@@ -1433,7 +1415,7 @@
                                                         </buttonConfiguration>
                                                         <connections>
                                                             <action selector="loginClicked:" destination="4ut-8f-2Hv" eventType="touchUpInside" id="aNm-2u-bCn"/>
-                                                            <segue destination="H11-OK-8dm" kind="show" identifier="Welcome" id="POD-KL-Kdh"/>
+                                                            <segue destination="BxP-6M-tb3" kind="show" id="GX7-l6-KpK"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -1883,7 +1865,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="051-ch-s54"/>
+        <segue reference="qCw-Dn-3f1"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="DropDownDown" width="152" height="140"/>
