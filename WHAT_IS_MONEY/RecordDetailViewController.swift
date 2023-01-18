@@ -27,8 +27,23 @@ class RecordDetailViewController: UIViewController {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(editRecordNotification(_:)),
+            name: NSNotification.Name("editRecord"),
+            object: nil
+                )
     }
     
+    @objc func editRecordNotification(_ notification: Notification){
+        guard let record = notification.object as? Record else { return }
+        guard let row = notification.userInfo?["indexPath.row"] as? Int else { return }
+        self.recordList[row] = record
+        self.recordList = self.recordList.sorted(by: {
+            $0.diaryDate.compare($1.diaryDate) == .orderedDescending
+        })
+        self.tableView?.reloadData()
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let writeRecordViewController = segue.destination as? WriteRecordViewController {
             writeRecordViewController.delegate = self
@@ -60,7 +75,14 @@ class RecordDetailViewController: UIViewController {
 }
 
 extension RecordDetailViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let fixedRecordViewController = self.storyboard?.instantiateViewController(withIdentifier: "FixedRecordViewController") as? FixedRecordViewController else {return}
+        let record = self.recordList[indexPath.row]
+        fixedRecordViewController.record = record
+        fixedRecordViewController.indexPath = indexPath
+        fixedRecordViewController.delegate = self
+        self.navigationController?.pushViewController(fixedRecordViewController, animated: true)
+    }
     
     
 }
@@ -99,7 +121,18 @@ extension RecordDetailViewController: UITableViewDataSource {
 extension RecordDetailViewController: WriteRecordViewDelegate {
     func didSelectRegister(record: Record) {
         self.recordList.append(record)
+        self.recordList = self.recordList.sorted(by: {
+            $0.diaryDate.compare($1.diaryDate) == .orderedDescending
+        })
         self.tableView.reloadData()// 9.아까 전에 화면에서 구현해줬던 프로토콜 안에 있던 함수 드디어 구현, 여기서 구조체 배열에 이전 화면 구조체 객체 첨가
+    }
+    
+}
+
+extension RecordDetailViewController: FixedRecordViewDelegate {
+    func didSelectDelete(indexPath: IndexPath) {
+        self.recordList.remove(at: indexPath.row)
+        self.tableView.deleteRows(at: [indexPath], with: .fade)
     }
     
 }

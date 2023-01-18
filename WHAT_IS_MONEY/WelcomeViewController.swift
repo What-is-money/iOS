@@ -14,4 +14,9 @@ class WelcomeViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+      navigationController?.isNavigationBarHidden = true // 뷰 컨트롤러가 나타날 때 숨기기
+    }
+
 }

@@ -8,6 +8,12 @@
 import UIKit
 import DropDown
 
+enum RecordEditorMode {
+    case new
+    case edit(IndexPath, Record)
+    
+}
+
 protocol WriteRecordViewDelegate: AnyObject {
     func didSelectRegister(record: Record)
     
@@ -32,6 +38,7 @@ class WriteRecordViewController: UIViewController {
         super.viewDidLoad()
         self.initUI()
         self.setDropdown()
+        self.configureEditorMode()
         self.diaryDate = RegisterCellDatePicker.date
     }
     
@@ -40,7 +47,8 @@ class WriteRecordViewController: UIViewController {
     private var categorytype: String?
     private var moneyAmount: String?
     weak var delegate: WriteRecordViewDelegate? // 3.delegate 객체 작성! (위에 있는 프로토콜을 객체화 한 것!! 객체화 해야 넘겨줄 수 있으니까)
-        
+    var recordEditorMode: RecordEditorMode = .new
+    
         @IBOutlet weak var dropView: UIView!
         
         @IBOutlet weak var tfInput: UITextField!
@@ -144,6 +152,23 @@ class WriteRecordViewController: UIViewController {
         guard let categorytype = self.categorytype else {return}
         guard let moneyAmount = self.moneyAmount else {return}
         let record = Record(diaryDate: diaryDate, recordtype: recordtype, categorytype: categorytype, moneyAmount: moneyAmount)
+        
+        switch self.recordEditorMode {
+        case .new:
+            self.delegate?.didSelectRegister(record: record)
+        case let .edit(indexPath, _):
+            NotificationCenter.default.post(
+                name: NSNotification.Name("editRecord"),
+                object: record,
+                userInfo: [
+                    "indexPath.row": indexPath.row
+                ]
+            
+            )
+            
+            
+        }
+        
         self.delegate?.didSelectRegister(record: record) // 5. 위에 프로토콜에서 만들어준 함수에 그 객체를 넣기(이 함수는 셀 정보를 넘겨줄 뷰 컨트롤러에 정의됨
         print(diaryDate)
         print(recordtype)
@@ -165,6 +190,27 @@ class WriteRecordViewController: UIViewController {
         present(alert, animated: false, completion: nil)
         
     }
+    
+    
+    private func configureEditorMode() {
+        switch self.recordEditorMode {
+        case let .edit(_, record):
+            self.RegisterCellDatePicker.date = record.diaryDate
+            if record.recordtype == "save" {
+                self.tapSaveOrConsume(self.SaveButton)
+            } else {
+                self.tapSaveOrConsume(self.ConsumeButton)
+                
+            }
+            self.tfInput.text = record.categorytype
+            self.MoneyTextField.text = record.moneyAmount
+            self.RegisterButton.setTitle("수정", for: .normal)
+            
+        default:
+            break
+        }
+    }
+      
     
     }
 
