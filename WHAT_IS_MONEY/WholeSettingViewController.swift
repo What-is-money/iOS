@@ -36,6 +36,9 @@ class WholeSettingViewController: UIViewController {
         self.WithDrawalView.addGestureRecognizer(gesturealert3)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+    self.navigationController?.navigationBar.isHidden = false
+    }
     
     @objc func goProfileEdit(sender:UIGestureRecognizer){
            let storyboard  = UIStoryboard(name: "Main", bundle: nil)
