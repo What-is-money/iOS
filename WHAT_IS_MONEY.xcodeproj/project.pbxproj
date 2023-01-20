@@ -16,8 +16,7 @@
 		15279A55296D71CD00C14AC6 /* RecordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15279A53296D71CD00C14AC6 /* RecordTableViewCell.xib */; };
 		15279A57296ED3F000C14AC6 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15279A56296ED3F000C14AC6 /* ChartViewController.swift */; };
 		15279A59296ED6EB00C14AC6 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15279A58296ED6EB00C14AC6 /* ChartView.swift */; };
-		1531147B29796C2000C029D1 /* GoalAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1531147A29796C2000C029D1 /* GoalAddViewController.swift */; };
-		1531147D29796C3700C029D1 /* GoalEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1531147C29796C3700C029D1 /* GoalEditViewController.swift */; };
+		1531147929781A9F00C029D1 /* TabBarControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1531147829781A9F00C029D1 /* TabBarControllerViewController.swift */; };
 		3E130B4D2977B44100D63CF9 /* GoalDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E130B4C2977B44100D63CF9 /* GoalDetailViewController.swift */; };
 		3E18F0672976E48F008C5B5E /* GoalListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E18F0662976E48F008C5B5E /* GoalListViewController.swift */; };
 		3E1B0A4F2963044D0092B6E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1B0A4E2963044D0092B6E3 /* AppDelegate.swift */; };
@@ -36,6 +35,8 @@
 		3E7D8BBA2965A8DC0032EA4B /* ChangeIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7D8BB92965A8DC0032EA4B /* ChangeIDViewController.swift */; };
 		3E7D8BBC2965A8F50032EA4B /* ChangeSNViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7D8BBB2965A8F50032EA4B /* ChangeSNViewController.swift */; };
 		3E7D8BBE2965AD360032EA4B /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7D8BBD2965AD360032EA4B /* QuestionViewController.swift */; };
+		3E808BE0297A8B1200A503F2 /* GoalEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E808BDF297A8B1200A503F2 /* GoalEditViewController.swift */; };
+		3E808BE2297A8B2500A503F2 /* GoalAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E808BE1297A8B2500A503F2 /* GoalAddViewController.swift */; };
 		3EB4E0ED2970339F006EF640 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB4E0EC2970339F006EF640 /* Record.swift */; };
 		3EE5DB53296E85A2009E6FA2 /* RecordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE5DB52296E85A2009E6FA2 /* RecordDetailViewController.swift */; };
 		3EE5DB55296E866F009E6FA2 /* RecordDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE5DB54296E866F009E6FA2 /* RecordDetailTableViewCell.swift */; };
@@ -52,8 +53,7 @@
 		15279A53296D71CD00C14AC6 /* RecordTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecordTableViewCell.xib; sourceTree = "<group>"; };
 		15279A56296ED3F000C14AC6 /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		15279A58296ED6EB00C14AC6 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
-		1531147A29796C2000C029D1 /* GoalAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalAddViewController.swift; sourceTree = "<group>"; };
-		1531147C29796C3700C029D1 /* GoalEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalEditViewController.swift; sourceTree = "<group>"; };
+		1531147829781A9F00C029D1 /* TabBarControllerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarControllerViewController.swift; sourceTree = "<group>"; };
 		3E130B4C2977B44100D63CF9 /* GoalDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalDetailViewController.swift; sourceTree = "<group>"; };
 		3E18F0662976E48F008C5B5E /* GoalListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalListViewController.swift; sourceTree = "<group>"; };
 		3E1B0A4B2963044D0092B6E3 /* WHAT_IS_MONEY.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WHAT_IS_MONEY.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,6 +74,8 @@
 		3E7D8BB92965A8DC0032EA4B /* ChangeIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeIDViewController.swift; sourceTree = "<group>"; };
 		3E7D8BBB2965A8F50032EA4B /* ChangeSNViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeSNViewController.swift; sourceTree = "<group>"; };
 		3E7D8BBD2965AD360032EA4B /* QuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
+		3E808BDF297A8B1200A503F2 /* GoalEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalEditViewController.swift; sourceTree = "<group>"; };
+		3E808BE1297A8B2500A503F2 /* GoalAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalAddViewController.swift; sourceTree = "<group>"; };
 		3EB4E0EC2970339F006EF640 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		3EE5DB52296E85A2009E6FA2 /* RecordDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailViewController.swift; sourceTree = "<group>"; };
 		3EE5DB54296E866F009E6FA2 /* RecordDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailTableViewCell.swift; sourceTree = "<group>"; };
@@ -137,9 +139,8 @@
 				3E1B0A522963044D0092B6E3 /* ViewController.swift */,
 				3E1B0A622963E9310092B6E3 /* WelcomeViewController.swift */,
 				3E1B0A642963EA4C0092B6E3 /* WholeSettingViewController.swift */,
+				1531147829781A9F00C029D1 /* TabBarControllerViewController.swift */,
 				3E1B0A542963044D0092B6E3 /* Main.storyboard */,
-				1531147C29796C3700C029D1 /* GoalEditViewController.swift */,
-				1531147A29796C2000C029D1 /* GoalAddViewController.swift */,
 				15279A56296ED3F000C14AC6 /* ChartViewController.swift */,
 				15279A58296ED6EB00C14AC6 /* ChartView.swift */,
 				15279A4E296D567E00C14AC6 /* RecordViewController.swift */,
@@ -165,6 +166,8 @@
 				3E2421BF2976DC82004B8052 /* GoalListCell.swift */,
 				3E18F0662976E48F008C5B5E /* GoalListViewController.swift */,
 				3E130B4C2977B44100D63CF9 /* GoalDetailViewController.swift */,
+				3E808BDF297A8B1200A503F2 /* GoalEditViewController.swift */,
+				3E808BE1297A8B2500A503F2 /* GoalAddViewController.swift */,
 			);
 			path = WHAT_IS_MONEY;
 			sourceTree = "<group>";
@@ -285,6 +288,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1531147929781A9F00C029D1 /* TabBarControllerViewController.swift in Sources */,
+				3E808BE2297A8B2500A503F2 /* GoalAddViewController.swift in Sources */,
+				3E808BE0297A8B1200A503F2 /* GoalEditViewController.swift in Sources */,
 				3EE5DB53296E85A2009E6FA2 /* RecordDetailViewController.swift in Sources */,
 				3E1B0A532963044D0092B6E3 /* ViewController.swift in Sources */,
 				15279A472969D17300C14AC6 /* RegisterViewController.swift in Sources */,
@@ -301,8 +307,6 @@
 				15279A54296D71CD00C14AC6 /* RecordTableViewCell.swift in Sources */,
 				3E2421BC29765E0E004B8052 /* FixedRecordDetailViewController.swift in Sources */,
 				15279A59296ED6EB00C14AC6 /* ChartView.swift in Sources */,
-				1531147D29796C3700C029D1 /* GoalEditViewController.swift in Sources */,
-				1531147B29796C2000C029D1 /* GoalAddViewController.swift in Sources */,
 				3E18F0672976E48F008C5B5E /* GoalListViewController.swift in Sources */,
 				3E7D8BBC2965A8F50032EA4B /* ChangeSNViewController.swift in Sources */,
 				3E7D8BBA2965A8DC0032EA4B /* ChangeIDViewController.swift in Sources */,

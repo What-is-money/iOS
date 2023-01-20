@@ -13,6 +13,8 @@ class GoalListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     
+    @IBOutlet weak var kebapButton: UIButton!
+    
     @IBOutlet weak var dropView: UIView!
     
     @IBOutlet weak var tfInput: UITextField!
@@ -33,10 +35,12 @@ class GoalListViewController: UIViewController {
     
     
     func configurenavigationbar(){
-        let addgoal = UIAction(title: "목표 추가하기", handler: { _ in print("목표 추가하기") })
+        let addgoal = UIAction(title: "목표 추가하기", handler: { _ in
+            guard let goaladdviewcontroller = self.storyboard?.instantiateViewController(withIdentifier: "GoalAddViewController") else {return}
+            self.navigationController?.pushViewController(goaladdviewcontroller, animated: true) })
         let deletegoal = UIAction(title: "목표 삭제하기", handler: { _ in print("목표 삭제하기") })
         let buttonMenu = UIMenu(title: "메뉴 타이틀", children: [addgoal, deletegoal])
-       
+        kebapButton.menu = buttonMenu
         
     }
         

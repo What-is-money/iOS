@@ -2,7 +2,7 @@
 //  GoalEditViewController.swift
 //  WHAT_IS_MONEY
 //
-//  Created by 이예나 on 1/19/23.
+//  Created by jinyong yun on 2023/01/20.
 //
 
 import UIKit
