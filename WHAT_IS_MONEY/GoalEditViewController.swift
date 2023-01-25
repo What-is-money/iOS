@@ -7,84 +7,90 @@
 
 import UIKit
 
-protocol ImagePickerDelegate : AnyObject {
-    func clickButton()
-}
-
-class GoalEditViewController: UIViewController {
+class GoalEditViewController: UIViewController, UINavigationControllerDelegate & UIImagePickerControllerDelegate {
 
  
     @IBOutlet weak var ImgLabel: UILabel!
+    @IBOutlet weak var ImgUI: UIButton!
     @IBOutlet weak var GoalNameTextField: UITextField!
     @IBOutlet weak var GoalPriceTextField: UITextField!
     @IBOutlet weak var InitPriceTextField: UITextField!
     @IBOutlet weak var CompleteButton: UIButton!
     
+    let picker = UIImagePickerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let imagePicker = ImagePicker()
-        self.view.addSubview(imagePicker)
-        imagePicker.translatesAutoresizingMaskIntoConstraints = false
-        imagePicker.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        NSLayoutConstraint.activate(
-             [imagePicker.topAnchor.constraint(equalTo: self.ImgLabel.topAnchor, constant: 36),
-             imagePicker.heightAnchor.constraint(equalToConstant: 90),
-             imagePicker.widthAnchor.constraint(equalToConstant: 90)])
+        picker.delegate = self
+        picker.sourceType = .photoLibrary // 앨범에서 가져옴
+        picker.allowsEditing = true
+    }
+    func openLibrary(){
+
+      picker.sourceType = .photoLibrary
+
+      present(picker, animated: false, completion: nil)
+
     }
 
-}
-class ImagePicker  : UIView {
-    weak var delegate : ImagePickerDelegate?
-    var image : UIImageView!
-    var button : UIButton!
- 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.setView()
+    func openCamera(){
+
+        if(UIImagePickerController .isSourceTypeAvailable(.camera)){
+
+        picker.sourceType = .camera
+
+                    present(picker, animated: false, completion: nil)
+
+                }
+
+                else{
+
+                    print("Camera not available")
+
+                }
+
     }
-    convenience init () {
-        self.init(frame:.zero)
-    }
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+
+    @IBAction func TapImgUIButton(_ sender: UIButton) {
+       
+        let alert =  UIAlertController(title: "사진 수정", message: "", preferredStyle: .actionSheet)
+        let library =  UIAlertAction(title: "사진앨범", style: .default) { (action) in self.openLibrary()
+        }
+        let camera =  UIAlertAction(title: "카메라", style: .default) { (action) in
+
+        self.openCamera()
+
+        }
+        let delete = UIAlertAction(title: "삭제", style: .destructive){
+                    //TODO 추가 이미지 setting (+)
+                    (action) in print("")
+                }
+
+        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+
+        alert.addAction(library)
+
+        alert.addAction(camera)
+        
+        alert.addAction(delete)
+
+        alert.addAction(cancel)
+
+        present(alert, animated: true, completion: nil)
     }
     
-    func setView() {
-        backgroundColor = .clear
-        createImage()
-        createButton()
-    }
-    func createImage() {
-            image = UIImageView()
-            image.clipsToBounds = true
-            image.image = UIImage(named : "image1") // 서버에서 받아와야함, 이미지가 디폴트가 아닐 시에 삭제 기능 작동, 디폴트면 추가기능만 작동
-            image.layer.cornerRadius = 8
-            image.layer.borderWidth = 0.5
-            image.layer.borderColor = UIColor(red: 0.587, green: 0.587, blue: 0.587, alpha: 1).cgColor
-            image.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-            addSubview(image)
-            image.translatesAutoresizingMaskIntoConstraints = false
-            image.frame = CGRect(x:0, y:0, width: 90, height: 90)
-        }
-  
-    func createButton() {
-            button = UIButton()
-            button.setImage(UIImage(systemName: "x.circle.fill"), for: .normal)
-            button.imageView?.tintColor = .black
-            button.layer.cornerRadius = 10
-            addSubview(button)
-            button.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate(
-                [button.topAnchor.constraint(equalTo: topAnchor, constant: -5),
-                 button.heightAnchor.constraint(equalToConstant: 18),
-                 button.widthAnchor.constraint(equalToConstant: 18),
-                 button.rightAnchor.constraint(equalTo: rightAnchor,constant: 5)])
-            
-            button.addTarget(self, action: #selector(click), for: .touchDown)
-        }
-    @objc func click() {
-        delegate?.clickButton()
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if var image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage{
+            image = image.resized(toWidth: 90.0) ?? image
+            ImgUI.setImage(image, for: .normal)
+            print(info)
 
+                }
+
+                dismiss(animated: true, completion: nil)
     }
+  
+    
+
 }
+

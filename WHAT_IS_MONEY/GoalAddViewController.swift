@@ -73,11 +73,17 @@ class GoalAddViewController: UIViewController, UINavigationControllerDelegate & 
         present(alert, animated: true, completion: nil)
     }
     
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if var image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
+            image = image.resized(toWidth: 90.0) ?? image
+            ImgUI.setImage(image, for: .normal)
+            print(info)
+
+                }
+
+                dismiss(animated: true, completion: nil)
+    }
+  
+    
 }
-
-
-
-
-
-
 
