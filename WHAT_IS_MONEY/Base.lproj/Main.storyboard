@@ -128,7 +128,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Yk-aX-GZB">
-                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RTn-ys-NwR">
                                         <rect key="frame" x="0.0" y="31" width="393" height="151"/>
@@ -374,18 +374,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MkL-dr-WyL">
-                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y6Y-en-x34">
                                         <rect key="frame" x="0.0" y="31" width="393" height="185"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jinperson2" translatesAutoresizingMaskIntoConstraints="NO" id="MP3-u1-m57">
-                                                <rect key="frame" x="151.66666666666666" y="19" width="90" height="90"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="90" id="QVV-Gt-g2x"/>
-                                                    <constraint firstAttribute="width" constant="90" id="koe-Ac-MjK"/>
-                                                </constraints>
-                                            </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kpb-rU-fAd">
                                                 <rect key="frame" x="179" y="117" width="35" height="24"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
@@ -398,15 +391,29 @@
                                                 <color key="textColor" systemColor="opaqueSeparatorColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ljb-cD-P43">
+                                                <rect key="frame" x="151.66666666666666" y="19" width="90" height="90"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="90" id="7LN-b0-7NN"/>
+                                                    <constraint firstAttribute="width" constant="90" id="WPR-oI-4jz"/>
+                                                </constraints>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="jinperson2">
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" scale="default"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="TapPickImageButton:" destination="3h7-cM-rY6" eventType="touchUpInside" id="AdX-eX-tKc"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
+                                            <constraint firstItem="Ljb-cD-P43" firstAttribute="top" secondItem="Y6Y-en-x34" secondAttribute="top" constant="19" id="1GM-vi-6QR"/>
+                                            <constraint firstItem="Kpb-rU-fAd" firstAttribute="centerX" secondItem="Ljb-cD-P43" secondAttribute="centerX" id="4GU-uZ-zh9"/>
+                                            <constraint firstItem="Kpb-rU-fAd" firstAttribute="top" secondItem="Ljb-cD-P43" secondAttribute="bottom" constant="8" symbolic="YES" id="HVa-rz-ACp"/>
                                             <constraint firstItem="NO6-NK-AD6" firstAttribute="centerX" secondItem="Y6Y-en-x34" secondAttribute="centerX" id="I0R-fL-NLy"/>
-                                            <constraint firstItem="MP3-u1-m57" firstAttribute="centerX" secondItem="Y6Y-en-x34" secondAttribute="centerX" id="RsE-lH-LwQ"/>
-                                            <constraint firstItem="MP3-u1-m57" firstAttribute="top" secondItem="Y6Y-en-x34" secondAttribute="top" constant="19" id="aVx-Og-7Qh"/>
-                                            <constraint firstItem="MP3-u1-m57" firstAttribute="top" secondItem="Y6Y-en-x34" secondAttribute="top" constant="19" id="gQL-Ya-boH"/>
+                                            <constraint firstItem="NO6-NK-AD6" firstAttribute="centerX" secondItem="Ljb-cD-P43" secondAttribute="centerX" id="TJK-Zs-GWv"/>
                                             <constraint firstItem="NO6-NK-AD6" firstAttribute="top" secondItem="Kpb-rU-fAd" secondAttribute="bottom" constant="8" symbolic="YES" id="q09-La-3Ek"/>
-                                            <constraint firstItem="Kpb-rU-fAd" firstAttribute="top" secondItem="MP3-u1-m57" secondAttribute="bottom" constant="8" symbolic="YES" id="w0W-pg-v1Z"/>
                                             <constraint firstItem="Kpb-rU-fAd" firstAttribute="centerX" secondItem="Y6Y-en-x34" secondAttribute="centerX" id="whb-b9-izo"/>
                                         </constraints>
                                     </view>
@@ -496,14 +503,14 @@
                         <outlet property="ChangeSNView" destination="2AA-ag-Rao" id="YYc-Z3-6cV"/>
                         <outlet property="ID" destination="NO6-NK-AD6" id="7c4-Cd-IAd"/>
                         <outlet property="Name" destination="Kpb-rU-fAd" id="11o-SO-C4I"/>
-                        <outlet property="ProfilePicture" destination="MP3-u1-m57" id="JhK-QI-ITy"/>
+                        <outlet property="imagepickButton" destination="Ljb-cD-P43" id="h48-VU-Vnm"/>
                         <segue destination="hiF-7u-5uZ" kind="show" identifier="ChangeID" id="ZU8-Lq-Bb6"/>
                         <segue destination="AI9-GW-1Ok" kind="show" identifier="ChangeSN" id="89Z-di-FrC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xDU-LO-kFG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5650" y="-1109"/>
+            <point key="canvasLocation" x="5649.6183206106871" y="-1109.1549295774648"/>
         </scene>
         <!--ChangeID View Controller-->
         <scene sceneID="Nhg-4L-eH1">
@@ -538,7 +545,7 @@
                                 <buttonConfiguration key="configuration" style="gray" title="중복확인" cornerStyle="capsule"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kSY-nP-Wz6">
-                                <rect key="frame" x="16" y="732" width="361" height="52"/>
+                                <rect key="frame" x="16" y="683" width="361" height="52"/>
                                 <color key="backgroundColor" red="0.98823529409999999" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="bhc-sw-dnG"/>
@@ -1753,64 +1760,51 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="61" translatesAutoresizingMaskIntoConstraints="NO" id="YH2-Nh-GVJ">
-                                <rect key="frame" x="40.666666666666657" y="233" width="312" height="386"/>
+                                <rect key="frame" x="40.666666666666657" y="262" width="312" height="328"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="58" translatesAutoresizingMaskIntoConstraints="NO" id="8Cn-Z4-nGL">
-                                        <rect key="frame" x="0.0" y="0.0" width="312" height="386"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="312" height="328"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" highlightedImage="person" translatesAutoresizingMaskIntoConstraints="NO" id="06I-xB-ghG">
-                                                <rect key="frame" x="82" y="0.0" width="148" height="152"/>
+                                                <rect key="frame" x="82" y="0.0" width="148" height="106"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="106" id="o5z-a3-yDV"/>
+                                                </constraints>
                                                 <imageReference key="image" image="profile" symbolScale="large" renderingMode="template" variableValue="1"/>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="46" translatesAutoresizingMaskIntoConstraints="NO" id="kWv-yz-JfK">
-                                                <rect key="frame" x="0.0" y="210" width="312" height="176"/>
+                                                <rect key="frame" x="0.0" y="164" width="312" height="164"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="머니뭐니님, 어서오세요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UuO-GS-MoN">
-                                                        <rect key="frame" x="61.000000000000014" y="0.0" width="189.66666666666669" height="24"/>
+                                                        <rect key="frame" x="61" y="0.0" width="190" height="24"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vg8-Gn-RgF">
+                                                        <rect key="frame" x="0.0" y="70" width="312" height="48"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="48" id="PVH-aX-jaD"/>
+                                                        </constraints>
+                                                        <color key="tintColor" red="0.98823529409999999" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="filled" title="시작하기" cornerStyle="fixed">
+                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="16"/>
+                                                            <color key="baseBackgroundColor" red="0.98823529409999999" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </buttonConfiguration>
+                                                        <connections>
+                                                            <action selector="loginClicked:" destination="4ut-8f-2Hv" eventType="touchUpInside" id="IMs-Nm-77N"/>
+                                                            <segue destination="BxP-6M-tb3" kind="show" id="abM-n3-rZw"/>
+                                                        </connections>
+                                                    </button>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="kPH-Wi-gTz">
-                                                        <rect key="frame" x="0.0" y="70" width="312" height="106"/>
-                                                        <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vg8-Gn-RgF">
-                                                                <rect key="frame" x="0.0" y="0.0" width="312" height="48"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" constant="312" id="0wv-cn-nFD"/>
-                                                                    <constraint firstAttribute="height" constant="48" id="PVH-aX-jaD"/>
-                                                                </constraints>
-                                                                <color key="tintColor" red="0.98823529409999999" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                <state key="normal" title="Button"/>
-                                                                <buttonConfiguration key="configuration" style="filled" title="시작하기" cornerStyle="fixed">
-                                                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="16"/>
-                                                                    <color key="baseBackgroundColor" red="0.98823529409999999" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                </buttonConfiguration>
-                                                                <connections>
-                                                                    <action selector="loginClicked:" destination="4ut-8f-2Hv" eventType="touchUpInside" id="IMs-Nm-77N"/>
-                                                                    <segue destination="BxP-6M-tb3" kind="show" id="abM-n3-rZw"/>
-                                                                </connections>
-                                                            </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Z0-fs-Cnq">
-                                                                <rect key="frame" x="0.0" y="58" width="312" height="48"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" constant="312" id="Lct-sk-J6z"/>
-                                                                    <constraint firstAttribute="height" constant="48" id="ZFj-Nj-Mee"/>
-                                                                </constraints>
-                                                                <color key="tintColor" red="0.98823529409999999" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                <state key="normal" title="Button"/>
-                                                                <buttonConfiguration key="configuration" style="filled" title="설정하기" cornerStyle="fixed">
-                                                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="16"/>
-                                                                    <color key="baseBackgroundColor" red="0.40392156862745099" green="0.40392156862745099" blue="0.40392156862745099" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                </buttonConfiguration>
-                                                                <connections>
-                                                                    <action selector="loginClicked:" destination="4ut-8f-2Hv" eventType="touchUpInside" id="poD-V7-0Xe"/>
-                                                                    <segue destination="Ebi-NF-vdQ" kind="show" id="hYs-JJ-wVd"/>
-                                                                </connections>
-                                                            </button>
-                                                        </subviews>
+                                                        <rect key="frame" x="0.0" y="164" width="312" height="0.0"/>
                                                     </stackView>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="kPH-Wi-gTz" firstAttribute="leading" secondItem="vg8-Gn-RgF" secondAttribute="leading" id="5Ay-tm-mJs"/>
+                                                    <constraint firstItem="UuO-GS-MoN" firstAttribute="leading" secondItem="kWv-yz-JfK" secondAttribute="leading" constant="61.000000000000028" id="miS-TH-OYz"/>
+                                                </constraints>
                                             </stackView>
                                         </subviews>
                                     </stackView>
@@ -1820,6 +1814,7 @@
                         <viewLayoutGuide key="safeArea" id="st7-sd-ZGr"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="YH2-Nh-GVJ" firstAttribute="top" secondItem="st7-sd-ZGr" secondAttribute="top" constant="159" id="Jj0-nL-lHk"/>
                             <constraint firstItem="YH2-Nh-GVJ" firstAttribute="centerX" secondItem="Nah-Zq-DfP" secondAttribute="centerX" id="g74-zt-nR9"/>
                             <constraint firstItem="YH2-Nh-GVJ" firstAttribute="centerY" secondItem="Nah-Zq-DfP" secondAttribute="centerY" id="gFM-Qw-O9n"/>
                         </constraints>
@@ -2397,6 +2392,9 @@
                                                     <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="baseBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="TapImgUIButton:" destination="SYj-Lw-W2w" eventType="touchUpInside" id="gpq-qu-yBH"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -2696,9 +2694,6 @@
             <point key="canvasLocation" x="6360" y="367"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="hYs-JJ-wVd"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="Chart" width="25" height="25"/>
         <image name="DropDownDown" width="152" height="140"/>
@@ -2708,7 +2703,7 @@
         <image name="calendar" catalog="system" width="128" height="107"/>
         <image name="defaultimage" width="246" height="248"/>
         <image name="jinperson" width="250" height="246"/>
-        <image name="jinperson2" width="268" height="252"/>
+        <image name="jinperson2" width="96" height="90"/>
         <image name="logo" width="105" height="74"/>
         <image name="person" width="128" height="128"/>
         <image name="pigImg" width="404" height="688"/>

@@ -58,7 +58,7 @@ class ImagePicker  : UIView {
     func createImage() {
             image = UIImageView()
             image.clipsToBounds = true
-            image.image = UIImage(named : "image1")
+            image.image = UIImage(named : "image1") // 서버에서 받아와야함, 이미지가 디폴트가 아닐 시에 삭제 기능 작동, 디폴트면 추가기능만 작동
             image.layer.cornerRadius = 8
             image.layer.borderWidth = 0.5
             image.layer.borderColor = UIColor(red: 0.587, green: 0.587, blue: 0.587, alpha: 1).cgColor
