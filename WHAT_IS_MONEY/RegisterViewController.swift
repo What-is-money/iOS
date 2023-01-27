@@ -7,145 +7,160 @@
 
 import UIKit
 
-
 class RegisterViewController: UIViewController {
-    var userModel = UserModel() // instance
     
     @IBOutlet weak var NameInput: UITextField!
     @IBOutlet weak var EmailInput: UITextField!
     @IBOutlet weak var IDInput: UITextField!
     @IBOutlet weak var PWInput: UITextField!
     @IBOutlet weak var ConfirmPWInput: UITextField!
+    @IBOutlet weak var IDCheckLabel: UILabel!
+    @IBOutlet weak var IDCheckBtn: UIButton!
     
-    //회원 확인
-    func isUser(id: String) -> Bool {
-        for user in userModel.users {
-            if user.email == id {
-                return true
-            }
-        }
-        return false
-    }
+    var isIdChecked = false
     
-    @objc func didEndOnExit(_ sender: UITextField) {
-        if NameInput.isFirstResponder {
-            EmailInput.becomeFirstResponder()
-        }
-        else if EmailInput.isFirstResponder {
-            IDInput.becomeFirstResponder()
-        }
-        else if IDInput.isFirstResponder {
-            PWInput.becomeFirstResponder()
-        }
-        else if PWInput.isFirstResponder {
-            ConfirmPWInput.becomeFirstResponder()
-        }
-        else if NameInput.isFirstResponder {
-            EmailInput.becomeFirstResponder()
-        }
-    }
-    // TextField 흔들기 애니메이션
-    func shakeTextField(textField: UITextField) -> Void{
-        UIView.animate(withDuration: 0.2, animations: {
-            textField.frame.origin.x -= 10
-        }, completion: { _ in
-            UIView.animate(withDuration: 0.2, animations: {
-                textField.frame.origin.x += 20
-            }, completion: { _ in
-                UIView.animate(withDuration: 0.2, animations: {
-                    textField.frame.origin.x -= 10
-                })
-            })
-        })
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        NameInput.addTarget(self, action: #selector(didEndOnExit), for: UIControl.Event.editingDidEndOnExit)
-        EmailInput.addTarget(self, action: #selector(didEndOnExit), for: UIControl.Event.editingDidEndOnExit)
-        IDInput.addTarget(self, action: #selector(didEndOnExit), for: UIControl.Event.editingDidEndOnExit)
-        PWInput.addTarget(self, action: #selector(didEndOnExit), for: UIControl.Event.editingDidEndOnExit)
-        ConfirmPWInput.addTarget(self, action: #selector(didEndOnExit), for: UIControl.Event.editingDidEndOnExit)
-        
-        // Do any additional setup after loading the view.
+        self.IDInput.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
     }
+    @objc func textFieldDidChange(_ sender: Any?) {
+        self.IDCheckBtn.isEnabled = true
+    }
+        @IBAction func checkIDValidation(_ sender: UIButton) {
+            guard let id = IDInput.text, !id.isEmpty else { return }
+            guard let url = URL(string: "https://www.pigmoney.xyz/users/idCheck/\(id)") else {
+                    print("Error: cannot create URL")
+                    return
+                }
+                // Create the url request
+                var request = URLRequest(url: url)
+                request.httpMethod = "GET"
+                URLSession.shared.dataTask(with: request) { data, response, error in
+                    guard error == nil else {
+                        print("Error: error calling GET")
+                        print(error!)
+                        return
+                    }
+                    guard let data = data else {
+                        print("Error: Did not receive data")
+                        return
+                    }
+                    
+                    print(String(data: data, encoding: .utf8)!)
+                    guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
+                        print("Error: HTTP request failed")
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        do {
+                            guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+                                print("Error: Cannot convert data to JSON object")
+                                return
+                            }
+                            guard let prettyJsonData = try? JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted) else {
+                                print("Error: Cannot convert JSON object to Pretty JSON data")
+                                return
+                            }
+                            guard String(data: prettyJsonData, encoding: .utf8) != nil else {
+                                print("Error: Couldn't print JSON in String")
+                                return
+                            }
+                            
+                            let result = jsonObject["result"] as? String
+                            if result == "사용가능한 아이디입니다!" {
+                                self.IDCheckLabel?.text = "사용가능한 아이디입니다."
+                                self.IDCheckBtn.isEnabled = false
+                                self.isIdChecked = true
+                                print("사용가능한 아이디입니다.")
+                            } else if result == "이미 사용중인 아이디입니다." {
+                                self.IDCheckLabel?.text = "이미 사용중인 아이디입니다."
+                                print("이미 사용중인 아이디입니다.")
+                            } else {
+                                self.IDCheckLabel?.text = "아이디 형식이 올바르지 않습니다."
+                            }
+                            
+                        } catch {
+                            print("Error: Trying to convert JSON data to string")
+                            return
+                        }
+                    }
+                    
+                }.resume()
+        }
     
-    @IBAction func checkIDValidation(_ sender: UIButton) {
-        guard let id = IDInput.text, !id.isEmpty else { return }
-        if userModel.isValidEmail(id: id) {
-            let checkFail : Bool = isUser(id: id)
-            if checkFail {
-                print("아이디 중복")
-                shakeTextField(textField: IDInput)
-                let checkFailLabel = UILabel(frame: CGRect(x: 68, y: 510, width: 279, height: 45))
-                checkFailLabel.text = "이미 가입된 아이디입니다."
-                checkFailLabel.textColor = UIColor.red
-                checkFailLabel.tag = 103
-                
-                self.view.addSubview(checkFailLabel)
-            }
+    @IBAction func RegisterClicked(_ sender: UIButton) {
+        guard let name = NameInput.text else { return }
+        guard let email = EmailInput.text else { return }
+        guard let id = IDInput.text else { return }
+        guard let pw = PWInput.text else { return }
+        guard let confirmPw = ConfirmPWInput.text else { return }
+        
+        if name.isEmpty || email.isEmpty || id.isEmpty || pw.isEmpty || confirmPw.isEmpty {
+            let sheet = UIAlertController(title: "경고", message: "모든 입력칸에 올바르게 입력하였는지 확인해주세요", preferredStyle: .alert)
+            sheet.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in print("빈 입력칸 확인") }))
+            present(sheet, animated: true)
         }
+        func isValidEmail(testStr:String) -> Bool {
+              let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+              let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+              return emailTest.evaluate(with: testStr)
+        }
+        func isValidPassword(testStr:String) -> Bool {
+              let passwordRegEx = "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#$%^&*()_+=-]).{8,16}"
+              let passwordTest = NSPredicate(format:"SELF MATCHES %@", passwordRegEx)
+              return passwordTest.evaluate(with: testStr)
+        }
+        if !isValidEmail(testStr: email) {
+            let sheet = UIAlertController(title: "경고", message: "이메일 형식이 올바르지 않습니다", preferredStyle: .alert)
+            sheet.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in print("이메일 확인") }))
+            present(sheet, animated: true)
+        }
+        if !isValidPassword(testStr: pw) {
+            let sheet = UIAlertController(title: "경고", message: "비밀번호는 8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요", preferredStyle: .alert)
+            sheet.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in print("비밀번호 확인") }))
+            present(sheet, animated: true)
+        }
+        if pw != confirmPw {
+            let sheet = UIAlertController(title: "경고", message: "비밀번호가 서로 일치하지 않습니다", preferredStyle: .alert)
+            sheet.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in print("비밀번호 일치 확인") }))
+            print("비밀번호가 서로 일치하지 않습니다.")
+            present(sheet, animated: true)
+        }
+        if isIdChecked == false {
+            let sheet = UIAlertController(title: "경고", message: "아이디 중복확인을 진행해주세요", preferredStyle: .alert)
+            sheet.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in print("아이디중복 확인") }))
+            present(sheet, animated: true)
+        }
+        
+
+
+        
+        // Create model
+        struct RegisterData: Codable {
+            let userId: String
+            let password: String
+            let confirmPassword: String
+            let name: String
+            let email: String
+            let agree: Bool
+            let idCheck: Bool
+        }
+        
+        // Add data to the model
+        let uploadDataModel = RegisterData(userId: id, password: pw, confirmPassword: confirmPw, name: name, email: email, agree: true, idCheck: isIdChecked)
+        
+        guard var vc = storyboard?.instantiateViewController(identifier: "AgreePrivacyPolicyViewController") as? AgreePrivacyPolicyViewController else { return }
+        vc.userId = id
+        vc.password = pw
+        vc.confirmPassword = confirmPw
+        vc.name = name
+        vc.email = email
+       // let vc = AgreePrivacyPolicyViewController(userId: id, password: pw, confirmPassword: pw, name: name, email: email, agree: true, idCheck: isIdChecked)
+        //self.present(vc, animated: false, completion: nil)
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+       
     }
-    
-    @IBAction func registerClicked(_ sender: UIButton) {
-        guard let name = NameInput.text, !name.isEmpty else { return }
-        guard let email = EmailInput.text, !email.isEmpty else { return }
-        guard let id = IDInput.text, !id.isEmpty else { return }
-        guard let pw = PWInput.text, !pw.isEmpty else { return }
-        guard let confirmPw = ConfirmPWInput.text, !confirmPw.isEmpty else { return }
-        
-        if userModel.isValidEmail(id: email){
-            if let removable = self.view.viewWithTag(100) {
-                removable.removeFromSuperview()
-            }
-        }
-        else {
-            shakeTextField(textField: EmailInput)
-            let emailLabel = UILabel(frame: CGRect(x: 31, y: 300, width: 312, height: 30))
-            emailLabel.text = "이메일 형식을 확인해 주세요"
-            emailLabel.textColor = UIColor.red
-            emailLabel.tag = 100
-            
-            self.view.addSubview(emailLabel)
-        } //email 형식 오류
-        
-        if userModel.isValidPassword(pwd: pw) {
-            if let removable = self.view.viewWithTag(101) {
-                removable.removeFromSuperview()
-            }
-        }
-        else {
-            shakeTextField(textField: PWInput)
-            let passwordLabel = UILabel(frame: CGRect(x: 31, y: 335, width: 312, height: 30))
-            passwordLabel.text = "비밀번호 형식을 확인해 주세요"
-            passwordLabel.textColor = UIColor.red
-            passwordLabel.tag = 101
-            
-            self.view.addSubview(passwordLabel)
-        }// pw 형식 오류
-        
-        if pw == confirmPw {
-            if let removable = self.view.viewWithTag(102) {
-                removable.removeFromSuperview()
-            }
-        }
-        else {
-            shakeTextField(textField: ConfirmPWInput)
-            let passwordConfirmLabel = UILabel(frame: CGRect(x: 68, y: 470, width: 279, height: 45))
-            passwordConfirmLabel.text = "비밀번호가 다릅니다."
-            passwordConfirmLabel.textColor = UIColor.red
-            passwordConfirmLabel.tag = 102
-            
-            self.view.addSubview(passwordConfirmLabel)
-        }
-        
-        
-        if userModel.isValidEmail(id: email) && userModel.isValidPassword(pwd: pw) && pw == confirmPw {
-            print("회원가입 성공")
-            if let removable = self.view.viewWithTag(103) {
-                removable.removeFromSuperview()
-            }
-            self.performSegue(withIdentifier: "로그인", sender: self)
-        }
-    }
+       
     
 }

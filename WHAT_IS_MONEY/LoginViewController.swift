@@ -130,6 +130,31 @@ class LoginViewController: UIViewController {
         }
         
     }
-    
+
+        @IBAction func LoginClicked(_ sender: UIButton) {
+            guard let url = URL(string: "https://www.pigmoney.xyz/test/log") else {
+                    print("Error: cannot create URL")
+                    return
+                }
+                // Create the url request
+                var request = URLRequest(url: url)
+                request.httpMethod = "GET"
+                URLSession.shared.dataTask(with: request) { data, response, error in
+                    guard error == nil else {
+                        print("Error: error calling GET")
+                        print(error!)
+                        return
+                    }
+                    guard let data = data else {
+                        print("Error: Did not receive data")
+                        return
+                    }
+                    print(String(data: data, encoding: .utf8)!)
+                    
+                }.resume()
+            }
+        
+        
+       
     
 }

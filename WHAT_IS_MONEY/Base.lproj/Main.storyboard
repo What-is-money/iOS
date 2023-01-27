@@ -13,7 +13,8 @@
         <!--Navigation Controller-->
         <scene sceneID="2eo-tT-Xlk">
             <objects>
-                <navigationController storyboardIdentifier="firstNavigationController" id="Opg-A4-2wu" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="firstNavigationController" wantsFullScreenLayout="YES" modalPresentationStyle="fullScreen" id="Opg-A4-2wu" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="WjW-5d-anm"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" restorationIdentifier="FirstNavBar" id="OQk-KY-LjS">
                         <rect key="frame" x="0.0" y="47" width="428" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1812,7 +1813,7 @@
         <!--Welcome View Controller-->
         <scene sceneID="D9e-By-gkB">
             <objects>
-                <viewController id="xgy-GA-4f7" customClass="WelcomeViewController" customModule="WHAT_IS_MONEY" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="overFullScreen" id="xgy-GA-4f7" customClass="WelcomeViewController" customModule="WHAT_IS_MONEY" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Nah-Zq-DfP">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1883,7 +1884,7 @@
         <!--메인-->
         <scene sceneID="qCW-HP-iZ8">
             <objects>
-                <tabBarController id="BxP-6M-tb3" sceneMemberID="viewController">
+                <tabBarController modalPresentationStyle="overFullScreen" id="BxP-6M-tb3" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="메인" id="vQz-cy-5Gm"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ZN9-yj-byj">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
@@ -1904,7 +1905,7 @@
         <!--로그인-->
         <scene sceneID="Wgz-gy-Ewa">
             <objects>
-                <viewController storyboardIdentifier="LoginViewController" id="4ut-8f-2Hv" customClass="LoginViewController" customModule="WHAT_IS_MONEY" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" modalPresentationStyle="overFullScreen" id="4ut-8f-2Hv" customClass="LoginViewController" customModule="WHAT_IS_MONEY" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="C8Z-Eh-4kF">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1972,6 +1973,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="312" height="48"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="48" id="4pX-kx-eI6"/>
+                                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="312" id="iI5-By-W4k"/>
                                                                     <constraint firstAttribute="width" constant="312" id="yB8-CV-pBn"/>
                                                                 </constraints>
                                                                 <color key="tintColor" red="0.98823529409999999" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1981,6 +1983,7 @@
                                                                     <color key="baseBackgroundColor" red="0.98823529409999999" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 </buttonConfiguration>
                                                                 <connections>
+                                                                    <action selector="LoginClicked:" destination="4ut-8f-2Hv" eventType="touchUpInside" id="oJr-1y-S4t"/>
                                                                     <action selector="loginClicked:" destination="4ut-8f-2Hv" eventType="touchUpInside" id="aNm-2u-bCn"/>
                                                                     <segue destination="xgy-GA-4f7" kind="show" id="DOF-sR-ae8"/>
                                                                 </connections>
@@ -2086,7 +2089,7 @@
         <!--아이디/비밀번호 찾기-->
         <scene sceneID="MS1-z6-I00">
             <objects>
-                <viewController storyboardIdentifier="FindIdPwViewController" id="sCC-wz-NFK" customClass="FindIdPwViewController" customModule="WHAT_IS_MONEY" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FindIdPwViewController" modalPresentationStyle="fullScreen" id="sCC-wz-NFK" customClass="FindIdPwViewController" customModule="WHAT_IS_MONEY" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hbZ-3W-7z6">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2237,19 +2240,19 @@
         <!--회원가입-->
         <scene sceneID="ckU-vK-0w9">
             <objects>
-                <viewController storyboardIdentifier="RegisterViewController" id="PUt-BZ-6bW" customClass="RegisterViewController" customModule="WHAT_IS_MONEY" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RegisterViewController" modalPresentationStyle="fullScreen" id="PUt-BZ-6bW" customClass="RegisterViewController" customModule="WHAT_IS_MONEY" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8C4-1M-35U">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="rWd-8G-sKf">
-                                <rect key="frame" x="58" y="118" width="312" height="352"/>
+                                <rect key="frame" x="58" y="118" width="312" height="412"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="56" translatesAutoresizingMaskIntoConstraints="NO" id="tMh-Cp-8ca">
-                                        <rect key="frame" x="0.0" y="0.0" width="312" height="352"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="312" height="412"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="EnC-CK-2Ap">
-                                                <rect key="frame" x="0.0" y="0.0" width="312" height="188"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="312" height="248"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="4MD-Bc-KhC">
                                                         <rect key="frame" x="0.0" y="0.0" width="312" height="108"/>
@@ -2274,40 +2277,68 @@
                                                             </textField>
                                                         </subviews>
                                                     </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Lqf-gq-Tbb">
-                                                        <rect key="frame" x="0.0" y="140" width="312" height="48"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Q0u-qF-cWR">
+                                                        <rect key="frame" x="0.0" y="140" width="312" height="108"/>
                                                         <subviews>
-                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="아이디" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n2F-4R-8Td">
-                                                                <rect key="frame" x="0.0" y="0.0" width="210" height="48"/>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Lqf-gq-Tbb">
+                                                                <rect key="frame" x="0.0" y="0.0" width="312" height="48"/>
+                                                                <subviews>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="아이디" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n2F-4R-8Td">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="210" height="48"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="48" id="jrl-ps-ryj"/>
+                                                                            <constraint firstAttribute="width" constant="210" id="zcs-KV-VSc"/>
+                                                                        </constraints>
+                                                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits"/>
+                                                                    </textField>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qfV-AL-SQT">
+                                                                        <rect key="frame" x="222" y="0.0" width="90" height="48"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="48" id="J4z-6T-1ob"/>
+                                                                        </constraints>
+                                                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <state key="normal" title="Button"/>
+                                                                        <buttonConfiguration key="configuration" style="filled" title="중복 확인">
+                                                                            <fontDescription key="titleFontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="14"/>
+                                                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <color key="baseBackgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        </buttonConfiguration>
+                                                                        <connections>
+                                                                            <action selector="checkIDValidation:" destination="PUt-BZ-6bW" eventType="touchUpInside" id="omu-Bc-NBN"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                </subviews>
+                                                            </stackView>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ywr-dX-X7v">
+                                                                <rect key="frame" x="0.0" y="58" width="312" height="50"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B5D-vt-VSZ">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="312" height="50"/>
+                                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
+                                                                        <color key="textColor" red="0.35686274509803922" green="0.35686274509803922" blue="0.35686274509803922" alpha="0.89803921568627454" colorSpace="calibratedRGB"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="48" id="jrl-ps-ryj"/>
-                                                                    <constraint firstAttribute="width" constant="210" id="zcs-KV-VSc"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="B5D-vt-VSZ" secondAttribute="trailing" id="aiM-zW-4GM"/>
+                                                                    <constraint firstItem="B5D-vt-VSZ" firstAttribute="leading" secondItem="ywr-dX-X7v" secondAttribute="leading" id="eNj-hg-Kgl"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="B5D-vt-VSZ" secondAttribute="bottom" id="wgi-Jc-RL8"/>
+                                                                    <constraint firstItem="B5D-vt-VSZ" firstAttribute="top" secondItem="ywr-dX-X7v" secondAttribute="top" id="xnw-we-Y3Z"/>
                                                                 </constraints>
-                                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits"/>
-                                                            </textField>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qfV-AL-SQT">
-                                                                <rect key="frame" x="222" y="0.0" width="90" height="48"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="48" id="J4z-6T-1ob"/>
-                                                                </constraints>
-                                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <state key="normal" title="Button"/>
-                                                                <buttonConfiguration key="configuration" style="filled" title="중복 확인">
-                                                                    <fontDescription key="titleFontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="14"/>
-                                                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                    <color key="baseBackgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                </buttonConfiguration>
-                                                                <connections>
-                                                                    <action selector="checkIDValidation:" destination="PUt-BZ-6bW" eventType="touchUpInside" id="omu-Bc-NBN"/>
-                                                                </connections>
-                                                            </button>
+                                                            </stackView>
                                                         </subviews>
+                                                        <constraints>
+                                                            <constraint firstAttribute="trailing" secondItem="ywr-dX-X7v" secondAttribute="trailing" id="1KJ-qG-Hcq"/>
+                                                            <constraint firstItem="ywr-dX-X7v" firstAttribute="top" secondItem="Lqf-gq-Tbb" secondAttribute="bottom" constant="10" id="EU8-TI-xit"/>
+                                                            <constraint firstAttribute="bottom" secondItem="ywr-dX-X7v" secondAttribute="bottom" id="qmq-ce-7bC"/>
+                                                            <constraint firstItem="ywr-dX-X7v" firstAttribute="leading" secondItem="Q0u-qF-cWR" secondAttribute="leading" id="rvd-uk-8pk"/>
+                                                        </constraints>
                                                     </stackView>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="nkM-O7-zAN">
-                                                <rect key="frame" x="0.0" y="244" width="312" height="108"/>
+                                                <rect key="frame" x="0.0" y="304" width="312" height="108"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="비밀번호" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="q1f-yO-NnM">
                                                         <rect key="frame" x="0.0" y="0.0" width="312" height="48"/>
@@ -2316,7 +2347,7 @@
                                                             <constraint firstAttribute="height" constant="48" id="OVY-t5-dsc"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                        <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="비밀번호 확인" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qMk-wN-4j8">
                                                         <rect key="frame" x="0.0" y="60" width="312" height="48"/>
@@ -2325,7 +2356,7 @@
                                                             <constraint firstAttribute="width" constant="312" id="vj4-Cv-7pa"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                        <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                 </subviews>
                                             </stackView>
@@ -2346,8 +2377,7 @@
                                     <color key="baseBackgroundColor" red="0.98823529409999999" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="registerClicked:" destination="PUt-BZ-6bW" eventType="touchUpInside" id="oxz-Qj-Liz"/>
-                                    <segue destination="1kU-Ua-Ixo" kind="show" id="hKK-gK-Cif"/>
+                                    <action selector="RegisterClicked:" destination="PUt-BZ-6bW" eventType="touchUpInside" id="PlG-10-ZCp"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -2364,6 +2394,8 @@
                     <connections>
                         <outlet property="ConfirmPWInput" destination="qMk-wN-4j8" id="eOy-Ot-EJc"/>
                         <outlet property="EmailInput" destination="sXU-8b-dWb" id="b2E-ls-FV6"/>
+                        <outlet property="IDCheckBtn" destination="qfV-AL-SQT" id="vnm-aa-HGc"/>
+                        <outlet property="IDCheckLabel" destination="B5D-vt-VSZ" id="OMh-vN-MsN"/>
                         <outlet property="IDInput" destination="n2F-4R-8Td" id="hhE-UV-y4V"/>
                         <outlet property="NameInput" destination="Zcj-oh-Azp" id="pZL-ox-Bu8"/>
                         <outlet property="PWInput" destination="q1f-yO-NnM" id="LYy-B0-o6S"/>
@@ -2376,7 +2408,7 @@
         <!--개인정보 이용처리-->
         <scene sceneID="cwD-Oo-g9L">
             <objects>
-                <viewController storyboardIdentifier="AgreePrivacyPolicyViewController" id="1kU-Ua-Ixo" customClass="AgreePrivacyPolicyViewController" customModule="WHAT_IS_MONEY" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AgreePrivacyPolicyViewController" modalPresentationStyle="fullScreen" id="1kU-Ua-Ixo" customClass="AgreePrivacyPolicyViewController" customModule="WHAT_IS_MONEY" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JnQ-ug-JLX">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2398,7 +2430,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aqY-EN-Kam">
-                                <rect key="frame" x="19" y="191" width="390" height="459"/>
+                                <rect key="frame" x="19" y="147" width="390" height="503"/>
                                 <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" systemColor="systemRedColor"/>
                             </view>
@@ -2415,10 +2447,76 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="개인정보 이용처리" id="TmD-SP-H6T"/>
+                    <connections>
+                        <outlet property="AgreeBtn" destination="y4f-Rc-1rm" id="RZd-yw-BTj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aRm-WO-7nU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1709.2307692307693" y="634.83412322274876"/>
+        </scene>
+        <!--AlertViewController-->
+        <scene sceneID="RYO-ZF-FdF">
+            <objects>
+                <viewController storyboardIdentifier="AlertViewController" title="AlertViewController" id="g1Q-Rg-K4u" customClass="AlertViewController" customModule="WHAT_IS_MONEY" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Szz-46-Tni">
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oIW-gw-Anb">
+                                <rect key="frame" x="30" y="313" width="368" height="300"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="회원가입이 완료되었습니다!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rzy-pK-LiF">
+                                        <rect key="frame" x="90.666666666666686" y="80" width="187" height="21"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uX7-jb-GsO">
+                                        <rect key="frame" x="28" y="202" width="312" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="dNw-Zz-mM3"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="312" id="mKE-cc-RNT"/>
+                                        </constraints>
+                                        <color key="tintColor" red="0.98823529409999999" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="메인으로 가기" cornerStyle="fixed">
+                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="16"/>
+                                            <color key="baseBackgroundColor" red="0.98823529409999999" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="AgreeClicked:" destination="1kU-Ua-Ixo" eventType="touchUpInside" id="MhP-W8-pdz"/>
+                                            <action selector="goAlert:" destination="g1Q-Rg-K4u" eventType="touchUpInside" id="BO3-PP-Om7"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="uX7-jb-GsO" firstAttribute="leading" secondItem="oIW-gw-Anb" secondAttribute="leading" constant="28" id="09O-JT-u5n"/>
+                                    <constraint firstAttribute="height" constant="300" id="0Sf-Va-pLW"/>
+                                    <constraint firstAttribute="trailing" secondItem="uX7-jb-GsO" secondAttribute="trailing" constant="28" id="7rq-4G-aZw"/>
+                                    <constraint firstItem="rzy-pK-LiF" firstAttribute="top" secondItem="oIW-gw-Anb" secondAttribute="top" constant="80" id="8KJ-xw-HZ1"/>
+                                    <constraint firstItem="rzy-pK-LiF" firstAttribute="centerX" secondItem="oIW-gw-Anb" secondAttribute="centerX" id="mau-5b-73Z"/>
+                                    <constraint firstAttribute="bottom" secondItem="uX7-jb-GsO" secondAttribute="bottom" constant="50" id="z2e-Sy-kfg"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="gty-pO-Po8"/>
+                        <color key="backgroundColor" red="0.69411764710000001" green="0.69411764710000001" blue="0.69411764710000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="oIW-gw-Anb" firstAttribute="leading" secondItem="gty-pO-Po8" secondAttribute="leading" constant="30" id="1Ib-ew-dzj"/>
+                            <constraint firstItem="oIW-gw-Anb" firstAttribute="centerY" secondItem="Szz-46-Tni" secondAttribute="centerY" id="MLm-he-I02"/>
+                            <constraint firstItem="gty-pO-Po8" firstAttribute="trailing" secondItem="oIW-gw-Anb" secondAttribute="trailing" constant="30" id="R8W-Vb-YL4"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="touchButton" destination="uX7-jb-GsO" id="WZd-ab-z4U"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dLi-y8-dlQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2501" y="640"/>
         </scene>
         <!--목표 추가-->
         <scene sceneID="PJF-Ah-NsV">
