@@ -8,16 +8,16 @@
 import UIKit
 
 final class UserModel {
-    struct User {
-        var email: String
+    struct User : Codable {
+        var userId: String
         var password: String
     }
     
-    var users: [User] = [
-        User(email: "abc1234@naver.com", password: "qwerty1234"),
-        User(email: "dazzlynnnn@gmail.com", password: "asdfasdf5678")
-    ]
-    
+//    var users: [User] = [
+//        User(email: "abc1234@naver.com", password: "qwerty1234"),
+//        User(email: "dazzlynnnn@gmail.com", password: "asdfasdf5678")
+//    ]
+//
     // 아이디 형식 검사
     func isValidEmail(id: String) -> Bool {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
@@ -32,129 +32,124 @@ final class UserModel {
         return passwordTest.evaluate(with: pwd)
     }
 }
-
+final class ResponseModel {
+    struct UserData : Codable {
+        var refreshToken: String
+        var accessToken: String
+        var userIdx: Int
+    }
+}
 class LoginViewController: UIViewController {
 
-    var userModel = UserModel()
     
     @IBOutlet weak var IDInput: UITextField!
     @IBOutlet weak var PWInput: UITextField!
+    @IBOutlet weak var LoginBtn: UIButton!
     
-    func loginCheck(id: String, pwd: String) -> Bool {
-        for user in userModel.users {
-            if user.email == id && user.password == pwd {
-                return true
-            }
-        }
-        return false
-    }
-    func shakeTextField(textField: UITextField) -> Void{
-        UIView.animate(withDuration: 0.2, animations: {
-            textField.frame.origin.x -= 10
-        }, completion: { _ in
-            UIView.animate(withDuration: 0.2, animations: {
-                textField.frame.origin.x += 20
-            }, completion: { _ in
-                UIView.animate(withDuration: 0.2, animations: {
-                    textField.frame.origin.x -= 10
-                })
-            })
-        })
-    }
-    @objc func didEndOnExit(_ sender: UITextField) {
-        if IDInput.isFirstResponder {
-            PWInput.becomeFirstResponder()
-        }
-    }
+    var successed = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+       
+    }
         
-        IDInput.addTarget(self, action: #selector(didEndOnExit), for: UIControl.Event.editingDidEndOnExit)
-        PWInput.addTarget(self, action: #selector(didEndOnExit), for: UIControl.Event.editingDidEndOnExit)
-      
+    @objc func popStartScreen() {
+        let start = self.storyboard?.instantiateViewController(withIdentifier: "WelcomeViewController") as! WelcomeViewController
+        start.modalPresentationStyle = .overFullScreen
+        present(start, animated: true, completion: nil)
+        
     }
     
-    @IBAction func loginClicked(_ sender: UIButton) {
-        guard let id = IDInput.text else { return }
-        guard let password = PWInput.text else { return }
+    @IBAction func LoginClicked(_ sender: UIButton) {
+        guard let id = IDInput.text else {return}
+        guard let password = PWInput.text else {return}
+        let uploadDataModel = UserModel.User(userId: id, password: password)
         
-        if userModel.isValidEmail(id: id){
-            if let removable = self.view.viewWithTag(100) {
-                removable.removeFromSuperview()
-            }
+        if id.isEmpty || password.isEmpty {
+            let sheet = UIAlertController(title: "경고", message: "아이디 또는 비밀번호를 입력해주세요", preferredStyle: .alert)
+            sheet.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in print("빈 입력칸 확인") }))
+            present(sheet, animated: true)
         }
-        else {
-            shakeTextField(textField: IDInput)
-//            let emailLabel = UILabel(frame: CGRect(x: 40, y: 305, width: 312, height: 30))
-//            emailLabel.text = "이메일 형식을 확인해 주세요"
-//            emailLabel.textColor = UIColor.red
-//            emailLabel.tag = 100
-//
-//            self.view.addSubview(emailLabel)
-        } //email 형식 오류
-        
-        if userModel.isValidPassword(pwd: password) {
-            if let removable = self.view.viewWithTag(101) {
-                removable.removeFromSuperview()
-            }
+         guard let url = URL(string: "https://www.pigmoney.xyz/users/login") else {
+            print("Error: cannot create URL")
+            return
         }
-        else {
-            shakeTextField(textField: PWInput)
-//            let passwordLabel = UILabel(frame: CGRect(x: 40, y: 360, width: 312, height: 30))
-//            passwordLabel.text = "비밀번호 형식을 확인해 주세요"
-//            passwordLabel.textColor = UIColor.red
-//            passwordLabel.tag = 101
-//
-//            self.view.addSubview(passwordLabel)
+        // Convert model to JSON data
+        guard let jsonData = try? JSONEncoder().encode(uploadDataModel) else {
+            print("Error: Trying to convert model to JSON data")
+            return
         }
-        if userModel.isValidEmail(id: id) && userModel.isValidPassword(pwd: password) {
-            let loginSuccess: Bool = loginCheck(id: id, pwd: password)
-            if loginSuccess {
-                print("로그인 성공")
-                if let removable = self.view.viewWithTag(102) {
-                    removable.removeFromSuperview()
-                }
-                self.performSegue(withIdentifier: "Welcome", sender: self)
-            }
-            else {
-                print("로그인 실패")
-                shakeTextField(textField: IDInput)
-                shakeTextField(textField: PWInput)
-                let loginFailLabel = UILabel(frame: CGRect(x: 68, y: 510, width: 279, height: 45))
-                loginFailLabel.text = "아이디나 비밀번호가 다릅니다."
-                loginFailLabel.textColor = UIColor.red
-                loginFailLabel.tag = 102
-                    
-                self.view.addSubview(loginFailLabel)
-            }
-        }
-        
-    }
-
-        @IBAction func LoginClicked(_ sender: UIButton) {
-            guard let url = URL(string: "https://www.pigmoney.xyz/test/log") else {
-                    print("Error: cannot create URL")
+        // Create the url request
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        //request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "X-ACCESS-TOKEN")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type") // the request is JSON
+        request.setValue("application/json", forHTTPHeaderField: "Accept") // the response expected to be in JSON format
+        request.httpBody = jsonData
+        print(String(data: jsonData, encoding: .utf8)!)
+        DispatchQueue.main.async {
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                guard error == nil else {
+                    print("Error: error calling POST")
+                    print(error!)
                     return
                 }
-                // Create the url request
-                var request = URLRequest(url: url)
-                request.httpMethod = "GET"
-                URLSession.shared.dataTask(with: request) { data, response, error in
-                    guard error == nil else {
-                        print("Error: error calling GET")
-                        print(error!)
+                guard let data = data else {
+                    print("Error: Did not receive data")
+                    return
+                }
+                print(String(data: data, encoding: .utf8)!)
+                guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
+                    print("Error: HTTP request failed")
+                    return
+                }
+                DispatchQueue.main.async {
+                    do {
+                        guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+                            print("Error: Cannot convert data to JSON object")
+                            return
+                        }
+                        guard let prettyJsonData = try? JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted) else {
+                            print("Error: Cannot convert JSON object to Pretty JSON data")
+                            return
+                        }
+                        guard let prettyPrintedJson = String(data: prettyJsonData, encoding: .utf8) else {
+                            print("Error: Couldn't print JSON in String")
+                            return
+                        }
+                        print(prettyPrintedJson)
+                        
+                        let isSuccess = jsonObject["isSuccess"] as? Bool
+                        self.successed = true
+                        if isSuccess == true {
+                            print("로그인 성공")
+                            self.successed = true
+                            self.popStartScreen()
+                            
+                            guard let result = jsonObject ["result"] as? [String: Any],
+                                  let userIdx = result ["userIdx"] as? Int,
+                                  let tokenDto = result ["tokenDto"] as? [String: Any],
+                                  let refreshToken = tokenDto ["refreshToken"] as? String,
+                                  let accessToken = tokenDto ["accessToken"] as? String
+                            else { return }
+                            let Response = ResponseModel.UserData(refreshToken: refreshToken, accessToken: accessToken, userIdx: userIdx)
+                            print(Response)
+                            print(Response.userIdx, Response.refreshToken)
+                            
+                        } else {
+                            let sheet = UIAlertController(title: "경고", message: "아이디 또는 비밀번호가 올바르지 않습니다", preferredStyle: .alert)
+                            sheet.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in print("형식 확인") }))
+                            self.present(sheet, animated: true)
+                        }
+                    } catch {
+                        print("Error: Trying to convert JSON data to string")
                         return
                     }
-                    guard let data = data else {
-                        print("Error: Did not receive data")
-                        return
-                    }
-                    print(String(data: data, encoding: .utf8)!)
-                    
-                }.resume()
-            }
+                }
+                
+            }.resume()
+            
+        }
         
-        
-       
-    
+    }
 }

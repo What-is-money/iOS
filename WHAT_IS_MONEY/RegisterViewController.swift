@@ -146,17 +146,14 @@ class RegisterViewController: UIViewController {
             let idCheck: Bool
         }
         
-        // Add data to the model
-        let uploadDataModel = RegisterData(userId: id, password: pw, confirmPassword: confirmPw, name: name, email: email, agree: true, idCheck: isIdChecked)
         
-        guard var vc = storyboard?.instantiateViewController(identifier: "AgreePrivacyPolicyViewController") as? AgreePrivacyPolicyViewController else { return }
+        guard let vc = storyboard?.instantiateViewController(identifier: "AgreePrivacyPolicyViewController") as? AgreePrivacyPolicyViewController else { return }
         vc.userId = id
         vc.password = pw
         vc.confirmPassword = confirmPw
         vc.name = name
         vc.email = email
-       // let vc = AgreePrivacyPolicyViewController(userId: id, password: pw, confirmPassword: pw, name: name, email: email, agree: true, idCheck: isIdChecked)
-        //self.present(vc, animated: false, completion: nil)
+
         self.navigationController?.pushViewController(vc, animated: true)
         
        
