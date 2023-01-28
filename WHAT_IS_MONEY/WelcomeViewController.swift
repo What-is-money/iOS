@@ -10,13 +10,73 @@ import SwiftUI
 
 class WelcomeViewController: UIViewController {
 
+    @IBOutlet weak var IntroLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        getUser()
     }
     
     override func viewWillAppear(_ animated: Bool) {
       navigationController?.isNavigationBarHidden = true // 뷰 컨트롤러가 나타날 때 숨기기
     }
 
+    func getUser() {
+        let useridx = UserDefaults.standard.integer(forKey: "userIdx")
+        print(useridx)
+        guard let url = URL(string: "https://www.pigmoney.xyz/users/start/\(useridx)") else {
+                print("Error: cannot create URL")
+                return
+            }
+            // Create the url request
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET"
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                guard error == nil else {
+                    print("Error: error calling GET")
+                    print(error!)
+                    return
+                }
+                guard let data = data else {
+                    print("Error: Did not receive data")
+                    return
+                }
+
+                print(String(data: data, encoding: .utf8)!)
+                guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
+                    print("Error: HTTP request failed")
+                    return
+                }
+                DispatchQueue.main.async {
+                    do {
+                        guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+                            print("Error: Cannot convert data to JSON object")
+                            return
+                        }
+                        guard let prettyJsonData = try? JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted) else {
+                            print("Error: Cannot convert JSON object to Pretty JSON data")
+                            return
+                        }
+                        guard String(data: prettyJsonData, encoding: .utf8) != nil else {
+                            print("Error: Couldn't print JSON in String")
+                            return
+                        }
+
+                        let result = jsonObject["result"] as? String
+                        print(result!)
+                        self.IntroLabel.text = result
+
+                    } catch {
+                        print("Error: Trying to convert JSON data to string")
+                        return
+                    }
+                }
+
+            }.resume()
+    }
+    
+    
+
+   
 }

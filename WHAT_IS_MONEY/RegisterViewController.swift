@@ -131,10 +131,7 @@ class RegisterViewController: UIViewController {
             sheet.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in print("아이디중복 확인") }))
             present(sheet, animated: true)
         }
-        
 
-
-        
         // Create model
         struct RegisterData: Codable {
             let userId: String

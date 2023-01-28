@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Foundation
 
 final class UserModel {
     struct User : Codable {
@@ -18,6 +19,7 @@ final class UserModel {
 //        User(email: "dazzlynnnn@gmail.com", password: "asdfasdf5678")
 //    ]
 //
+    
     // 아이디 형식 검사
     func isValidEmail(id: String) -> Bool {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
@@ -39,6 +41,11 @@ final class ResponseModel {
         var userIdx: Int
     }
 }
+struct UserStorage {
+    static let userIdx = 0
+    static let refreshToken = ""
+    static let accessToken = ""
+}
 class LoginViewController: UIViewController {
 
     
@@ -47,7 +54,6 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var LoginBtn: UIButton!
     
     var successed = false
-    
     override func viewDidLoad() {
         super.viewDidLoad()
        
@@ -124,7 +130,7 @@ class LoginViewController: UIViewController {
                         if isSuccess == true {
                             print("로그인 성공")
                             self.successed = true
-                            self.popStartScreen()
+                            
                             
                             guard let result = jsonObject ["result"] as? [String: Any],
                                   let userIdx = result ["userIdx"] as? Int,
@@ -135,7 +141,15 @@ class LoginViewController: UIViewController {
                             let Response = ResponseModel.UserData(refreshToken: refreshToken, accessToken: accessToken, userIdx: userIdx)
                             print(Response)
                             print(Response.userIdx, Response.refreshToken)
-                            
+                            let defaults = UserDefaults.standard
+                            func putData() {
+                                defaults.set(Response.userIdx, forKey: "userIdx")
+                                defaults.set(Response.accessToken, forKey: "accessToken")
+                                defaults.set(Response.refreshToken, forKey: "refreshToken")
+                            }
+                            putData()
+                            print(UserDefaults.standard.dictionaryRepresentation())
+                            self.popStartScreen()
                         } else {
                             let sheet = UIAlertController(title: "경고", message: "아이디 또는 비밀번호가 올바르지 않습니다", preferredStyle: .alert)
                             sheet.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in print("형식 확인") }))

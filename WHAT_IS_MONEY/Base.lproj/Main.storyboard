@@ -1834,7 +1834,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="46" translatesAutoresizingMaskIntoConstraints="NO" id="kWv-yz-JfK">
                                                 <rect key="frame" x="0.0" y="164" width="311.66666666666669" height="142"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="머니뭐니님, 어서오세요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UuO-GS-MoN">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UuO-GS-MoN">
                                                         <rect key="frame" x="60.999999999999986" y="0.0" width="189.66666666666663" height="48"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                         <nil key="textColor"/>
@@ -1876,6 +1876,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Sju-hI-k4k"/>
+                    <connections>
+                        <outlet property="IntroLabel" destination="UuO-GS-MoN" id="mld-3c-S0i"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="agU-cP-2WX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
