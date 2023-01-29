@@ -24,6 +24,7 @@ class WholeSettingViewController: UIViewController {
     
     override func viewDidLoad() {
     super.viewDidLoad()
+        
         let gesture1 = UITapGestureRecognizer(target: self, action: #selector(WholeSettingViewController.goProfileEdit(sender:)))
     self.ProfileView.addGestureRecognizer(gesture1)
         let gesture4 = UITapGestureRecognizer(target: self, action: #selector(WholeSettingViewController.goQuestion(sender:)))
@@ -46,6 +47,90 @@ class WholeSettingViewController: UIViewController {
            self.navigationController!.pushViewController(profileEditViewController, animated: true)
        }
  
+    @IBAction func toggleClicked(_ sender: UISwitch) {
+        print(AlertSwitch.isOn)
+        let accessToken = UserDefaults.standard.string(forKey: "accessToken")
+        let userIdx = UserDefaults.standard.integer(forKey: "userIdx")
+        guard let url = URL(string: "https://www.pigmoney.xyz/users/alarm") else {
+            print("Error: cannot create URL")
+            return
+        }
+        // Create model
+        struct UploadData: Codable {
+            let userIdx: Int
+            let alarm: Bool
+        }
+        
+        // Add data to the model
+        let uploadDataModel = UploadData(userIdx: userIdx, alarm: AlertSwitch.isOn)
+        
+        
+        // Convert model to JSON data
+        guard let jsonData = try? JSONEncoder().encode(uploadDataModel) else {
+            print("Error: Trying to convert model to JSON data")
+            return
+        }
+        // Create the url request
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue(accessToken!, forHTTPHeaderField: "X-ACCESS-TOKEN")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type") // the request is JSON
+        request.setValue("application/json", forHTTPHeaderField: "Accept") // the response expected to be in JSON format
+        request.httpBody = jsonData
+        print(String(data: jsonData, encoding: .utf8)!)
+        DispatchQueue.main.async {
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                guard error == nil else {
+                    print("Error: error calling POST")
+                    print(error!)
+                    return
+                }
+                guard let data = data else {
+                    print("Error: Did not receive data")
+                    return
+                }
+                print(String(data: data, encoding: .utf8)!)
+                guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
+                    print("Error: HTTP request failed")
+                    return
+                }
+                DispatchQueue.main.async {
+                    do {
+                        guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+                            print("Error: Cannot convert data to JSON object")
+                            return
+                        }
+                        guard let prettyJsonData = try? JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted) else {
+                            print("Error: Cannot convert JSON object to Pretty JSON data")
+                            return
+                        }
+                        guard let prettyPrintedJson = String(data: prettyJsonData, encoding: .utf8) else {
+                            print("Error: Couldn't print JSON in String")
+                            return
+                        }
+                        print(prettyPrintedJson)
+                        
+                        let isSuccess = jsonObject["isSuccess"] as? Bool
+                        let result = jsonObject["result"] as? String
+                        if isSuccess == true {
+                            let sheet = UIAlertController(title: "안내", message: result, preferredStyle: .alert)
+                            sheet.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
+                                print("알림설정") }))
+                            self.present(sheet, animated: true)
+                        } else {
+                          print("오류 발생")
+                        }
+                    } catch {
+                        print("Error: Trying to convert JSON data to string")
+                        return
+                    }
+                }
+                
+            }.resume()
+        }
+        
+    }
+    
     @objc func goQuestion(sender:UIGestureRecognizer){
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let QuestionViewController = storyboard.instantiateViewController(withIdentifier: "QuestionViewController")
@@ -71,28 +156,206 @@ class WholeSettingViewController: UIViewController {
     
     @objc func showLogoutAlert(sender:UIGestureRecognizer){
         let alert = UIAlertController(title: "로그아웃", message: "로그아웃 하시겠습니까?", preferredStyle: .alert)
-        let confirm = UIAlertAction(title: "로그아웃", style: .default, handler: nil)
-        let close = UIAlertAction(title: "안나갈래요", style: .destructive, handler: nil)
+        let confirm = UIAlertAction(title: "로그아웃", style: .destructive, handler: {(_) -> Void in
+            print("Ok button tapped")
+            let accessToken = UserDefaults.standard.string(forKey: "accessToken")
+            let refreshToken = UserDefaults.standard.string(forKey: "refreshToken")
+            
+            guard let url = URL(string: "https://www.pigmoney.xyz/users/logout") else {
+                print("Error: cannot create URL")
+                return
+            }
+            // Create model
+            struct UploadData: Codable {
+                let accessToken: String
+                let refreshToken: String
+            }
+            
+            // Add data to the model
+            let uploadDataModel = UploadData(accessToken: accessToken!, refreshToken: refreshToken!)
+            
+            
+            // Convert model to JSON data
+            guard let jsonData = try? JSONEncoder().encode(uploadDataModel) else {
+                print("Error: Trying to convert model to JSON data")
+                return
+            }
+            // Create the url request
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.addValue(accessToken!, forHTTPHeaderField: "X-ACCESS-TOKEN")
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type") // the request is JSON
+            request.setValue("application/json", forHTTPHeaderField: "Accept") // the response expected to be in JSON format
+            request.httpBody = jsonData
+            print(String(data: jsonData, encoding: .utf8)!)
+            DispatchQueue.main.async {
+                URLSession.shared.dataTask(with: request) { data, response, error in
+                    guard error == nil else {
+                        print("Error: error calling POST")
+                        print(error!)
+                        return
+                    }
+                    guard let data = data else {
+                        print("Error: Did not receive data")
+                        return
+                    }
+                    print(String(data: data, encoding: .utf8)!)
+                    guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
+                        print("Error: HTTP request failed")
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        do {
+                            guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+                                print("Error: Cannot convert data to JSON object")
+                                return
+                            }
+                            guard let prettyJsonData = try? JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted) else {
+                                print("Error: Cannot convert JSON object to Pretty JSON data")
+                                return
+                            }
+                            guard let prettyPrintedJson = String(data: prettyJsonData, encoding: .utf8) else {
+                                print("Error: Couldn't print JSON in String")
+                                return
+                            }
+                            print(prettyPrintedJson)
+                            
+                            let isSuccess = jsonObject["isSuccess"] as? Bool
+                            
+                            if isSuccess == true {
+                                print("로그아웃 완료")
+                                UserDefaults.standard.removeObject(forKey: "userIdx") //제거
+                                UserDefaults.standard.removeObject(forKey: "accessToken") //제거
+                                UserDefaults.standard.removeObject(forKey: "refreshToken") //제거
+                                let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+                                vc.modalPresentationStyle = .fullScreen
+                                print(UserDefaults.standard.dictionaryRepresentation())
+                                self.present(vc, animated: true)
+                            } else {
+                              print("오류 발생")
+                            }
+                        } catch {
+                            print("Error: Trying to convert JSON data to string")
+                            return
+                        }
+                    }
+                    
+                }.resume()
+            }
+        
+        })
+
+        let close = UIAlertAction(title: "안나갈래요", style: .default, handler: nil)
         alert.addAction(confirm)
         alert.addAction(close)
         present(alert, animated: true, completion: nil)
     }
     
+                                    
     @objc func showWDAlert(sender:UIGestureRecognizer){
-        let alert = UIAlertController(title: "회원탈퇴", message: "탈퇴하시는 이유가 무엇인가요?", preferredStyle: .alert)
-        alert.addTextField { textField in
-            let heightConstraint = NSLayoutConstraint(item: textField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 200)
-            textField.addConstraint(heightConstraint)
-        }
+
+        let attributedString = NSAttributedString(string: "그동안 열심히 노력하신 목표와 여러분의 일꾼 아기돼지들을 다신 볼 수 없습니다. \n 그래도 탈퇴하시겠습니까?", attributes: [
+                    NSAttributedString.Key.font : UIFont.systemFont(ofSize: 13),
+                    NSAttributedString.Key.foregroundColor : UIColor.red
+                ])
+        let alert = UIAlertController(title: "경고", message: "그동안 열심히 노력하신 목표와 여러분의 일꾼 아기돼지들을 다신 볼 수 없습니다. 탈퇴하시겠습니까?", preferredStyle: .alert)
+        alert.setValue(attributedString, forKey: "attributedMessage")
+        let confirm = UIAlertAction(title: "탈퇴", style: .destructive, handler: {(_) -> Void in
+            print("Ok button tapped")
+            let userIdx = UserDefaults.standard.integer(forKey: "userIdx")
+            let accessToken = UserDefaults.standard.string(forKey: "accessToken")
+    
+            
+            guard let url = URL(string: "https://www.pigmoney.xyz/users/deleteUser") else {
+                print("Error: cannot create URL")
+                return
+            }
+            // Create model
+            struct UploadData: Codable {
+                let userIdx: Int
+            }
+            
+            // Add data to the model
+            let uploadDataModel = UploadData(userIdx: userIdx)
+            
+            
+            // Convert model to JSON data
+            guard let jsonData = try? JSONEncoder().encode(uploadDataModel) else {
+                print("Error: Trying to convert model to JSON data")
+                return
+            }
+            // Create the url request
+            var request = URLRequest(url: url)
+            request.httpMethod = "DELETE"
+            request.addValue(accessToken!, forHTTPHeaderField: "X-ACCESS-TOKEN")
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type") // the request is JSON
+            request.setValue("application/json", forHTTPHeaderField: "Accept") // the response expected to be in JSON format
+            request.httpBody = jsonData
+            print(String(data: jsonData, encoding: .utf8)!)
+            DispatchQueue.main.async {
+                URLSession.shared.dataTask(with: request) { data, response, error in
+                    guard error == nil else {
+                        print("Error: error calling POST")
+                        print(error!)
+                        return
+                    }
+                    guard let data = data else {
+                        print("Error: Did not receive data")
+                        return
+                    }
+                    print(String(data: data, encoding: .utf8)!)
+                    guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
+                        print("Error: HTTP request failed")
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        do {
+                            guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+                                print("Error: Cannot convert data to JSON object")
+                                return
+                            }
+                            guard let prettyJsonData = try? JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted) else {
+                                print("Error: Cannot convert JSON object to Pretty JSON data")
+                                return
+                            }
+                            guard let prettyPrintedJson = String(data: prettyJsonData, encoding: .utf8) else {
+                                print("Error: Couldn't print JSON in String")
+                                return
+                            }
+                            print(prettyPrintedJson)
+                            
+                            let isSuccess = jsonObject["isSuccess"] as? Bool
+                            
+                            if isSuccess == true {
+                                print("회원탈퇴 완료")
+                                UserDefaults.standard.removeObject(forKey: "userIdx") //제거
+                                UserDefaults.standard.removeObject(forKey: "accessToken") //제거
+                                UserDefaults.standard.removeObject(forKey: "refreshToken") //제거
+                                let sheet = UIAlertController(title: "안내", message: "안전하게 회원탈퇴 되었습니다", preferredStyle: .alert)
+                                let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+                                vc.modalPresentationStyle = .fullScreen
+                                sheet.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ -> Void in
+                                    self.present(vc, animated: true) }))
+                                self.present(sheet, animated: true)
+                                print(UserDefaults.standard.dictionaryRepresentation())
+                                
+                            } else {
+                              print("오류 발생")
+                            }
+                        } catch {
+                            print("Error: Trying to convert JSON data to string")
+                            return
+                        }
+                    }
+                    
+                }.resume()
+            }
         
-        let confirm = UIAlertAction(title: "탈퇴", style: .default, handler: nil)
-        let close = UIAlertAction(title: "안할래요", style: .destructive, handler: nil)
+        })
+        let close = UIAlertAction(title: "안할래요", style: .default, handler: nil)
         alert.addAction(confirm)
         alert.addAction(close)
         present(alert, animated: true, completion: nil)
     }
   }
   
- 
-
-
