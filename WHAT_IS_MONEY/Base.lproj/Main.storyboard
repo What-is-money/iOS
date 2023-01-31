@@ -361,6 +361,8 @@
                         <outlet property="PrivateInfView" destination="07w-Yt-0Dy" id="5GI-QD-ve8"/>
                         <outlet property="ProfileView" destination="RTn-ys-NwR" id="Mas-hv-VlR"/>
                         <outlet property="QuestionView" destination="hMV-Lf-GAH" id="jZ2-94-giz"/>
+                        <outlet property="UserIDLabel" destination="sJX-y7-Myg" id="OdK-yT-9xv"/>
+                        <outlet property="UserNameLabel" destination="Ere-eH-cu8" id="Wa5-Je-ujH"/>
                         <outlet property="WithDrawalView" destination="INx-xy-MBw" id="FgX-S4-yBu"/>
                         <segue destination="3h7-cM-rY6" kind="show" id="Ebd-bX-Dd7"/>
                     </connections>
@@ -402,7 +404,7 @@
                                                     <constraint firstAttribute="width" constant="90" id="WPR-oI-4jz"/>
                                                 </constraints>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" image="jinperson2">
+                                                <buttonConfiguration key="configuration" style="plain" image="jinperson2" cornerStyle="capsule">
                                                     <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" scale="default"/>
                                                 </buttonConfiguration>
                                                 <connections>
@@ -505,8 +507,8 @@
                     <connections>
                         <outlet property="ChangeIDView" destination="LOY-GA-MAU" id="is0-JV-p7y"/>
                         <outlet property="ChangeSNView" destination="2AA-ag-Rao" id="YYc-Z3-6cV"/>
-                        <outlet property="ID" destination="NO6-NK-AD6" id="7c4-Cd-IAd"/>
-                        <outlet property="Name" destination="Kpb-rU-fAd" id="11o-SO-C4I"/>
+                        <outlet property="UserIDLabel" destination="NO6-NK-AD6" id="Xd6-w4-pK7"/>
+                        <outlet property="UserNameLabel" destination="Kpb-rU-fAd" id="lxZ-0T-kSE"/>
                         <outlet property="imagepickButton" destination="Ljb-cD-P43" id="h48-VU-Vnm"/>
                         <segue destination="hiF-7u-5uZ" kind="show" identifier="ChangeID" id="ZU8-Lq-Bb6"/>
                         <segue destination="AI9-GW-1Ok" kind="show" identifier="ChangeSN" id="89Z-di-FrC"/>
@@ -543,7 +545,7 @@
                                         <rect key="frame" x="0.0" y="68.333333333333343" width="354" height="48"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="아이디" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QaM-iK-MDD">
-                                                <rect key="frame" x="0.0" y="0.0" width="258" height="48"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="268.33333333333331" height="48"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="48" id="wFN-di-Kz5"/>
                                                 </constraints>
@@ -551,20 +553,24 @@
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SJP-mp-spH">
-                                                <rect key="frame" x="271" y="0.0" width="83" height="48"/>
+                                                <rect key="frame" x="281.33333333333331" y="0.0" width="72.666666666666686" height="48"/>
                                                 <color key="tintColor" systemColor="systemGroupedBackgroundColor"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="중복확인"/>
                                                 <buttonConfiguration key="configuration" style="filled" title="중복확인" cornerStyle="fixed">
+                                                    <fontDescription key="titleFontDescription" type="system" pointSize="14"/>
                                                     <color key="baseBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="checkIDValidation:" destination="hiF-7u-5uZ" eventType="touchUpInside" id="xAo-5H-xuh"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MLl-p2-6B3">
                                         <rect key="frame" x="0.0" y="128.33333333333334" width="354" height="50"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
+                                        <color key="textColor" red="0.35686274509803922" green="0.35686274509803922" blue="0.35686274509803922" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -633,7 +639,7 @@
                                     <constraint firstAttribute="height" constant="48" id="kwB-Ng-MhF"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="비밀번호 확인" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="edl-HZ-jQ7">
                                 <rect key="frame" x="30" y="134" width="354" height="46"/>
@@ -641,7 +647,7 @@
                                     <constraint firstAttribute="height" constant="46" id="sN0-e8-pjT"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WaT-HR-FsQ">
                                 <rect key="frame" x="30" y="735" width="354" height="48"/>
@@ -803,7 +809,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="날짜" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vW3-2Y-OQX">
-                                <rect key="frame" x="66.333333333333314" y="66.666666666666671" width="34.666666666666671" height="24"/>
+                                <rect key="frame" x="66.333333333333329" y="66.666666666666671" width="34.666666666666671" height="24"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>

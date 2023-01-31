@@ -89,33 +89,39 @@ class ChangeSNViewController: UIViewController {
                     print("Error: HTTP request failed")
                     return
                 }
-                
-                do {
-                    guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
-                        print("Error: Cannot convert data to JSON object")
+                DispatchQueue.main.async {
+                    do {
+                        guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+                            print("Error: Cannot convert data to JSON object")
+                            return
+                        }
+                        guard let prettyJsonData = try? JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted) else {
+                            print("Error: Cannot convert JSON object to Pretty JSON data")
+                            return
+                        }
+                        guard let prettyPrintedJson = String(data: prettyJsonData, encoding: .utf8) else {
+                            print("Error: Couldn't print JSON in String")
+                            return
+                        }
+                        print(prettyPrintedJson)
+                        let isSuccess = jsonObject["isSuccess"] as? Bool
+                        if isSuccess == true {
+                            let sheet = UIAlertController(title: "안내", message: "비밀번호 변경 완료", preferredStyle: .alert)
+                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+                            vc.modalPresentationStyle = .fullScreen
+                            sheet.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ -> Void in
+                                self.present(vc, animated: true) }))
+                            self.present(sheet, animated: true)
+                            
+                        } else {
+                            let sheet = UIAlertController(title: "경고", message: "비번 변경 오류", preferredStyle: .alert)
+                            sheet.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in print("변경 오류") }))
+                            self.present(sheet, animated: true)
+                        }
+                    } catch {
+                        print("Error: Trying to convert JSON data to string")
                         return
                     }
-                    guard let prettyJsonData = try? JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted) else {
-                        print("Error: Cannot convert JSON object to Pretty JSON data")
-                        return
-                    }
-                    guard let prettyPrintedJson = String(data: prettyJsonData, encoding: .utf8) else {
-                        print("Error: Couldn't print JSON in String")
-                        return
-                    }
-                    print(prettyPrintedJson)
-                    let isSuccess = jsonObject["isSuccess"] as? Bool
-                    if isSuccess == true {
-                        print("비밀번호 변경 성공")
-                        
-                    } else {
-                        let sheet = UIAlertController(title: "경고", message: "비번 변경 오류", preferredStyle: .alert)
-                        sheet.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in print("변경 오류") }))
-                        self.present(sheet, animated: true)
-                    }
-                } catch {
-                    print("Error: Trying to convert JSON data to string")
-                    return
                 }
                 
                 

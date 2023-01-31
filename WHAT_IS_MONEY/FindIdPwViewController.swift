@@ -39,7 +39,7 @@ class FindIdPwViewController: UIViewController {
         struct UploadData: Codable {
             let email: String
         }
-        
+        let accessToken = UserDefaults.standard.string(forKey: "accessToken")
         // Add data to the model
         let uploadDataModel = UploadData(email: email)
         
@@ -52,6 +52,7 @@ class FindIdPwViewController: UIViewController {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         //request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "X-ACCESS-TOKEN")
+        request.setValue(accessToken, forHTTPHeaderField: "X-ACCESS-TOKEN")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type") // the request is JSON
         request.setValue("application/json", forHTTPHeaderField: "Accept") // the response expected to be in JSON format
         request.httpBody = jsonData
@@ -147,9 +148,11 @@ class FindIdPwViewController: UIViewController {
             print("Error: Trying to convert model to JSON data")
             return
         }
+        let accessToken = UserDefaults.standard.string(forKey: "accessToken")
         // Create the url request
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
+        request.setValue(accessToken!, forHTTPHeaderField: "X-ACCESS-TOKEN")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type") // the request is JSON
         request.setValue("application/json", forHTTPHeaderField: "Accept") // the response expected to be in JSON format
         request.httpBody = jsonData

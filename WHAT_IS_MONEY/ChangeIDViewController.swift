@@ -27,6 +27,7 @@ class ChangeIDViewController: UIViewController {
     }
     func getUserID() {
         let useridx = UserDefaults.standard.integer(forKey: "userIdx")
+        let accessToken = UserDefaults.standard.string(forKey: "accessToken")
         print(useridx)
         guard let url = URL(string: "https://www.pigmoney.xyz/users/\(useridx)") else {
                 print("Error: cannot create URL")
@@ -35,6 +36,7 @@ class ChangeIDViewController: UIViewController {
             // Create the url request
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
+            request.addValue(accessToken!, forHTTPHeaderField: "X-ACCESS-TOKEN")
             URLSession.shared.dataTask(with: request) { data, response, error in
                 guard error == nil else {
                     print("Error: error calling GET")
@@ -67,6 +69,7 @@ class ChangeIDViewController: UIViewController {
                         }
 
                         let result = jsonObject["result"] as? String
+                        
                         print(result!)
                         self.currentIdLabel.text = result
 
@@ -195,35 +198,41 @@ class ChangeIDViewController: UIViewController {
                     print("Error: HTTP request failed")
                     return
                 }
-                
-                do {
-                    guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
-                        print("Error: Cannot convert data to JSON object")
+                DispatchQueue.main.async {
+                    do {
+                        guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+                            print("Error: Cannot convert data to JSON object")
+                            return
+                        }
+                        guard let prettyJsonData = try? JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted) else {
+                            print("Error: Cannot convert JSON object to Pretty JSON data")
+                            return
+                        }
+                        guard let prettyPrintedJson = String(data: prettyJsonData, encoding: .utf8) else {
+                            print("Error: Couldn't print JSON in String")
+                            return
+                        }
+                        print(prettyPrintedJson)
+                        let isSuccess = jsonObject["isSuccess"] as? Bool
+                        if isSuccess == true {
+                            print("아이디 변경 성공")
+                            let sheet = UIAlertController(title: "안내", message: "아이디 변경 완료", preferredStyle: .alert)
+                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+                            vc.modalPresentationStyle = .fullScreen
+                            sheet.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ -> Void in
+                                self.present(vc, animated: true) }))
+                            self.present(sheet, animated: true)
+                            
+                        } else {
+                            let sheet = UIAlertController(title: "경고", message: "아이디 변경 오류", preferredStyle: .alert)
+                            sheet.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in print("변경 오류") }))
+                            self.present(sheet, animated: true)
+                        }
+                    } catch {
+                        print("Error: Trying to convert JSON data to string")
                         return
                     }
-                    guard let prettyJsonData = try? JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted) else {
-                        print("Error: Cannot convert JSON object to Pretty JSON data")
-                        return
-                    }
-                    guard let prettyPrintedJson = String(data: prettyJsonData, encoding: .utf8) else {
-                        print("Error: Couldn't print JSON in String")
-                        return
-                    }
-                    print(prettyPrintedJson)
-                    let isSuccess = jsonObject["isSuccess"] as? Bool
-                    if isSuccess == true {
-                        print("아이디 변경 성공")
-                        
-                    } else {
-                        let sheet = UIAlertController(title: "경고", message: "아이디 변경 오류", preferredStyle: .alert)
-                        sheet.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in print("변경 오류") }))
-                        self.present(sheet, animated: true)
-                    }
-                } catch {
-                    print("Error: Trying to convert JSON data to string")
-                    return
                 }
-                
                 
             }.resume()
             

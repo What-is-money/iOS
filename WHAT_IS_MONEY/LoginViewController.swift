@@ -41,11 +41,22 @@ final class ResponseModel {
         var userIdx: Int
     }
 }
-struct UserStorage {
+struct UserStorage : Codable {
     static let userIdx = 0
     static let refreshToken = ""
     static let accessToken = ""
 }
+struct ResultData: Codable {
+    static let userIdx = 0
+    static let refreshToken = "".self
+    static let accessToken = ""
+}
+//struct ResponseData : Codable {
+//     let message: String
+//   let result: AnyObject
+//    let code: Int
+//     let isSuccess: Bool
+//}
 class LoginViewController: UIViewController {
 
     
@@ -110,7 +121,16 @@ class LoginViewController: UIViewController {
                     return
                 }
                 DispatchQueue.main.async {
+//                    do {
+//                        let decoder = JSONDecoder()
+//                        if let json = try? decoder.decode(ResponseData.self, from: data) {
+//                            print("here!!!!",json)
+//                            //self.goalList = json.result
+//
+//                        } else {print("Error: Trying to convert JSON data to string")}
+//                    }
                     do {
+                        
                         guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
                             print("Error: Cannot convert data to JSON object")
                             return

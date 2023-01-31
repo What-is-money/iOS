@@ -24,6 +24,7 @@ class WelcomeViewController: UIViewController {
 
     func getUser() {
         let useridx = UserDefaults.standard.integer(forKey: "userIdx")
+        let accessToken = UserDefaults.standard.string(forKey: "accessToken")
         print(useridx)
         guard let url = URL(string: "https://www.pigmoney.xyz/users/start/\(useridx)") else {
                 print("Error: cannot create URL")
@@ -32,6 +33,7 @@ class WelcomeViewController: UIViewController {
             // Create the url request
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
+            request.addValue(accessToken!, forHTTPHeaderField: "X-ACCESS-TOKEN")
             URLSession.shared.dataTask(with: request) { data, response, error in
                 guard error == nil else {
                     print("Error: error calling GET")
@@ -64,6 +66,7 @@ class WelcomeViewController: UIViewController {
                         }
 
                         let result = jsonObject["result"] as? String
+                        //let result = jsonObject ["result"] as? [String: Any],
                         print(result!)
                         self.IntroLabel.text = result
 

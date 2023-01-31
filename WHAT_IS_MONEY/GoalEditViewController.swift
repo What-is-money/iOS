@@ -83,11 +83,12 @@ class GoalEditViewController: UIViewController, UINavigationControllerDelegate &
         if var image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage{
             image = image.resized(toWidth: 90.0) ?? image
             ImgUI.setImage(image, for: .normal)
+            print(image)
             print(info)
 
                 }
 
-                dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
   
     
