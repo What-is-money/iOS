@@ -7,11 +7,12 @@
 
 import Foundation
 
-struct Record {
-    
-var diaryDate: Date
-var recordtype: String
-var categorytype: String
-var moneyAmount: String
+struct Record: Codable {
+
+    var userIdx: Int
+    var goalIdx: Int
+    var date: String
+    var category: Int
+    var amount: String
     
 }

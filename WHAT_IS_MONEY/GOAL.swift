@@ -8,12 +8,19 @@
 import Foundation
 import UIKit
 
-struct Goal {
+struct Goal: Codable {
+    var image: String
+    var goal_amount: Int
+    var init_amount: Int
+    var category_name: String
+    var date: String
     
-var CurrentMoney: Double
-var GoalMoney: Double
-var Percentage: Double
+    /*
+var userIdx: Int
+var init_amount: Int
+var goal_amount: Int
 var GoalName: String
-var GoalImageview: UIImageView
+var GoalImage: String
+     */
     
 }
