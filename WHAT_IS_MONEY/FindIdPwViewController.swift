@@ -94,8 +94,8 @@ class FindIdPwViewController: UIViewController {
                         
                         if isSuccess == true {
                             print("아이디찾기 성공")
-                            let sheet = UIAlertController(title: "안내", message: "아이디는 \(result!)입니다 ", preferredStyle: .alert)
-                            sheet.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in print("이메일 확인") }))
+                            let sheet = UIAlertController(title: "안내", message: "메일 발송 완료", preferredStyle: .alert)
+                            sheet.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in print("아이디 메일 발송 완료") }))
                             self.present(sheet, animated: true)
                             
                         } else {
