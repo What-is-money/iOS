@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina6_72" orientation="portrait" appearance="light"/>
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -13,19 +12,22 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="bkO-ZT-Ogg">
-                                <rect key="frame" x="138" y="210" width="154" height="512"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appLogo" translatesAutoresizingMaskIntoConstraints="NO" id="bkO-ZT-Ogg">
+                                <rect key="frame" x="-3.6666666666666572" y="276" width="400.33333333333326" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="400" id="kl5-kD-EgJ"/>
+                                    <constraint firstAttribute="height" constant="300" id="sJd-3P-tPC"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.98823529409999999" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="bkO-ZT-Ogg" secondAttribute="trailing" constant="138" id="Ksb-KO-4vs"/>
-                            <constraint firstItem="bkO-ZT-Ogg" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="138" id="WCa-05-lzk"/>
-                            <constraint firstItem="bkO-ZT-Ogg" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="dQP-dz-DNu"/>
+                            <constraint firstItem="bkO-ZT-Ogg" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="SUh-gO-7nq"/>
+                            <constraint firstItem="bkO-ZT-Ogg" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="hrg-pN-fye"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -35,9 +37,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="logo" width="724" height="512"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <image name="appLogo" width="512" height="512"/>
     </resources>
 </document>
