@@ -34,6 +34,9 @@ class WelcomeViewController: UIViewController {
             }
             // Create the url request
             var request = URLRequest(url: url)
+        
+           
+    
             request.httpMethod = "GET"
             request.addValue(accessToken!, forHTTPHeaderField: "X-ACCESS-TOKEN")
             URLSession.shared.dataTask(with: request) { data, response, error in

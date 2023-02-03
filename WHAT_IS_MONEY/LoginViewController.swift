@@ -106,6 +106,7 @@ final class TokenClass {
             request.setValue("application/json", forHTTPHeaderField: "Content-Type") // the request is JSON
             request.setValue("application/json", forHTTPHeaderField: "Accept") // the response expected to be in JSON format
             request.httpBody = jsonData
+
             print("리이슈 요청 바디",String(data: jsonData, encoding: .utf8)!)
             DispatchQueue.main.async {
                 URLSession.shared.dataTask(with: request) { data, response, error in
@@ -138,7 +139,9 @@ final class TokenClass {
                                 print("Error: Couldn't print JSON in String")
                                 return
                             }
+
                             print("reissue pretty json",prettyPrintedJson)
+
 
                             let isSuccess = jsonObject["isSuccess"] as? Bool
 
@@ -149,7 +152,9 @@ final class TokenClass {
                                       let newAccessToken = result ["newAccessToken"] as? String,
                                       let accessTokenExpirationTime = result ["accessTokenExpirationTime"] as? Double
                                 else { return }
+
                                 print("result, newAccessToken, accessTokenExpirationTime", result, newAccessToken, accessTokenExpirationTime)
+
                                 let exTimeToSec = accessTokenExpirationTime / 1000 // change ms to s
 
                                 let expireTime = Date().addingTimeInterval(exTimeToSec) // 현시간 + 토큰 만료시간 (최종만료시간 계산)
@@ -158,7 +163,9 @@ final class TokenClass {
                                 UserDefaults.standard.set(newAccessToken, forKey: "accessToken")
                                 UserDefaults.standard.set(expireTime, forKey: "accessTokenExpirationTime")
 
+
                                 print("new UserDefaults set",UserDefaults.standard.dictionaryRepresentation())
+
 
                             } else {
                                 print("reissue error")

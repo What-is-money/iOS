@@ -7,12 +7,20 @@
 		<key>DropDown.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
+<<<<<<< HEAD
 			<integer>2</integer>
+=======
+			<integer>1</integer>
+>>>>>>> 802f443497d7fd28254d2f087210cd4edb0328da
 		</dict>
 		<key>Pods-WHAT_IS_MONEY.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
+<<<<<<< HEAD
 			<integer>0</integer>
+=======
+			<integer>2</integer>
+>>>>>>> 802f443497d7fd28254d2f087210cd4edb0328da
 		</dict>
 	</dict>
 </dict>
