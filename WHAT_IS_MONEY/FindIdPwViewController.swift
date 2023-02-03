@@ -17,6 +17,9 @@ class FindIdPwViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        TokenClass.handlingToken()
+    }
     
     @IBAction func findIDclicked(_ sender: UIButton) {
         guard let email = EmailInput.text else {return}

@@ -22,6 +22,16 @@ class ProfileEditViewController: UIViewController {
     let picker = UIImagePickerController()
     var imageData : NSData? = nil
     
+    
+     
+    override func viewWillAppear(_ animated: Bool) {
+        TokenClass.handlingToken()
+    }
+
+     
+     
+     
+     
     override func viewDidLoad() {
         super.viewDidLoad()
         getUserInfo()

@@ -42,7 +42,9 @@ class WholeSettingViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-    self.navigationController?.navigationBar.isHidden = false
+       
+        self.navigationController?.navigationBar.isHidden = false
+        TokenClass.handlingToken()
     }
     func getUserInfo() {
         let useridx = UserDefaults.standard.integer(forKey: "userIdx")
@@ -265,6 +267,7 @@ class WholeSettingViewController: UIViewController {
                         return
                     }
                     print(String(data: data, encoding: .utf8)!)
+                    
                     guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
                         print("Error: HTTP request failed")
                         return
@@ -424,3 +427,4 @@ class WholeSettingViewController: UIViewController {
     }
   }
   
+

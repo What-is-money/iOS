@@ -8,16 +8,43 @@
 import UIKit
 import DropDown
 
-enum RecordEditorMode {
-    case new
-    case edit(IndexPath, Record)
+struct Addcategory: Codable {
+    let userIdx: Int
+    let flag: Int
+    let category_name: String
+
+}
+
+struct result: Codable {
+    let userIdx: Int
+    let category_name: String
+    let flag: Int
+
+}
+
+struct categoryresponse: Codable {
+    let isSuccess: Bool
+    let code: Int
+    let message: String
+    let result: result
     
 }
 
-protocol WriteRecordViewDelegate: AnyObject {
-    func didSelectRegister(record: Record)
+struct categoryresultdetail: Codable {
+    let categoryIdx: Int
+    let category_name: String
+    let flag: Int
+}
+
+struct categoryresult: Codable {
+    let isSuccess: Bool
+    let code: Int
+    let message: String
+    let result: [categoryresultdetail]
     
-} // 1. to ios 이 프로토콜 작성!!
+}
+
+
 
 class WriteRecordViewController: UIViewController {
     
@@ -33,21 +60,33 @@ class WriteRecordViewController: UIViewController {
     
     @IBOutlet weak var RegisterButton: UIButton!
     
+    var resultlist: [categoryresultdetail] = []
+    // DropDown 아이템 리스트
+    var itemList0: [String] = []
+    var itemList1: [String] = []
+    
+    override func viewWillAppear(_ animated: Bool) {
+        TokenClass.handlingToken()
+        loadcategory()
+        setDropdown()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initUI()
         self.setDropdown()
-        self.configureEditorMode()
         self.diaryDate = RegisterCellDatePicker.date
     }
     
     private var diaryDate: Date? // 2. 현 화면에서 정보를 담을 각 변수 있는지 확인!
     private var recordtype: String?
     private var categorytype: String?
+    private var categoryname: String?
     private var moneyAmount: String?
-    weak var delegate: WriteRecordViewDelegate? // 3.delegate 객체 작성! (위에 있는 프로토콜을 객체화 한 것!! 객체화 해야 넘겨줄 수 있으니까)
-    var recordEditorMode: RecordEditorMode = .new
+    private var categoryId: Int?
+    private var flag: Int?
+    private var recorddateString: String?
+    var goalIdx: Int?
     
         @IBOutlet weak var dropView: UIView!
         
@@ -57,13 +96,203 @@ class WriteRecordViewController: UIViewController {
         
         @IBOutlet weak var btnSelect: UIButton!
         
+    func observeresultlist(){
+        
+        itemList0.removeAll()
+        itemList1.removeAll()
+        
+        for resultone in resultlist {
+            if resultone.flag == 0 {
+                itemList0.append(resultone.category_name)
+                
+            } else {
+                
+                itemList1.append(resultone.category_name)
+                
+            }
+            
+            
+        }
+        
+    }
+    
+    func findcategoryid(categoryname: String) -> Int {
+        for resultlistone in resultlist {
+            if resultlistone.category_name == categoryname {
+                return resultlistone.categoryIdx
+            }
+        }
+        
+        return 0
+        
+    }
+    
+    func loadcategory(){
+        let userIdx = UserDefaults.standard.integer(forKey: "userIdx")
+        if let url = URL(string: "https://www.pigmoney.xyz/category/\(userIdx)/\(flag ?? 0)"){
+            
+            var request = URLRequest.init(url: url)
+            
+            request.httpMethod = "GET"
+            
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue( UserDefaults.standard.string(forKey: "accessToken") ?? "0", forHTTPHeaderField: "X-ACCESS-TOKEN")
+            
+            
+            DispatchQueue.global().async {
+                do {
+                    
+                    URLSession.shared.dataTask(with: request){ [self] (data, response, error) in
+                        
+                        guard let data = data else {
+                            print("Error: Did not receive data")
+                            return
+                        }
+                        
+                        print(String(data: data, encoding: .utf8)!)
+                        
+                        
+                        
+                        guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
+                            print("Error: HTTP request failed")
+                            return
+                        }
+                        
+                        let decoder = JSONDecoder()
+                        if let json = try? decoder.decode(categoryresult.self, from: data) {
+                            self.resultlist =  json.result
+                            print("*******")
+                            print(self.resultlist)
+                            print("*******")
+                            observeresultlist()
+                            print(itemList0)
+                            print(itemList1)
+                        }
+                        
+                    }.resume() //URLSession - end
+                    
+                }
+            }
+            
+        }
+        
+    }
+    
+    func postRecord() {
+        
+        // 넣는 순서도 순서대로여야 하는 것 같다.
+        let record = Record(userIdx: UserDefaults.standard.integer(forKey: "userIdx"), goalIdx: goalIdx!, date: diaryDate?.toString() ?? "0000", category: findcategoryid(categoryname: self.categoryname!), amount: MoneyTextField.text ?? "0")
+        guard let uploadData = try? JSONEncoder().encode(record)
+        else {return}
+        
+        // URL 객체 정의
+        let url = URL(string: "https://www.pigmoney.xyz/records")
+        
+        // URLRequest 객체를 정의
+        var request = URLRequest(url: url!)
+        request.httpMethod = "POST"
+        // HTTP 메시지 헤더
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue( UserDefaults.standard.string(forKey: "accessToken") ?? "0", forHTTPHeaderField: "X-ACCESS-TOKEN")
+        request.httpBody = uploadData
+        
+        print(String(data: uploadData, encoding: .utf8)!)
+        
+        DispatchQueue.global().async {
+            do {
+                
+                // URLSession 객체를 통해 전송, 응답값 처리
+                URLSession.shared.uploadTask(with: request, from: uploadData) { (data, response, error) in
+                    
+                    // 서버가 응답이 없거나 통신이 실패
+                    if let e = error {
+                        NSLog("An error has occured: \(e.localizedDescription)")
+                        return
+                    }
+                    // 응답 처리 로직
+                    guard let data = data else {
+                        print("Error: Did not receive data")
+                        return
+                    }
+                    
+                    print("**************응답데이터*****************")
+                    print(String(data: data, encoding: .utf8)!)
+                    print("**************응답데이터*****************")
+                    
+                    guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
+                        print("Error: HTTP request failed")
+                        return
+                    }
+                    
+                    // data
+                    let decoder = JSONDecoder()
+                    if let json = try? decoder.decode(responseP.self, from: data) {
+                        print(json.message)
+                    }
+                
+                // POST 전송
+                }.resume()
+            }
+              }
+                
+            }
+        
+    
+    
+    
+    func postcategory(newcategoryname: String) {
+        
+        // 넣는 순서도 순서대로여야 하는 것 같다.
+        let addcategory = Addcategory(userIdx: UserDefaults.standard.integer(forKey: "userIdx"), flag: flag ?? 0, category_name: newcategoryname)
+        guard let uploadData = try? JSONEncoder().encode(addcategory)
+        else {return}
+        
+        // URL 객체 정의
+        let url = URL(string: "https://www.pigmoney.xyz/category")
+        
+        // URLRequest 객체를 정의
+        var request = URLRequest(url: url!)
+        request.httpMethod = "POST" //GET이라고 써있는데 이해 안 됨
+        // HTTP 메시지 헤더
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue( UserDefaults.standard.string(forKey: "accessToken") ?? "0", forHTTPHeaderField: "X-ACCESS-TOKEN")
+        
+        request.httpBody = uploadData
+        print(String(data: uploadData, encoding: .utf8)!)
+        
+        DispatchQueue.global().async {
+            do {
+                // URLSession 객체를 통해 전송, 응답값 처리
+                URLSession.shared.uploadTask(with: request, from: uploadData) { (data, response, error) in
+                    
+                    // 서버가 응답이 없거나 통신이 실패
+                    if let e = error {
+                        NSLog("An error has occured: \(e.localizedDescription)")
+                        return
+                    }
+                    // 응답 처리 로직
+                    // guard let data = data else { return }
+                    
+                    // data
+                    
+                    
+                    
+                    // POST 전송
+                }.resume()
+                
+            }
+        }
+            
+        
+        self.loadcategory()
+        
+    }
+    
         
         
         let dropdown = DropDown()
 
-        // DropDown 아이템 리스트
-    var itemList = ["용돈", "적금", "월급", "의복", "식재", "배달음식", "교통비", "고정지출"]
-        
+       
         
         func initUI() {
             // DropDown View의 배경
@@ -84,8 +313,11 @@ class WriteRecordViewController: UIViewController {
 
         func setDropdown() {
             // dataSource로 ItemList를 연결
-           
-                dropdown.dataSource = itemList
+            if flag == 0 {
+                dropdown.dataSource = itemList0 } else {
+                    
+                    dropdown.dataSource = itemList1
+                }
             // anchorView를 통해 UI와 연결
             dropdown.anchorView = self.dropView
             
@@ -96,6 +328,7 @@ class WriteRecordViewController: UIViewController {
             dropdown.selectionAction = { [weak self] (index, item) in
                 //선택한 Item을 TextField에 넣어준다.
                 self!.tfInput.text = item
+                self!.categoryname = self!.tfInput.text
                 self!.categorytype = item
                 self!.ivIcon.image = UIImage.init(named: "DropDownDown")
             }
@@ -108,9 +341,11 @@ class WriteRecordViewController: UIViewController {
         }
         
         @IBAction func dropdownClicked(_ sender: UIButton) {
+            self.loadcategory()
+            self.setDropdown()
+            self.ivIcon.image = UIImage.init(named: "DropDownDown")
             dropdown.show() // 아이템 팝업을 보여준다.
               // 아이콘 이미지를 변경하여 DropDown이 펼쳐진 것을 표현
-              self.ivIcon.image = UIImage.init(named: "DropDownDown")
         }
     
     
@@ -119,9 +354,15 @@ class WriteRecordViewController: UIViewController {
         if sender == self.SaveButton {
             self.changeButtonalpha(color: .red)
             recordtype = "save"
+            flag = 0
+            self.loadcategory()
+            self.setDropdown()
         } else if sender == self.ConsumeButton {
             self.changeButtonalpha(color: .systemMint)
             recordtype = "consume"
+            flag = 1
+            self.loadcategory()
+            self.setDropdown()
         }
         
     }
@@ -146,34 +387,7 @@ class WriteRecordViewController: UIViewController {
     }
     
     @IBAction func tapRegisterButton(_ sender: UIButton) { // 4. 각 변수들을 상수로 만들고 그 상수들을 record(각자 화면의 정보를 담을 구조체) 객체화 시킨 다음
-        
-        guard let diaryDate = self.diaryDate else {return}
-        guard let recordtype = self.recordtype else {return}
-        guard let categorytype = self.categorytype else {return}
-        guard let moneyAmount = self.moneyAmount else {return}
-        let record = Record(diaryDate: diaryDate, recordtype: recordtype, categorytype: categorytype, moneyAmount: moneyAmount)
-        
-        switch self.recordEditorMode {
-        case .new:
-            self.delegate?.didSelectRegister(record: record)
-        case let .edit(indexPath, _):
-            NotificationCenter.default.post(
-                name: NSNotification.Name("editRecord"),
-                object: record,
-                userInfo: [
-                    "indexPath.row": indexPath.row
-                ]
-            
-            )
-            
-            
-        }
-        
-        self.delegate?.didSelectRegister(record: record) // 5. 위에 프로토콜에서 만들어준 함수에 그 객체를 넣기(이 함수는 셀 정보를 넘겨줄 뷰 컨트롤러에 정의됨
-        print(diaryDate)
-        print(recordtype)
-        print(categorytype)
-        print(moneyAmount)
+        self.postRecord()
         self.navigationController?.popViewController(animated: true) //6. 이전 화면으로 화면 전환
         
     }
@@ -182,7 +396,7 @@ class WriteRecordViewController: UIViewController {
         let alert = UIAlertController(title: "카테고리 추가", message: "원하시는 항목을 새로 넣어주세요!", preferredStyle: UIAlertController.Style.alert)
         alert.addTextField()
         let addAction = UIAlertAction(title: "추가", style: .default) { (action) in
-            self.itemList.append(alert.textFields?[0].text ?? "")
+            self.postcategory(newcategoryname: alert.textFields?[0].text ?? "알 수 없음")
             self.setDropdown()
                 }
         
@@ -192,27 +406,31 @@ class WriteRecordViewController: UIViewController {
     }
     
     
-    private func configureEditorMode() {
-        switch self.recordEditorMode {
-        case let .edit(_, record):
-            self.RegisterCellDatePicker.date = record.diaryDate
-            if record.recordtype == "save" {
-                self.tapSaveOrConsume(self.SaveButton)
-            } else {
-                self.tapSaveOrConsume(self.ConsumeButton)
-                
-            }
-            self.tfInput.text = record.categorytype
-            self.MoneyTextField.text = record.moneyAmount
-            self.RegisterButton.setTitle("수정", for: .normal)
-            
-        default:
-            break
-        }
-    }
+  
       
     
     }
 
     
 
+extension String {
+    func toDate() -> Date? { //"yyyy-MM-dd HH:mm:ss"
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.timeZone = TimeZone(identifier: "UTC")
+        if let date = dateFormatter.date(from: self) {
+            return date
+        } else {
+            return nil
+        }
+    }
+}
+
+extension Date {
+    func toString() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.timeZone = TimeZone(identifier: "UTC")
+        return dateFormatter.string(from: self)
+    }
+}

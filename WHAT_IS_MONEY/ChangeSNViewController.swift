@@ -15,7 +15,10 @@ class ChangeSNViewController: UIViewController {
         super.viewDidLoad()
     
     }
-   
+    override func viewWillAppear(_ animated: Bool) {
+        TokenClass.handlingToken()
+    }
+
     
     @IBAction func changePWCompleted(_ sender: UIButton) {
         guard let pw = newPWInput.text, !pw.isEmpty else { return }

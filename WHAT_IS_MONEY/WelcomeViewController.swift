@@ -20,6 +20,7 @@ class WelcomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
       navigationController?.isNavigationBarHidden = true // 뷰 컨트롤러가 나타날 때 숨기기
+        TokenClass.handlingToken()
     }
 
     func getUser() {
@@ -32,6 +33,9 @@ class WelcomeViewController: UIViewController {
             }
             // Create the url request
             var request = URLRequest(url: url)
+        
+           
+    
             request.httpMethod = "GET"
             request.addValue(accessToken!, forHTTPHeaderField: "X-ACCESS-TOKEN")
             URLSession.shared.dataTask(with: request) { data, response, error in
@@ -68,6 +72,7 @@ class WelcomeViewController: UIViewController {
                         let result = jsonObject["result"] as? String
                         //let result = jsonObject ["result"] as? [String: Any],
                         print(result!)
+
                         self.IntroLabel.text = result
 
                     } catch {

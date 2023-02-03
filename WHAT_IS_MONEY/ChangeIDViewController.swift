@@ -22,6 +22,10 @@ class ChangeIDViewController: UIViewController {
         getUserID()
         self.newId.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
     }
+    override func viewWillAppear(_ animated: Bool) {
+        TokenClass.handlingToken()
+    }
+
     @objc func textFieldDidChange(_ sender: Any?) {
         self.IdCheckBtn.isEnabled = true
     }
@@ -243,3 +247,4 @@ class ChangeIDViewController: UIViewController {
 
 
 }
+
