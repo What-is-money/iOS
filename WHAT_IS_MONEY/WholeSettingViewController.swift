@@ -25,6 +25,7 @@ class WholeSettingViewController: UIViewController {
     @IBOutlet weak var UserNameLabel: UILabel!
     @IBOutlet weak var UserIDLabel: UILabel!
     
+    @IBOutlet weak var ProfileImg: UIImageView!
     
     override func viewDidLoad() {
     super.viewDidLoad()
@@ -94,7 +95,13 @@ class WholeSettingViewController: UIViewController {
                         else { return }
                         let name = result ["name"] as? String
                         let id = result ["userId"] as? String
+                        let image = result ["image"] as! String
                         print(result)
+                        
+                        let data = Data(base64Encoded: image, options: .ignoreUnknownCharacters) ?? Data()
+                        var decodeImg = UIImage(data: data)
+                        decodeImg = decodeImg?.resized(toWidth: 90.0) ?? decodeImg
+                        self.ProfileImg.image = decodeImg
                         self.UserNameLabel.text = name
                         self.UserIDLabel.text = id
                      

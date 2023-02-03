@@ -11,6 +11,7 @@ import SwiftUI
 class WelcomeViewController: UIViewController {
 
     @IBOutlet weak var IntroLabel: UILabel!
+    @IBOutlet weak var ProfileImg: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,15 +28,12 @@ class WelcomeViewController: UIViewController {
         let useridx = UserDefaults.standard.integer(forKey: "userIdx")
         let accessToken = UserDefaults.standard.string(forKey: "accessToken")
         print(useridx)
-        guard let url = URL(string: "https://www.pigmoney.xyz/users/start/\(useridx)") else {
+        guard let url = URL(string: "https://www.pigmoney.xyz/users/profile/\(useridx)") else {
                 print("Error: cannot create URL")
                 return
             }
             // Create the url request
             var request = URLRequest(url: url)
-        
-           
-    
             request.httpMethod = "GET"
             request.addValue(accessToken!, forHTTPHeaderField: "X-ACCESS-TOKEN")
             URLSession.shared.dataTask(with: request) { data, response, error in
@@ -69,11 +67,18 @@ class WelcomeViewController: UIViewController {
                             return
                         }
 
-                        let result = jsonObject["result"] as? String
-                        //let result = jsonObject ["result"] as? [String: Any],
-                        print(result!)
-
-                        self.IntroLabel.text = result
+                        guard let result = jsonObject ["result"] as? [String: Any]
+                            else { return }
+                            let name = result ["name"] as? String
+                
+                            let image = result ["image"] as! String
+                            print(result)
+                            
+                            let data = Data(base64Encoded: image, options: .ignoreUnknownCharacters) ?? Data()
+                            var decodeImg = UIImage(data: data)
+                            decodeImg = decodeImg?.resized(toWidth: 90.0) ?? decodeImg
+                            self.ProfileImg.image = decodeImg
+                        self.IntroLabel.text = "\(name ?? "머니뭐니")님, 어서오세요!"
 
                     } catch {
                         print("Error: Trying to convert JSON data to string")

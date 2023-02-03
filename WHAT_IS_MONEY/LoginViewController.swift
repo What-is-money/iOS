@@ -65,14 +65,11 @@ final class TokenClass {
         let refreshToken = UserDefaults.standard.string(forKey: "refreshToken")
         let accessTokenExpirationTime = UserDefaults.standard.object(forKey: "accessTokenExpirationTime") as? Date ?? Date()
         let refreshTokenExpirationTime = UserDefaults.standard.object(forKey: "refreshTokenExpirationTime") as? Date ?? Date()
-        print("handling token 호출")
         let now = Date()
-        print(accessTokenExpirationTime)
-        print(refreshTokenExpirationTime)
         let before30sec = accessTokenExpirationTime - 30 // 만료시간 30초 전
-        print("현재 시간, 만료시간, refresh만료시간", now, accessTokenExpirationTime, refreshTokenExpirationTime)
-        print(now>accessTokenExpirationTime, now>before30sec)
-        if now > refreshTokenExpirationTime {
+//        print("현재 시간, 만료시간, refresh만료시간", now, accessTokenExpirationTime, refreshTokenExpirationTime)
+//        print(now>accessTokenExpirationTime, now>before30sec)
+        if now > refreshTokenExpirationTime - 30 {
             print("로그인 유효기간 만료")
             UserDefaults.standard.removeObject(forKey: "userIdx") //제거
             UserDefaults.standard.removeObject(forKey: "accessToken") //제거
@@ -82,7 +79,9 @@ final class TokenClass {
             loginVC.modalTransitionStyle = .crossDissolve
             loginVC.present(loginVC, animated: true)
         }
-        if now > accessTokenExpirationTime || now > before30sec {
+//        now > accessTokenExpirationTime ||
+        // 만료 시간 30초전에 reissue post
+        if now > before30sec {
             guard let url = URL(string: "https://www.pigmoney.xyz/users/reissue") else {
                 print("Error: cannot create URL")
                 return
@@ -107,7 +106,7 @@ final class TokenClass {
             request.setValue("application/json", forHTTPHeaderField: "Content-Type") // the request is JSON
             request.setValue("application/json", forHTTPHeaderField: "Accept") // the response expected to be in JSON format
             request.httpBody = jsonData
-            print(String(data: jsonData, encoding: .utf8)!)
+            print("리이슈 요청 바디",String(data: jsonData, encoding: .utf8)!)
             DispatchQueue.main.async {
                 URLSession.shared.dataTask(with: request) { data, response, error in
                     guard error == nil else {
@@ -139,7 +138,7 @@ final class TokenClass {
                                 print("Error: Couldn't print JSON in String")
                                 return
                             }
-                            print(prettyPrintedJson)
+                            print("reissue pretty json",prettyPrintedJson)
 
                             let isSuccess = jsonObject["isSuccess"] as? Bool
 
@@ -150,7 +149,7 @@ final class TokenClass {
                                       let newAccessToken = result ["newAccessToken"] as? String,
                                       let accessTokenExpirationTime = result ["accessTokenExpirationTime"] as? Double
                                 else { return }
-
+                                print("result, newAccessToken, accessTokenExpirationTime", result, newAccessToken, accessTokenExpirationTime)
                                 let exTimeToSec = accessTokenExpirationTime / 1000 // change ms to s
 
                                 let expireTime = Date().addingTimeInterval(exTimeToSec) // 현시간 + 토큰 만료시간 (최종만료시간 계산)
@@ -159,7 +158,7 @@ final class TokenClass {
                                 UserDefaults.standard.set(newAccessToken, forKey: "accessToken")
                                 UserDefaults.standard.set(expireTime, forKey: "accessTokenExpirationTime")
 
-                                print(UserDefaults.standard.dictionaryRepresentation())
+                                print("new UserDefaults set",UserDefaults.standard.dictionaryRepresentation())
 
                             } else {
                                 print("reissue error")

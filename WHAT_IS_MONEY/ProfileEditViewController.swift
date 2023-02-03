@@ -92,7 +92,13 @@ class ProfileEditViewController: UIViewController {
                         else { return }
                         let name = result ["name"] as? String
                         let id = result ["userId"] as? String
+                        let image = result ["image"] as! String
                         print(result)
+                        
+                        let data = Data(base64Encoded: image, options: .ignoreUnknownCharacters) ?? Data()
+                        var decodeImg = UIImage(data: data)
+                        decodeImg = decodeImg?.resized(toWidth: 90.0) ?? decodeImg
+                        self.imagepickButton.setImage(decodeImg, for: .normal)
                         self.UserNameLabel.text = name
                         self.UserIDLabel.text = id
                      
@@ -134,7 +140,7 @@ class ProfileEditViewController: UIViewController {
     }
     
     @IBAction func TapPickImageButton(_ sender: UIButton) {
-        let alert =  UIAlertController(title: "원하는 타이틀", message: "원하는 메세지", preferredStyle: .actionSheet)
+        let alert =  UIAlertController(title: "프로필 사진 설정", message: "사진 선택", preferredStyle: .actionSheet)
         let library =  UIAlertAction(title: "사진앨범", style: .default) { (action) in self.openLibrary()
         }
         let camera =  UIAlertAction(title: "카메라", style: .default) { (action) in
