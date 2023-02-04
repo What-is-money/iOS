@@ -151,7 +151,7 @@
                                                     </label>
                                                 </subviews>
                                             </stackView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jinperson" translatesAutoresizingMaskIntoConstraints="NO" id="8YM-n7-iUd">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jinperson" translatesAutoresizingMaskIntoConstraints="NO" id="8YM-n7-iUd">
                                                 <rect key="frame" x="25" y="30" width="90" height="90"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="90" id="4F4-Fb-rHn"/>
@@ -1794,24 +1794,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="61" translatesAutoresizingMaskIntoConstraints="NO" id="YH2-Nh-GVJ">
-                                <rect key="frame" x="31.666666666666657" y="253" width="312" height="306"/>
+                                <rect key="frame" x="31.666666666666657" y="252" width="312" height="308"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="58" translatesAutoresizingMaskIntoConstraints="NO" id="8Cn-Z4-nGL">
-                                        <rect key="frame" x="0.0" y="0.0" width="312" height="306"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="312" height="308"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" highlightedImage="person" translatesAutoresizingMaskIntoConstraints="NO" id="06I-xB-ghG">
-
-                                                <rect key="frame" x="115.66666666666669" y="0.0" width="81" height="106"/>
-
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" highlightedImage="person" translatesAutoresizingMaskIntoConstraints="NO" id="06I-xB-ghG">
+                                                <rect key="frame" x="102" y="0.0" width="108" height="108"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="106" id="o5z-a3-yDV"/>
+                                                    <constraint firstAttribute="width" constant="108" id="RYV-Hx-rXE"/>
+                                                    <constraint firstAttribute="height" constant="108" id="iXA-2z-Pol"/>
                                                 </constraints>
                                                 <imageReference key="image" image="jinperson" symbolScale="large" renderingMode="template" variableValue="1"/>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="46" translatesAutoresizingMaskIntoConstraints="NO" id="kWv-yz-JfK">
-                                                <rect key="frame" x="0.0" y="164" width="312" height="142"/>
+                                                <rect key="frame" x="0.0" y="166" width="312" height="142"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UuO-GS-MoN">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UuO-GS-MoN">
                                                         <rect key="frame" x="61" y="0.0" width="190" height="48"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                         <nil key="textColor"/>
@@ -1837,6 +1836,7 @@
                                                 <constraints>
                                                     <constraint firstItem="vg8-Gn-RgF" firstAttribute="leading" secondItem="kWv-yz-JfK" secondAttribute="leading" id="CTW-er-DiU"/>
                                                     <constraint firstAttribute="trailing" secondItem="vg8-Gn-RgF" secondAttribute="trailing" id="Pf3-KI-3DW"/>
+                                                    <constraint firstAttribute="trailing" secondItem="UuO-GS-MoN" secondAttribute="trailing" constant="61" id="TYE-gs-saW"/>
                                                     <constraint firstItem="UuO-GS-MoN" firstAttribute="leading" secondItem="kWv-yz-JfK" secondAttribute="leading" constant="61.000000000000028" id="miS-TH-OYz"/>
                                                 </constraints>
                                             </stackView>

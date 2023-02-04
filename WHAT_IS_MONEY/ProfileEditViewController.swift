@@ -26,15 +26,15 @@ class ProfileEditViewController: UIViewController {
      
     override func viewWillAppear(_ animated: Bool) {
         TokenClass.handlingToken()
+        getUserProfile()
+        getUserInfo()
     }
 
      
      
-     
-     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getUserInfo()
+
         picker.delegate = self
         let gesture2 = UITapGestureRecognizer(target: self, action: #selector(ProfileEditViewController.goChangeID(sender:)))
         let gesture3 = UITapGestureRecognizer(target: self, action: #selector(ProfileEditViewController.goChangeSN(sender:)))
@@ -43,7 +43,78 @@ class ProfileEditViewController: UIViewController {
         self.ChangeSNView.addGestureRecognizer(gesture3)
         
     }
-    
+    func getUserProfile() {
+        let useridx = UserDefaults.standard.integer(forKey: "userIdx")
+        let accessToken = UserDefaults.standard.string(forKey: "accessToken")
+        print(useridx)
+        guard let url = URL(string: "https://www.pigmoney.xyz/users/profileImage/\(useridx)") else {
+            print("Error: cannot create URL")
+            return
+        }
+        // Create the url request
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "GET"
+        request.addValue(accessToken!, forHTTPHeaderField: "X-ACCESS-TOKEN")
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            guard error == nil else {
+                print("Error: error calling GET")
+                print(error!)
+                return
+            }
+            guard let data = data else {
+                print("Error: Did not receive data")
+                return
+            }
+            
+            print(String(data: data, encoding: .utf8)!)
+            guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
+                print("Error: HTTP request failed")
+                return
+            }
+            DispatchQueue.main.async {
+                do {
+                    guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+                        print("Error: Cannot convert data to JSON object")
+                        return
+                    }
+                    guard let prettyJsonData = try? JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted) else {
+                        print("Error: Cannot convert JSON object to Pretty JSON data")
+                        return
+                    }
+                    guard String(data: prettyJsonData, encoding: .utf8) != nil else {
+                        print("Error: Couldn't print JSON in String")
+                        return
+                    }
+                    
+                    guard let result = jsonObject ["result"] as? String
+                    else { return }
+                    print("imgresult",result)
+                    print(result.count)
+                    if (result.count == 0) {
+                        self.imagepickButton.setImage(UIImage(named: "jinperson2"), for: .normal)
+                        //self.ProfileImg.image = UIImage(named: "jinperson")
+                        
+                    } else {
+                        if let data = Data(base64Encoded: result, options: .ignoreUnknownCharacters) {
+                            let decodedImg = UIImage(data: data)
+                            self.imagepickButton.layer.cornerRadius = self.imagepickButton.frame.height/2
+                            self.imagepickButton.layer.borderWidth = 1
+                            self.imagepickButton.layer.borderColor = UIColor.clear.cgColor
+                            // 뷰의 경계에 맞춰준다
+                            self.imagepickButton.clipsToBounds = true
+                            self.imagepickButton.setImage(decodedImg, for: .normal)
+                            
+                        }
+                    }
+                } catch {
+                    print("Error: Trying to convert JSON data to string")
+                    return
+                }
+            }
+            
+        }.resume()
+    }
     func getUserInfo() {
         let useridx = UserDefaults.standard.integer(forKey: "userIdx")
         let accessToken = UserDefaults.standard.string(forKey: "accessToken")
@@ -92,13 +163,9 @@ class ProfileEditViewController: UIViewController {
                         else { return }
                         let name = result ["name"] as? String
                         let id = result ["userId"] as? String
-                        let image = result ["image"] as! String
+    
                         print(result)
                         
-                        let data = Data(base64Encoded: image, options: .ignoreUnknownCharacters) ?? Data()
-                        var decodeImg = UIImage(data: data)
-                        decodeImg = decodeImg?.resized(toWidth: 90.0) ?? decodeImg
-                        self.imagepickButton.setImage(decodeImg, for: .normal)
                         self.UserNameLabel.text = name
                         self.UserIDLabel.text = id
                      
@@ -146,9 +213,15 @@ class ProfileEditViewController: UIViewController {
         let camera =  UIAlertAction(title: "카메라", style: .default) { (action) in
         self.openCamera()
         }
+        let delete = UIAlertAction(title: "삭제", style: .destructive){
+            (action) -> Void in
+            self.requestPOST()
+            self.imagepickButton.setImage(UIImage(named: "jinperson"), for: .normal)
+                }
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         alert.addAction(library)
         alert.addAction(camera)
+        alert.addAction(delete)
         alert.addAction(cancel)
         present(alert, animated: true, completion: nil)
     }
@@ -167,10 +240,9 @@ class ProfileEditViewController: UIViewController {
            // MARK: [전송할 데이터 파라미터 정의 실시]
            var reqestParam : Dictionary<String, Any> = [String : Any]()
            reqestParam["userIdx"] = userIdx // 일반 파라미터
-           reqestParam["\(file)"] = self.imageData! as NSData // 사진 파일
+           reqestParam["\(file)"] = self.imageData // 사진 파일
            
            // MARK: [URL 지정 실시]
-          // let urlComponents = URLComponents(string: "https://www.pigmoney.xyz/users/profile/\(userIdx)/\(file)")
            let urlComponents = URLComponents(string: "https://www.pigmoney.xyz/users/profile")
            
            // [boundary 설정 : 바운더리 라인 구분 필요 위함]
@@ -372,14 +444,6 @@ extension ProfileEditViewController: UIImagePickerControllerDelegate, UINavigati
             
             // [이미지 데이터에 선택한 이미지 지정 실시]
             self.imageData = (img as? UIImage)!.jpegData(compressionQuality: 0.8) as NSData? // jpeg 압축 품질 설정
-            /*
-             print("")
-             print("===============================")
-             print("[A_Image >> imagePickerController() :: 앨범에서 선택한 사진 정보 확인 및 사진 표시 실시]")
-             print("[imageData :: ", self.imageData)
-             print("===============================")
-             print("")
-             // */
             
             
             // [멀티파트 서버에 사진 업로드 수행]
@@ -405,145 +469,7 @@ extension ProfileEditViewController: UIImagePickerControllerDelegate, UINavigati
         self.dismiss(animated: true, completion: nil)
     }
 }
-   
-//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-//        if var image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
-//                image = image.resized(toWidth: 90.0) ?? image
-//                imagepickButton.setImage(image, for: .normal)
-//                print(info)
-////            let data = Data(base64Encoded: image, options: .ignoreUnknownCharacters) ?? Data()
-////            let decodeImg = UIImage(data: data)
-//            struct UploadData: Codable {
-//                let userIdx: Int
-//                let Img: String
-//            }
-//            let userIdx = UserDefaults.standard.integer(forKey: "userIdx")
-//            let accessToken = UserDefaults.standard.string(forKey: "accessToken")
-//
-//            let uploadDataModel = UploadData(userIdx: userIdx, Img: <#T##String#>)
-//
-//            guard let url = URL(string: "https://www.pigmoney.xyz/users/profile") else {
-//                print("Error: cannot create URL")
-//                return
-//            }
-//            // Convert model to JSON data
-//            guard let jsonData = try? JSONEncoder().encode(uploadDataModel) else {
-//                print("Error: Trying to convert model to JSON data")
-//                return
-//            }
-//            // Create the url request
-//            var request = URLRequest(url: url)
-//            request.httpMethod = "POST"
-//            request.addValue(accessToken!, forHTTPHeaderField: "X-ACCESS-TOKEN")
-//            request.setValue("application/json", forHTTPHeaderField: "Content-Type") // the request is JSON
-//            request.setValue("application/json", forHTTPHeaderField: "Accept") // the response expected to be in JSON format
-//            request.httpBody = jsonData
-//            print(request)
-//            print(String(data: jsonData, encoding: .utf8)!)
-//            DispatchQueue.main.async {
-//                URLSession.shared.dataTask(with: request) { data, response, error in
-//                    guard error == nil else {
-//                        print("Error: error calling POST")
-//                        print(error!)
-//                        return
-//                    }
-//                    guard let data = data else {
-//                        print("Error: Did not receive data")
-//                        return
-//                    }
-//                    print(String(data: data, encoding: .utf8)!)
-//                    guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
-//                        print("Error: HTTP request failed")
-//                        return
-//                    }
-//                    DispatchQueue.main.async {
-//                        do {
-//                            guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
-//                                print("Error: Cannot convert data to JSON object")
-//                                return
-//                            }
-//                            guard let prettyJsonData = try? JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted) else {
-//                                print("Error: Cannot convert JSON object to Pretty JSON data")
-//                                return
-//                            }
-//                            guard let prettyPrintedJson = String(data: prettyJsonData, encoding: .utf8) else {
-//                                print("Error: Couldn't print JSON in String")
-//                                return
-//                            }
-//                            print(prettyPrintedJson)
-//                            let isSuccess = jsonObject["isSuccess"] as? Bool
-//                            if isSuccess == true {
-//                                print("프사 등록 성공")
-//                                let sheet = UIAlertController(title: "안내", message: "프로필사진 등록 완료", preferredStyle: .alert)
-//                                sheet.addAction(UIAlertAction(title: "확인", style: .default, handler: { _  in
-//                                    print("hurray")}))
-//                                self.present(sheet, animated: true)
-//
-//                            } else {
-//                                let sheet = UIAlertController(title: "경고", message: "프로필사진 등록 오류", preferredStyle: .alert)
-//                                sheet.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in print("등록 오류") }))
-//                                self.present(sheet, animated: true)
-//                            }
-//                        } catch {
-//                            print("Error: Trying to convert JSON data to string")
-//                            return
-//                        }
-//                    }
-//
-//                }.resume()
-//
-//            }
-//
-//        }
-//
-//        dismiss(animated: true, completion: nil)
-//    }
-//
-//    func convertImageToBase64(image: UIImage) -> String {
-//        let imageData = image.pngData()!
-//        return imageData.base64EncodedString(options: Data.Base64EncodingOptions.lineLength64Characters) }
-//    func uploadImage(paramName: String, fileName: String, image: UIImage) {
-//        let url = URL(string: "https://www.pigmoney.xyz/users/profile")
-//        let accessToken = UserDefaults.standard.string(forKey: "accessToken")
-//        // 바운더리를 구분하기 위한 임의의 문자열. 각 필드는 `--바운더리`의 라인으로 구분된다.
-//        let boundary = UUID().uuidString
-//        let session = URLSession.shared
-//
-//        // URLRequest 생성하기
-//        var urlRequest = URLRequest(url: url!)
-//        urlRequest.httpMethod = "POST"
-//
-//        // Boundary랑 Content-type 지정해주기.
-//        urlRequest.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-//        urlRequest.addValue(accessToken!, forHTTPHeaderField: "X-ACCESS-TOKEN")
-//
-//        var data = Data()
-//
-//        // --(boundary)로 시작.
-//        data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
-//        // 헤더 정의 - 문자열로 작성 후 UTF8로 인코딩해서 Data타입으로 변환해야 함
-//        data.append("Content-Disposition: form-data; name=\"\(paramName)\"; filename=\"\(fileName)\"\r\n".data(using: .utf8)!)
-//        // 헤더 정의 2 - 문자열로 작성 후 UTF8로 인코딩해서 Data타입으로 변환해야 함, 구분은 \r\n으로 통일.
-//        data.append("Content-Type: image/png\r\n\r\n".data(using: .utf8)!)
-//        // 내용 붙이기
-//        data.append(image.pngData()!)
-//
-//
-//        // 모든 내용 끝나는 곳에 --(boundary)--로 표시해준다.
-//        data.append("\r\n--\(boundary)--\r\n".data(using: .utf8)!)
-//
-//        // Send a POST request to the URL, with the data we created earlier
-//        session.uploadTask(with: urlRequest, from: data, completionHandler: { responseData, response, error in
-//            if error == nil {
-//                let jsonData = try? JSONSerialization.jsonObject(with: responseData!, options: .allowFragments)
-//                if let json = jsonData as? [String: Any] {
-//                    print(json)
-//                }
-//            }
-//        }).resume()
-//    }
-//
-    
+
 
 
 
