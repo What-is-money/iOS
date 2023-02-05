@@ -26,7 +26,6 @@ class ProfileEditViewController: UIViewController {
      
     override func viewWillAppear(_ animated: Bool) {
         TokenClass.handlingToken()
-        getUserProfile()
         getUserInfo()
     }
 
@@ -43,78 +42,7 @@ class ProfileEditViewController: UIViewController {
         self.ChangeSNView.addGestureRecognizer(gesture3)
         
     }
-    func getUserProfile() {
-        let useridx = UserDefaults.standard.integer(forKey: "userIdx")
-        let accessToken = UserDefaults.standard.string(forKey: "accessToken")
-        print(useridx)
-        guard let url = URL(string: "https://www.pigmoney.xyz/users/profileImage/\(useridx)") else {
-            print("Error: cannot create URL")
-            return
-        }
-        // Create the url request
-        var request = URLRequest(url: url)
-        
-        request.httpMethod = "GET"
-        request.addValue(accessToken!, forHTTPHeaderField: "X-ACCESS-TOKEN")
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            guard error == nil else {
-                print("Error: error calling GET")
-                print(error!)
-                return
-            }
-            guard let data = data else {
-                print("Error: Did not receive data")
-                return
-            }
-            
-            print(String(data: data, encoding: .utf8)!)
-            guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
-                print("Error: HTTP request failed")
-                return
-            }
-            DispatchQueue.main.async {
-                do {
-                    guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
-                        print("Error: Cannot convert data to JSON object")
-                        return
-                    }
-                    guard let prettyJsonData = try? JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted) else {
-                        print("Error: Cannot convert JSON object to Pretty JSON data")
-                        return
-                    }
-                    guard String(data: prettyJsonData, encoding: .utf8) != nil else {
-                        print("Error: Couldn't print JSON in String")
-                        return
-                    }
-                    
-                    guard let result = jsonObject ["result"] as? String
-                    else { return }
-                    print("imgresult",result)
-                    print(result.count)
-                    if (result.count == 0) {
-                        self.imagepickButton.setImage(UIImage(named: "jinperson2"), for: .normal)
-                        //self.ProfileImg.image = UIImage(named: "jinperson")
-                        
-                    } else {
-                        if let data = Data(base64Encoded: result, options: .ignoreUnknownCharacters) {
-                            let decodedImg = UIImage(data: data)
-                            self.imagepickButton.layer.cornerRadius = self.imagepickButton.frame.height/2
-                            self.imagepickButton.layer.borderWidth = 1
-                            self.imagepickButton.layer.borderColor = UIColor.clear.cgColor
-                            // 뷰의 경계에 맞춰준다
-                            self.imagepickButton.clipsToBounds = true
-                            self.imagepickButton.setImage(decodedImg, for: .normal)
-                            
-                        }
-                    }
-                } catch {
-                    print("Error: Trying to convert JSON data to string")
-                    return
-                }
-            }
-            
-        }.resume()
-    }
+    
     func getUserInfo() {
         let useridx = UserDefaults.standard.integer(forKey: "userIdx")
         let accessToken = UserDefaults.standard.string(forKey: "accessToken")
@@ -163,9 +91,24 @@ class ProfileEditViewController: UIViewController {
                         else { return }
                         let name = result ["name"] as? String
                         let id = result ["userId"] as? String
-    
+                        let image = result ["image"] as? String
                         print(result)
-                        
+                        if (image?.count == 0 || image == nil) {
+                            self.imagepickButton.setImage(UIImage(named: "jinperson2"), for: .normal)
+                            //self.ProfileImg.image = UIImage(named: "jinperson")
+                            
+                        } else {
+                            if let data = Data(base64Encoded: image!, options: .ignoreUnknownCharacters) {
+                                let decodedImg = UIImage(data: data)
+                                self.imagepickButton.layer.cornerRadius = self.imagepickButton.frame.height/2
+                                self.imagepickButton.layer.borderWidth = 1
+                                self.imagepickButton.layer.borderColor = UIColor.clear.cgColor
+                                // 뷰의 경계에 맞춰준다
+                                self.imagepickButton.clipsToBounds = true
+                                self.imagepickButton.setImage(decodedImg, for: .normal)
+                                
+                            }
+                        }
                         self.UserNameLabel.text = name
                         self.UserIDLabel.text = id
                      
@@ -213,15 +156,15 @@ class ProfileEditViewController: UIViewController {
         let camera =  UIAlertAction(title: "카메라", style: .default) { (action) in
         self.openCamera()
         }
-        let delete = UIAlertAction(title: "삭제", style: .destructive){
-            (action) -> Void in
-            self.requestPOST()
-            self.imagepickButton.setImage(UIImage(named: "jinperson"), for: .normal)
-                }
+//        let delete = UIAlertAction(title: "삭제", style: .destructive){
+//            (action) -> Void in
+//            self.requestPOST()
+//            self.imagepickButton.setImage(UIImage(named: "jinperson"), for: .normal)
+//                }
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         alert.addAction(library)
         alert.addAction(camera)
-        alert.addAction(delete)
+//        alert.addAction(delete)
         alert.addAction(cancel)
         present(alert, animated: true, completion: nil)
     }
@@ -267,8 +210,10 @@ class ProfileEditViewController: UIViewController {
            var uploadData = Data()
            let boundaryPrefix = "--\(boundary)\r\n"
            
-           
-           
+           let sheet = UIAlertController(title: "사진 업로드 에러", message: "다시 시도해주세요", preferredStyle: .alert)
+           sheet.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+           let sheet2 = UIAlertController(title: "사진 업로드 성공", message: "프로필사진 설정 완료", preferredStyle: .alert)
+           sheet2.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
            // [멀티 파트 전송 파라미터 삽입 : 딕셔너리 for 문 수행]
            for (key, value) in reqestParam {
                if "\(key)" == "\(file)" { // MARK: [사진 파일 인 경우]
@@ -336,14 +281,19 @@ class ProfileEditViewController: UIViewController {
                let successsRange = 200..<300
                guard let statusCode = (response as? HTTPURLResponse)?.statusCode, successsRange.contains(statusCode)
                else {
-                   print("")
-                   print("====================================")
-                   print("[A_Image >> requestPOST() :: 사진 업로드 요청 에러]")
-                   print("error : ", (response as? HTTPURLResponse)?.statusCode ?? 0)
-                   print("allHeaderFields : ", (response as? HTTPURLResponse)?.allHeaderFields ?? "")
-                   print("msg : ", (response as? HTTPURLResponse)?.description ?? "")
-                   print("====================================")
-                   print("")
+                   DispatchQueue.main.async {
+                       self.present(sheet, animated: true)
+                       print("")
+                       print("====================================")
+                       print("[A_Image >> requestPOST() :: 사진 업로드 요청 에러]")
+                       print("error : ", (response as? HTTPURLResponse)?.statusCode ?? 0)
+                       print("allHeaderFields : ", (response as? HTTPURLResponse)?.allHeaderFields ?? "")
+                       print("msg : ", (response as? HTTPURLResponse)?.description ?? "")
+                       print("====================================")
+                       print("")
+                       
+                     
+                   }
                    return
                }
 
@@ -378,15 +328,18 @@ class ProfileEditViewController: UIViewController {
                        print("")
                        return
                    }
-                   print("")
-                   print("====================================")
-                   print("[A_Image >> requestPOST() :: 사진 업로드 요청 성공]")
-                   print("allHeaderFields : ", (response as? HTTPURLResponse)?.allHeaderFields ?? "")
-                   print("resultCode : ", resultCode)
-                   print("resultLen : ", resultLen)
-                   print("resultString : ", resultString)
-                   print("====================================")
-                   print("")
+                   DispatchQueue.main.async {
+                       self.present(sheet2, animated: true)
+                       print("")
+                       print("====================================")
+                       print("[A_Image >> requestPOST() :: 사진 업로드 요청 성공]")
+                       print("allHeaderFields : ", (response as? HTTPURLResponse)?.allHeaderFields ?? "")
+                       print("resultCode : ", resultCode)
+                       print("resultLen : ", resultLen)
+                       print("resultString : ", resultString)
+                       print("====================================")
+                       print("")
+                   }
                } catch {
                    print("")
                    print("====================================")
