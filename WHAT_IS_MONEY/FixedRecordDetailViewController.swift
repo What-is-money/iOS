@@ -72,6 +72,7 @@ class FixedRecordViewController: UIViewController {
     }
     
     var recordIdx: Int?
+    var goalIdx: Int?
     
     var resultlist: [categoryresultdetail] = []
     // DropDown 아이템 리스트
@@ -150,7 +151,7 @@ class FixedRecordViewController: UIViewController {
                          return
                      }
                      
-                     print(String(data: data, encoding: .utf8)!)
+                    // print(String(data: data, encoding: .utf8)!)
                      guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
                          print("Error: HTTP request failed")
                          return
@@ -193,7 +194,7 @@ class FixedRecordViewController: UIViewController {
                                                   return
                                               }
                                               
-                                              print(String(data: data, encoding: .utf8)!)
+                                             // print(String(data: data, encoding: .utf8)!)
                                               
                                               
                                               
@@ -237,7 +238,7 @@ class FixedRecordViewController: UIViewController {
                 if let json = try? decoder.decode(existresponse.self, from: data) {
                     DispatchQueue.main.async {
                         self.RecordDatePicker.date =  json.result.date.toDate() ?? Date()
-                        
+                        self.goalIdx = json.result.goalIdx
                         if json.result.type == 0 {
                             self.tapSaveOrConsume(self.SaveButton)
                         } else {
@@ -398,7 +399,17 @@ class FixedRecordViewController: UIViewController {
     
     @IBAction func tapEditButton(_ sender: UIButton) {
         self.patchRecord()
-        self.navigationController?.popViewController(animated: true)
+        
+        if flag == 1 {
+            guard let consumeViewController = self.storyboard?.instantiateViewController(withIdentifier: "ConsumeViewController") as? ConsumeViewController else {return}
+            consumeViewController.goalIdx = self.goalIdx
+            consumeViewController.recordDate = self.RecordDatePicker.date.toString()
+            self.navigationController?.pushViewController(consumeViewController, animated: true)
+            
+        } else {
+            self.navigationController?.popViewController(animated: true) //6. 이전 화면으로 화면 전환
+        }
+        
     }
     
     

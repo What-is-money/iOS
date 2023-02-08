@@ -91,7 +91,7 @@ class RecordViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func loadrecordlist(){
        let useridx = UserDefaults.standard.integer(forKey: "userIdx")
         if let url = URL(string: "https://www.pigmoney.xyz/records/\(useridx)/\(goalIdx!)?type=\(type)"){
-            
+            print(url)
             var request = URLRequest.init(url: url)
             
             request.httpMethod = "GET"
@@ -109,6 +109,7 @@ class RecordViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             return}
                         
                     print("뭐가문제야\n\n\n\n")
+                        print("이거 확인")
                     print(String(data: data, encoding: .utf8)!)
                         
                         

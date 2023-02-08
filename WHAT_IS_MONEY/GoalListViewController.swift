@@ -8,18 +8,18 @@ struct goalresult: Codable {
     let image: String
     let goal_amount: Int
     let amount: Int
+    let init_amount: Int
     let progress: Float
     let category_name: String
     let date: String
-    
-    
+        
 }
 
 struct goallistresponse: Codable {
-    let code: Int
     let isSuccess: Bool
-    let result: [goalresult]
+    let code: Int
     let message: String
+    let result: [goalresult]
     
 }
 
@@ -86,6 +86,8 @@ class GoalListViewController: UIViewController {
                         }
                         
                         print(String(data: data, encoding: .utf8)!)
+                        
+                        
                         guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
                             print("Error: HTTP request failed")
                             return
@@ -100,7 +102,7 @@ class GoalListViewController: UIViewController {
                                 self.tableView.reloadData()
                             }
                             print("goalList!!!!",self.goalList)
-                            print(self.goalList.count)
+                           // print(self.goalList.count)
                         } else {
                             print("wrong!!!")
                         }
@@ -137,7 +139,7 @@ class GoalListViewController: UIViewController {
                             return
                         }
                         
-                        print(String(data: data, encoding: .utf8)!)
+                        //print(String(data: data, encoding: .utf8)!)
                         
                         
                         guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
@@ -147,14 +149,14 @@ class GoalListViewController: UIViewController {
                         //                    goallistresponse.self
                         let decoder = JSONDecoder()
                         if let json = try? decoder.decode(goallistresponse.self, from: data) {
-                            print("\n\n\njson\n\n\n\n",json)
-                            print("\n\n\nmessage!!!!!\n\n\n",json.message)
+                            //print("\n\n\njson\n\n\n\n",json)
+                            //print("\n\n\nmessage!!!!!\n\n\n",json.message)
                             self.goalList = json.result
                             DispatchQueue.main.async {
                                 self.tableView.reloadData()
                             }
-                            print("goalList!!!!",self.goalList)
-                            print(self.goalList.count)
+                             print("goalList!!!!",self.goalList)
+                            // print(self.goalList.count)
                         } else {
                             print("wrong!!!")
                         }
@@ -199,14 +201,14 @@ class GoalListViewController: UIViewController {
                         //                    goallistresponse.self
                         let decoder = JSONDecoder()
                         if let json = try? decoder.decode(goallistresponse.self, from: data) {
-                            print("\n\n\njson\n\n\n\n",json)
+                           // print("\n\n\njson\n\n\n\n",json)
                             print("\n\n\nmessage!!!!!\n\n\n",json.message)
                             self.goalList = json.result
                             DispatchQueue.main.async {
                                 self.tableView.reloadData()
                             }
-                            print("goalList!!!!",self.goalList)
-                            print(self.goalList.count)
+                            //print("goalList!!!!",self.goalList)
+                            //print(self.goalList.count)
                         } else {
                             print("wrong!!!")
                         }
@@ -239,7 +241,7 @@ class GoalListViewController: UIViewController {
                                 return
                             }
                             
-                            print(String(data: data, encoding: .utf8)!)
+                           // print(String(data: data, encoding: .utf8)!)
                             
                             
                             guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
@@ -386,13 +388,13 @@ extension GoalListViewController: UITableViewDataSource {
             return UITableViewCell()}
         let data = Data(base64Encoded: goalList[indexPath.row].image, options: .ignoreUnknownCharacters) ?? Data()
             let decodeImg = UIImage(data: data)
+         //let defaultImg = UIImage(named: "defaultimage")
         cell.GoalImage.image = decodeImg?.resized(toWidth: 63)
-        
         cell.GoalNameLabel.text = goalList[indexPath.row].category_name
         cell.CurrentMoney.text = String(goalList[indexPath.row].amount)
         cell.GoalMoney.text = String(goalList[indexPath.row].goal_amount)
         cell.percentageLabel.text = String(goalList[indexPath.row].progress)
-            
+         
         return cell
         
     }

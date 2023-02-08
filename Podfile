@@ -7,4 +7,5 @@ target 'WHAT_IS_MONEY' do
 
   # Pods for WHAT_IS_MONEY
   pod 'DropDown'
+  pod 'Gifu'
 end

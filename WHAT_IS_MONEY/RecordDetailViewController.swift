@@ -68,7 +68,7 @@ class RecordDetailViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(recordList)
+        //print(recordList)
         tableView.dataSource = self
         tableView.delegate = self
     }
@@ -77,30 +77,29 @@ class RecordDetailViewController: UIViewController {
     
     func getrecordList(){
         
-        let record = recordlistpost(userIdx: UserDefaults.standard.integer(forKey: "userIdx"), goalIdx: goalIdx!, date: recordDate!)
+        /*let record = recordlistpost(userIdx: UserDefaults.standard.integer(forKey: "userIdx"), goalIdx: goalIdx!, date: recordDate!)
         guard let uploadData = try? JSONEncoder().encode(record)
-        else {return}
+        else {return}*/
         
+        let userIdx = UserDefaults.standard.integer(forKey: "userIdx")
         // URL 객체 정의
-        let url = URL(string: "https://www.pigmoney.xyz/daily-records")
+        let url = URL(string: "https://www.pigmoney.xyz/daily-records/\(userIdx)/\(goalIdx!)/\(recordDate!)")
         
         // URLRequest 객체를 정의
         var request = URLRequest(url: url!)
-        request.httpMethod = "POST"
+        request.httpMethod = "GET"
         
         // HTTP 메시지 헤더
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue( UserDefaults.standard.string(forKey: "accessToken") ?? "0", forHTTPHeaderField: "X-ACCESS-TOKEN")
         
-        request.httpBody = uploadData
-        print("업로드 리코드")
-        print(String(data: uploadData, encoding: .utf8)!)
+        //print(String(data: uploadData, encoding: .utf8)!)
         
         DispatchQueue.global().async {
             do {
                 
                 // URLSession 객체를 통해 전송, 응답값 처리
-                URLSession.shared.uploadTask(with: request, from: uploadData) { (data, response, error) in
+                URLSession.shared.dataTask(with: request) { (data, response, error) in
                     
                     // 서버가 응답이 없거나 통신이 실패
                     if let e = error {
@@ -113,7 +112,10 @@ class RecordDetailViewController: UIViewController {
                         return
                     }
                     
+                    print("이거 확인")
                     print(String(data: data, encoding: .utf8)!)
+                    
+                    //print(String(data: data, encoding: .utf8)!)
                     guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
                         print("Error: HTTP request failed")
                         return
@@ -123,9 +125,9 @@ class RecordDetailViewController: UIViewController {
                     let decoder = JSONDecoder()
                     if let json = try? decoder.decode(response1.self, from: data) {
                         self.recordList = json.result.records
-                        print("+++++++++++++++++")
-                        print(self.recordList)
-                        print("+++++++++++++")
+                        //print("+++++++++++++++++")
+                        //print(self.recordList)
+                        //print("+++++++++++++")
                         DispatchQueue.main.async {
                             self.tableView.reloadData()
                         }
@@ -170,7 +172,7 @@ class RecordDetailViewController: UIViewController {
                         return
                     }
                     print("deleterecordlist")
-                    print(String(data: data, encoding: .utf8)!)
+                    //print(String(data: data, encoding: .utf8)!)
                     
                     guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
                         print("Error: HTTP request failed")

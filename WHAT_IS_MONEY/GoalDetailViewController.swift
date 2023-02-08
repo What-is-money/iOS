@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Gifu
+
 
 
 struct goalresponse: Codable {
@@ -24,6 +26,9 @@ struct goaldeleteresponse: Codable {
 
 class GoalDetailViewController: UIViewController {
 
+    @IBOutlet weak var gifImageView: GIFImageView!
+    
+    @IBOutlet weak var gifImageView2: GIFImageView!
     
     @IBOutlet weak var kebapButton: UIButton!
 
@@ -37,6 +42,7 @@ class GoalDetailViewController: UIViewController {
     
     @IBOutlet weak var currentamountlabel: UILabel!
     
+    @IBOutlet weak var initialamountLabel: UILabel!
     
     @IBOutlet weak var goalImageView: UIImageView!
     
@@ -44,6 +50,8 @@ class GoalDetailViewController: UIViewController {
     var goalIdx: Int = 0
     var goaldetail: goalresult?
     var goaldeleteresponse: goaldeleteresponse?
+    
+    var goalanimationflag: Int = 0
     
     override func viewWillAppear(_ animated: Bool) {
         print("viewwillappear")
@@ -54,6 +62,9 @@ class GoalDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        progressView.transform = progressView.transform.scaledBy(x: 1, y: 7)
+        gifImageView.animate(withGIFNamed: "목표화면배경2")
+        gifImageView2.animate(withGIFNamed: "아기돼지")
         getGoal()
         print(goaldetail?.category_name as Any)
         configureView()
@@ -118,7 +129,7 @@ class GoalDetailViewController: UIViewController {
                             return
                         }
                         
-                        print(String(data: data, encoding: .utf8)!)
+                        print("getgoall:" ,String(data: data, encoding: .utf8)!)
                         
                         guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
                             print("Error: HTTP request failed")
@@ -128,6 +139,7 @@ class GoalDetailViewController: UIViewController {
                         let decoder = JSONDecoder()
                         if let json = try? decoder.decode(goalresponse.self, from: data) {
                             self.goaldetail =  json.result
+                            print(goaldetail as Any)
                             DispatchQueue.main.async {
                                 self.configureView()
                             }
@@ -164,10 +176,10 @@ class GoalDetailViewController: UIViewController {
                             print("Error: Did not receive data")
                             return
                         }
-                        print("\n\n\n\n\n\n\n\n")
+                        /*print("\n\n\n\n\n\n\n\n")
                         print("삭제왜안돼")
                         print(String(data: data, encoding: .utf8)!)
-                        print("\n\n\n\n\n\n\n\n")
+                        print("\n\n\n\n\n\n\n\n")*/
                         guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
                             print("Error: HTTP request failed")
                             return
@@ -190,12 +202,15 @@ class GoalDetailViewController: UIViewController {
     func configureView(){
         goalnameLabel.text = goaldetail?.category_name
         let data = Data(base64Encoded: goaldetail?.image ?? "알 수 없음", options: .ignoreUnknownCharacters) ?? Data()
-        let decodeImg = UIImage(data: data)?.resized(toWidth: 240)
+        let decodeImg = UIImage(data: data)?.resized(toWidth: 143)
         goalImageView.image = decodeImg
-        progressView.progress = Float(goaldetail?.progress ?? 0.0)
-        progresspercentageLabel.text = String(goaldetail?.progress ?? 0.0) + "%"
+        //goalImageView.alpha = CGFloat((goaldetail?.progress ?? 0.0) / 100)
+        //progressView.progress = Float(goaldetail?.progress ?? 0.0)
+        progressView.setProgress((goaldetail?.progress ?? 0.0)/100 , animated: true)
+        progresspercentageLabel.text = "\(String(goaldetail?.progress ?? 0.0))%"
         goalamountlabel.text = String(goaldetail?.goal_amount ?? 0)
         currentamountlabel.text = String(goaldetail?.amount ?? 0)
+        initialamountLabel.text = String(goaldetail?.init_amount ?? 0)
         
     }
     

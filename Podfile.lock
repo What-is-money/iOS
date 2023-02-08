@@ -1,16 +1,20 @@
 PODS:
   - DropDown (2.3.13)
+  - Gifu (3.3.1)
 
 DEPENDENCIES:
   - DropDown
+  - Gifu
 
 SPEC REPOS:
   trunk:
     - DropDown
+    - Gifu
 
 SPEC CHECKSUMS:
   DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
+  Gifu: 416d4e38c4c2fed012f019e0a1d3ffcb58e5b842
 
-PODFILE CHECKSUM: 29a488fdc664584def77a3ebac200bf838533b2f
+PODFILE CHECKSUM: 78ebe220bfc68db72fbb6e18a12eade6ee42fd31
 
 COCOAPODS: 1.11.3

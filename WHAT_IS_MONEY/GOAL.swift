@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 struct Goal: Codable {
-    var image: String
     var goal_amount: Int
     var init_amount: Int
     var category_name: String
