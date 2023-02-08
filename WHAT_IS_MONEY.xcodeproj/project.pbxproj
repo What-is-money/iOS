@@ -18,6 +18,7 @@
 		15279A59296ED6EB00C14AC6 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15279A58296ED6EB00C14AC6 /* ChartView.swift */; };
 		1531147929781A9F00C029D1 /* TabBarControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1531147829781A9F00C029D1 /* TabBarControllerViewController.swift */; };
 		15592C412983943900C678DD /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15592C402983943900C678DD /* AlertViewController.swift */; };
+		155D2C8D29937C0C004334EA /* ChartMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155D2C8C29937C0C004334EA /* ChartMainViewController.swift */; };
 		3E130B4D2977B44100D63CF9 /* GoalDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E130B4C2977B44100D63CF9 /* GoalDetailViewController.swift */; };
 		3E18F0672976E48F008C5B5E /* GoalListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E18F0662976E48F008C5B5E /* GoalListViewController.swift */; };
 		3E1B0A4F2963044D0092B6E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1B0A4E2963044D0092B6E3 /* AppDelegate.swift */; };
@@ -56,6 +57,7 @@
 		15279A58296ED6EB00C14AC6 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		1531147829781A9F00C029D1 /* TabBarControllerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarControllerViewController.swift; sourceTree = "<group>"; };
 		15592C402983943900C678DD /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		155D2C8C29937C0C004334EA /* ChartMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartMainViewController.swift; sourceTree = "<group>"; };
 		3E130B4C2977B44100D63CF9 /* GoalDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalDetailViewController.swift; sourceTree = "<group>"; };
 		3E18F0662976E48F008C5B5E /* GoalListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalListViewController.swift; sourceTree = "<group>"; };
 		3E1B0A4B2963044D0092B6E3 /* WHAT_IS_MONEY.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WHAT_IS_MONEY.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -145,6 +147,7 @@
 				3E1B0A542963044D0092B6E3 /* Main.storyboard */,
 				15592C402983943900C678DD /* AlertViewController.swift */,
 				15279A56296ED3F000C14AC6 /* ChartViewController.swift */,
+				155D2C8C29937C0C004334EA /* ChartMainViewController.swift */,
 				15279A58296ED6EB00C14AC6 /* ChartView.swift */,
 				15279A4E296D567E00C14AC6 /* RecordViewController.swift */,
 				15279A52296D71CD00C14AC6 /* RecordTableViewCell.swift */,
@@ -296,6 +299,7 @@
 				3E808BE0297A8B1200A503F2 /* GoalEditViewController.swift in Sources */,
 				3EE5DB53296E85A2009E6FA2 /* RecordDetailViewController.swift in Sources */,
 				3E1B0A532963044D0092B6E3 /* ViewController.swift in Sources */,
+				155D2C8D29937C0C004334EA /* ChartMainViewController.swift in Sources */,
 				15279A472969D17300C14AC6 /* RegisterViewController.swift in Sources */,
 				3E3A0669296FCE2F0023BBFB /* WriteRecordViewController.swift in Sources */,
 				3E2421C02976DC82004B8052 /* GoalListCell.swift in Sources */,
