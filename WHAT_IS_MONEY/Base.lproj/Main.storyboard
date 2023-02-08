@@ -2406,7 +2406,7 @@
         <!--개인정보 이용처리-->
         <scene sceneID="cwD-Oo-g9L">
             <objects>
-                <viewController storyboardIdentifier="AgreePrivacyPolicyViewController" modalPresentationStyle="fullScreen" id="1kU-Ua-Ixo" customClass="AgreePrivacyPolicyViewController" customModule="WHAT_IS_MONEY" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AgreePrivacyPolicyViewController" title="개인정보 이용처리" modalPresentationStyle="fullScreen" id="1kU-Ua-Ixo" customClass="AgreePrivacyPolicyViewController" customModule="WHAT_IS_MONEY" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JnQ-ug-JLX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2429,8 +2429,36 @@
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aqY-EN-Kam">
                                 <rect key="frame" x="19" y="147" width="337" height="389"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vGz-8B-bSA">
+                                        <rect key="frame" x="0.0" y="0.0" width="337" height="389"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <string key="text">1. 입력받는 정보 
+	* 가.정보항목 
+		* 이름, 사용자가 입력한 아이디와 비밀번호, 사용자가 직접 입력한 지출과 저축 내역, 업로드된 사진 
+	* 나.입력방법 사용자가 컨텐츠 내 텍스트 필드에 직접 입력 
+2. 개인정보의 이용목적과 수집 및 제공 정보 
+	* 가.이용 목적 
+		* 서비스(회원가입, ID/PW찾기 등)이용을 위한 본인인증 
+		* 이전달과 이번달의 금융내역 비교 활용 
+			* 지출과 저축 내역 파악 및 정리 
+	* 나. 수집 및 제공하는 정보 
+		* IP주소, 사용자 월별 소비 및 저축 내역 
+3. 개인정보의 보유 및 이용기간 
+이용자의 개인정보는 원칙적으로 개인정보의 수집 및 이용목적이 달성되면 지체없이 파기합니다. 회원탈퇴 시 즉각적으로 가입자의 정보가 파기됩니다.</string>
+                                        <color key="textColor" systemColor="labelColor"/>
+                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
                                 <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" systemColor="systemRedColor"/>
+                                <constraints>
+                                    <constraint firstItem="vGz-8B-bSA" firstAttribute="leading" secondItem="aqY-EN-Kam" secondAttribute="leading" id="CgS-1N-gFW"/>
+                                    <constraint firstAttribute="bottom" secondItem="vGz-8B-bSA" secondAttribute="bottom" id="kbb-Ae-fFR"/>
+                                    <constraint firstAttribute="trailing" secondItem="vGz-8B-bSA" secondAttribute="trailing" id="oew-M7-TbI"/>
+                                    <constraint firstItem="vGz-8B-bSA" firstAttribute="top" secondItem="aqY-EN-Kam" secondAttribute="top" id="rKV-o6-u85"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="MOI-zg-Ubn"/>

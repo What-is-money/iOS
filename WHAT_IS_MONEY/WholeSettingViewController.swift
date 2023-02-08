@@ -227,19 +227,43 @@ class WholeSettingViewController: UIViewController {
     }
     
     @objc func showSIAlert(sender:UIGestureRecognizer){
-        let alert = UIAlertController(title: "개인정보 처리방침", message: "동의서 열람", preferredStyle: .alert)
-        alert.addTextField { textField in
-            let heightConstraint = NSLayoutConstraint(item: textField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 500)
-            textField.addConstraint(heightConstraint)
-            textField.text = "여기에 개인정보 동의서 열람과 내용이 표시됩니다.\n 상당히 길 것으로 예측되는데 스크롤도 넣어야 할까요 아니면 그정도면 괜찮을까요"
-            textField.isUserInteractionEnabled = false
-        }
+        let alert = UIAlertController(title: "개인정보 처리방침", message: "동의서 열람\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
+        alert.view.autoresizesSubviews = true
+        let textView = UITextView()
+        alert.view.addSubview(textView)
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.isUserInteractionEnabled = false
+
+        let leadConstraint = NSLayoutConstraint (item: alert.view!, attribute: .leading, relatedBy: .equal, toItem: textView, attribute: .leading, multiplier: 1.0, constant: -8.0)
+        let trailConstraint = NSLayoutConstraint (item: alert.view!, attribute: .trailing, relatedBy: .equal, toItem: textView, attribute: .trailing, multiplier: 1.0, constant: 8.0)
+        let topConstraint = NSLayoutConstraint (item: alert.view!, attribute: .top, relatedBy: .equal, toItem: textView, attribute: .top, multiplier: 1.0, constant: -64.0)
+        let bottomConstraint = NSLayoutConstraint (item: alert.view!, attribute: .bottom, relatedBy: .equal, toItem: textView, attribute: .bottom, multiplier: 1.0, constant: 64.0)
+
+        textView.text = """
+        1. 입력받는 정보
+            * 가.정보항목
+               * 이름, 사용자가 입력한 아이디와 비밀번호, 사용자가 직접 입력한 지출과 저축 내역, 업로드된 사진
+            * 나.입력방법 사용자가 컨텐츠 내 텍스트 필드에 직접 입력
+        2. 개인정보의 이용목적과 수집 및 제공 정보
+            * 가.이용 목적
+                * 서비스(회원가입, ID/PW찾기 등)이용을 위한 본인인증
+                * 이전달과 이번달의 금융내역 비교 활용
+                    * 지출과 저축 내역 파악 및 정리
+            * 나. 수집 및 제공하는 정보
+                * IP주소, 사용자 월별 소비 및 저축 내역
+        3. 개인정보의 보유 및 이용기간
+         이용자의 개인정보는 원칙적으로 개인정보의 수집 및 이용목적이 달성되면 지체없이 파기합니다. 회원탈퇴 시 즉각적으로 가입자의 정보가 파기됩니다.
+        """
         
-        let confirm = UIAlertAction(title: "확인", style: .default, handler: nil)
-        let close = UIAlertAction(title: "닫기", style: .destructive, handler: nil)
-        alert.addAction(confirm)
-        alert.addAction(close)
-        present(alert, animated: true, completion: nil)
+        NSLayoutConstraint.activate([leadConstraint, trailConstraint, topConstraint, bottomConstraint])
+
+        let Done = UIAlertAction(title: "확인", style: .default) { (action:UIAlertAction) in
+            NSLog("%@", textView.text)
+        }
+        alert.addAction(Done)
+
+        self.present(alert, animated: true, completion: nil)
+           
     }
     
     @objc func showLogoutAlert(sender:UIGestureRecognizer){
