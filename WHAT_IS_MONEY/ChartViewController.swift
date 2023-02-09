@@ -15,7 +15,15 @@ class ChartViewController: UIViewController {
     }
     
     @IBSegueAction func showChartView(_ coder: NSCoder) -> UIViewController? {
-        return UIHostingController(coder: coder, rootView: ChartView())
+//        let contentView = ChartView().environmentObject(Network())
+//
+//        if let windowScene = scene as? UIWindowScene {
+//            let window = UIWindow(windowScene: windowScene)
+//            window.rootViewController = UIHostingController(rootView: contentView)
+//            self.window = window
+//            window.makeKeyAndVisible()
+//        }
+        return UIHostingController(coder: coder, rootView: ChartView().environmentObject(Network()))
     }
     
    
