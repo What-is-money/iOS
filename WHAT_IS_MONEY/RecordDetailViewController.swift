@@ -112,8 +112,8 @@ class RecordDetailViewController: UIViewController {
                         return
                     }
                     
-                    print("이거 확인")
-                    print(String(data: data, encoding: .utf8)!)
+                    //vprint("이거 확인")
+                    //print(String(data: data, encoding: .utf8)!)
                     
                     //print(String(data: data, encoding: .utf8)!)
                     guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
@@ -199,7 +199,7 @@ class RecordDetailViewController: UIViewController {
         } else {
             print("edittapnum=1이다")
             self.EditButton.titleLabel?.text = "편집"
-            self.EditButton.titleLabel?.textColor = UIColor.blue
+            self.EditButton.titleLabel?.textColor = UIColor(red: 0.3255, green: 0.4667, blue: 0.9647, alpha: 1.0)
             self.tableView.setEditing(false, animated: true)
             edittapnum = edittapnum - 1
             getrecordList()
@@ -245,11 +245,13 @@ extension RecordDetailViewController: UITableViewDataSource {
          let record = self.recordList[indexPath.row]
          if record.type == 0 {
             cell.CellKindLabel.text = "저축"
-             cell.CellKindLabel.textColor = UIColor.red
+             cell.CellKindLabel.textColor = UIColor(red: 0.3255, green: 0.4667, blue: 0.9647, alpha: 1.0)
+             cell.CostLabel.textColor = UIColor(red: 0.3255, green: 0.4667, blue: 0.9647, alpha: 1.0)
             
         } else {
             cell.CellKindLabel.text = "지출"
-            cell.CellKindLabel.textColor = UIColor.systemMint
+            cell.CellKindLabel.textColor = UIColor.red
+            cell.CostLabel.textColor = UIColor.red
         }
         
         cell.CategoryLabel.text = record.category

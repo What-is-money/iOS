@@ -390,8 +390,9 @@ class FixedRecordViewController: UIViewController {
             self.postcategory(newcategoryname: alert.textFields?[0].text ?? "알 수 없음")
             self.setDropdown()
                 }
-        
+        let cancelAction = UIAlertAction(title: "삭제", style: .cancel)
         alert.addAction(addAction)
+        alert.addAction(cancelAction)
         present(alert, animated: false, completion: nil)
         
     }

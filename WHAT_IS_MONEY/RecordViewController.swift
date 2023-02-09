@@ -161,22 +161,33 @@ class RecordViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if recorddata.records.count == 3 {
             if recorddata.records[0].type == 0 {
                 cell.firstSortLabel.text = "저축"
+                cell.firstSortLabel.textColor = UIColor(red: 0.3255, green: 0.4667, blue: 0.9647, alpha: 1.0)
+                cell.firstPriceLabel.textColor = UIColor(red: 0.3255, green: 0.4667, blue: 0.9647, alpha: 1.0)
             } else {
                 cell.firstSortLabel.text = "지출"
+               
             }
             cell.firstCategoryLabel.text = recorddata.records[0].category
             cell.firstPriceLabel.text = String(recorddata.records[0].amount)
+            
             if recorddata.records[1].type == 0 {
                 cell.secondSortLabel.text = "저축"
+                cell.secondSortLabel.textColor = UIColor(red: 0.3255, green: 0.4667, blue: 0.9647, alpha: 1.0)
+                cell.secondPriceLabel.textColor = UIColor(red: 0.3255, green: 0.4667, blue: 0.9647, alpha: 1.0)
             } else {
                 cell.secondSortLabel.text = "지출"
+                
             }
             cell.secondCategoryLabel.text = recorddata.records[1].category
             cell.secondPriceLabel.text = String(recorddata.records[1].amount)
+            
             if recorddata.records[2].type == 0 {
                 cell.thirdSortLabel.text = "저축"
+                cell.thirdSortLabel.textColor = UIColor(red: 0.3255, green: 0.4667, blue: 0.9647, alpha: 1.0)
+                cell.thirdPriceLabel.textColor = UIColor(red: 0.3255, green: 0.4667, blue: 0.9647, alpha: 1.0)
             } else {
                 cell.thirdSortLabel.text = "지출"
+              
             }
             cell.thirdCategoryLabel.text = recorddata.records[2].category
             cell.thirdPriceLabel.text = String(recorddata.records[2].amount)
@@ -192,6 +203,8 @@ class RecordViewController: UIViewController, UITableViewDelegate, UITableViewDa
         else if recorddata.records.count == 2 {
             if recorddata.records[0].type == 0 {
                 cell.firstSortLabel.text = "저축"
+                cell.firstSortLabel.textColor = UIColor(red: 0.3255, green: 0.4667, blue: 0.9647, alpha: 1.0)
+                cell.firstPriceLabel.textColor = UIColor(red: 0.3255, green: 0.4667, blue: 0.9647, alpha: 1.0)
             } else {
                 cell.firstSortLabel.text = "지출"
             }
@@ -199,6 +212,8 @@ class RecordViewController: UIViewController, UITableViewDelegate, UITableViewDa
             cell.firstPriceLabel.text = String(recorddata.records[0].amount)
             if recorddata.records[1].type == 0 {
                 cell.secondSortLabel.text = "저축"
+                cell.secondSortLabel.textColor = UIColor(red: 0.3255, green: 0.4667, blue: 0.9647, alpha: 1.0)
+                cell.secondPriceLabel.textColor = UIColor(red: 0.3255, green: 0.4667, blue: 0.9647, alpha: 1.0)
             } else {
                 cell.secondSortLabel.text = "지출"
             }
@@ -220,6 +235,8 @@ class RecordViewController: UIViewController, UITableViewDelegate, UITableViewDa
        else if recorddata.records.count == 1 {
             if recorddata.records[0].type == 0 {
                 cell.firstSortLabel.text = "저축"
+                cell.firstSortLabel.textColor = UIColor(red: 0.3255, green: 0.4667, blue: 0.9647, alpha: 1.0)
+                cell.firstPriceLabel.textColor = UIColor(red: 0.3255, green: 0.4667, blue: 0.9647, alpha: 1.0)
             } else {
                 cell.firstSortLabel.text = "지출"
             }
