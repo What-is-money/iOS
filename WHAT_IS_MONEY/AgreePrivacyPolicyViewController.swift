@@ -29,10 +29,14 @@ class AgreePrivacyPolicyViewController: UIViewController {
     
     @IBOutlet weak var AgreeBtn: UIButton!
 
-
+    @IBOutlet weak var AgreeView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.AgreeBtn.addTarget(self, action: #selector(self.popAlert), for: .touchUpInside)
+        AgreeView.layer.borderColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1.0).cgColor
+        AgreeView.layer.borderWidth = 0.5
+        AgreeView.layer.cornerRadius = 5.0
         // Do any additional setup after loading the view.
     }
     @objc func popAlert() {
