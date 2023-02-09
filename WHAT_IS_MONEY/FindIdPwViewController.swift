@@ -93,7 +93,7 @@ class FindIdPwViewController: UIViewController {
                         print(prettyPrintedJson)
                         
                         let isSuccess = jsonObject["isSuccess"] as? Bool
-//                        let result = jsonObject["result"] as? String
+                        let result = jsonObject["result"] as? String
                         
                         if isSuccess == true {
                             print("아이디찾기 성공")

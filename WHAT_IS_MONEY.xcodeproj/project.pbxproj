@@ -19,9 +19,6 @@
 		1531147929781A9F00C029D1 /* TabBarControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1531147829781A9F00C029D1 /* TabBarControllerViewController.swift */; };
 		15592C412983943900C678DD /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15592C402983943900C678DD /* AlertViewController.swift */; };
 		155D2C8D29937C0C004334EA /* ChartMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155D2C8C29937C0C004334EA /* ChartMainViewController.swift */; };
-		155D2C912993EF27004334EA /* 늑대배경.gif in Resources */ = {isa = PBXBuildFile; fileRef = 155D2C8E2993EF27004334EA /* 늑대배경.gif */; };
-		155D2C922993EF27004334EA /* 아기돼지.gif in Resources */ = {isa = PBXBuildFile; fileRef = 155D2C8F2993EF27004334EA /* 아기돼지.gif */; };
-		155D2C932993EF27004334EA /* 목표화면배경2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 155D2C902993EF27004334EA /* 목표화면배경2.gif */; };
 		3E130B4D2977B44100D63CF9 /* GoalDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E130B4C2977B44100D63CF9 /* GoalDetailViewController.swift */; };
 		3E18F0672976E48F008C5B5E /* GoalListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E18F0662976E48F008C5B5E /* GoalListViewController.swift */; };
 		3E1B0A4F2963044D0092B6E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1B0A4E2963044D0092B6E3 /* AppDelegate.swift */; };
@@ -44,6 +41,9 @@
 		3E808BE2297A8B2500A503F2 /* GoalAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E808BE1297A8B2500A503F2 /* GoalAddViewController.swift */; };
 		3E9A9246299259A10014B58A /* Circularprogress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9A9245299259A10014B58A /* Circularprogress.swift */; };
 		3EB4E0ED2970339F006EF640 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB4E0EC2970339F006EF640 /* Record.swift */; };
+		3EC798E62993B1F00060D22A /* 목표화면배경2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3EC798E52993B1F00060D22A /* 목표화면배경2.gif */; };
+		3EC798E82993B1FD0060D22A /* 늑대배경.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3EC798E72993B1FD0060D22A /* 늑대배경.gif */; };
+		3EC798EA2993B2060060D22A /* 아기돼지.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3EC798E92993B2060060D22A /* 아기돼지.gif */; };
 		3EC798EC2993CE3B0060D22A /* ConsumeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC798EB2993CE3B0060D22A /* ConsumeViewController.swift */; };
 		3EE5DB53296E85A2009E6FA2 /* RecordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE5DB52296E85A2009E6FA2 /* RecordDetailViewController.swift */; };
 		3EE5DB55296E866F009E6FA2 /* RecordDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE5DB54296E866F009E6FA2 /* RecordDetailTableViewCell.swift */; };
@@ -63,9 +63,6 @@
 		1531147829781A9F00C029D1 /* TabBarControllerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarControllerViewController.swift; sourceTree = "<group>"; };
 		15592C402983943900C678DD /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		155D2C8C29937C0C004334EA /* ChartMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartMainViewController.swift; sourceTree = "<group>"; };
-		155D2C8E2993EF27004334EA /* 늑대배경.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "늑대배경.gif"; path = "../../iOS/WHAT_IS_MONEY/늑대배경.gif"; sourceTree = "<group>"; };
-		155D2C8F2993EF27004334EA /* 아기돼지.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "아기돼지.gif"; path = "../../iOS/WHAT_IS_MONEY/아기돼지.gif"; sourceTree = "<group>"; };
-		155D2C902993EF27004334EA /* 목표화면배경2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "목표화면배경2.gif"; path = "../../iOS/WHAT_IS_MONEY/목표화면배경2.gif"; sourceTree = "<group>"; };
 		3E130B4C2977B44100D63CF9 /* GoalDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalDetailViewController.swift; sourceTree = "<group>"; };
 		3E18F0662976E48F008C5B5E /* GoalListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalListViewController.swift; sourceTree = "<group>"; };
 		3E1B0A4B2963044D0092B6E3 /* WHAT_IS_MONEY.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WHAT_IS_MONEY.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,6 +87,9 @@
 		3E808BE1297A8B2500A503F2 /* GoalAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalAddViewController.swift; sourceTree = "<group>"; };
 		3E9A9245299259A10014B58A /* Circularprogress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Circularprogress.swift; sourceTree = "<group>"; };
 		3EB4E0EC2970339F006EF640 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
+		3EC798E52993B1F00060D22A /* 목표화면배경2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "목표화면배경2.gif"; path = "../../../../Downloads/목표화면배경2.gif"; sourceTree = "<group>"; };
+		3EC798E72993B1FD0060D22A /* 늑대배경.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "늑대배경.gif"; path = "../../../../Downloads/늑대배경.gif"; sourceTree = "<group>"; };
+		3EC798E92993B2060060D22A /* 아기돼지.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "아기돼지.gif"; path = "../../../../Downloads/아기돼지.gif"; sourceTree = "<group>"; };
 		3EC798EB2993CE3B0060D22A /* ConsumeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumeViewController.swift; sourceTree = "<group>"; };
 		3EE5DB52296E85A2009E6FA2 /* RecordDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailViewController.swift; sourceTree = "<group>"; };
 		3EE5DB54296E866F009E6FA2 /* RecordDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailTableViewCell.swift; sourceTree = "<group>"; };
@@ -155,9 +155,9 @@
 				3E1B0A642963EA4C0092B6E3 /* WholeSettingViewController.swift */,
 				1531147829781A9F00C029D1 /* TabBarControllerViewController.swift */,
 				3E1B0A542963044D0092B6E3 /* Main.storyboard */,
-				155D2C902993EF27004334EA /* 목표화면배경2.gif */,
-				155D2C8E2993EF27004334EA /* 늑대배경.gif */,
-				155D2C8F2993EF27004334EA /* 아기돼지.gif */,
+				3EC798E52993B1F00060D22A /* 목표화면배경2.gif */,
+				3EC798E92993B2060060D22A /* 아기돼지.gif */,
+				3EC798E72993B1FD0060D22A /* 늑대배경.gif */,
 				15592C402983943900C678DD /* AlertViewController.swift */,
 				15279A56296ED3F000C14AC6 /* ChartViewController.swift */,
 				155D2C8C29937C0C004334EA /* ChartMainViewController.swift */,
@@ -253,12 +253,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				155D2C912993EF27004334EA /* 늑대배경.gif in Resources */,
-				155D2C932993EF27004334EA /* 목표화면배경2.gif in Resources */,
+				3EC798EA2993B2060060D22A /* 아기돼지.gif in Resources */,
+				3EC798E82993B1FD0060D22A /* 늑대배경.gif in Resources */,
 				3E1B0A5B2963044E0092B6E3 /* LaunchScreen.storyboard in Resources */,
 				3E1B0A582963044E0092B6E3 /* Assets.xcassets in Resources */,
-				155D2C922993EF27004334EA /* 아기돼지.gif in Resources */,
 				15279A55296D71CD00C14AC6 /* RecordTableViewCell.xib in Resources */,
+				3EC798E62993B1F00060D22A /* 목표화면배경2.gif in Resources */,
 				3E1B0A562963044D0092B6E3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
