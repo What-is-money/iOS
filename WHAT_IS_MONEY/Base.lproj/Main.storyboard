@@ -714,7 +714,7 @@
                                 <rect key="frame" x="0.0" y="56" width="375" height="673"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6F5-sY-TnK">
-                                <rect key="frame" x="44" y="599" width="287" height="60"/>
+                                <rect key="frame" x="44" y="639" width="287" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="e34-wW-8Ug"/>
                                 </constraints>
@@ -758,7 +758,7 @@
                         <viewLayoutGuide key="safeArea" id="nVq-m2-QVd"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="nVq-m2-QVd" firstAttribute="bottom" secondItem="6F5-sY-TnK" secondAttribute="bottom" constant="70" id="8Qj-4g-zPX"/>
+                            <constraint firstItem="nVq-m2-QVd" firstAttribute="bottom" secondItem="6F5-sY-TnK" secondAttribute="bottom" constant="30" id="8Qj-4g-zPX"/>
                             <constraint firstItem="6F5-sY-TnK" firstAttribute="leading" secondItem="nVq-m2-QVd" secondAttribute="leading" constant="44" id="HcQ-WN-xWr"/>
                             <constraint firstItem="7y0-DA-BJo" firstAttribute="leading" secondItem="nVq-m2-QVd" secondAttribute="leading" id="HhV-lr-cWb"/>
                             <constraint firstItem="nVq-m2-QVd" firstAttribute="trailing" secondItem="6F5-sY-TnK" secondAttribute="trailing" constant="44" id="MK0-rr-Xum"/>
@@ -2579,7 +2579,7 @@
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="iQa-SG-jnE">
                                         <rect key="frame" x="30" y="30" width="277" height="329"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <mutableString key="text">&lt; 머니뭐니 &gt;('https://www.pigmoney.xyz/'이하 '머니뭐니')은(는) 「개인정보 보호법」 제30조에 따라 정보주체의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리방침을 수립·공개합니다.
+                                        <string key="text">&lt; 머니뭐니 &gt;('https://www.pigmoney.xyz/'이하 '머니뭐니')은(는) 「개인정보 보호법」 제30조에 따라 정보주체의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리방침을 수립·공개합니다.
 
 ○ 이 개인정보처리방침은 2023년 1월 1부터 적용됩니다.
 
@@ -2892,7 +2892,7 @@
 
 예시 ) - 20XX. X. X ~ 20XX. X. X 적용 (클릭)
 
-예시 ) - 20XX. X. X ~ 20XX. X. X 적용 (클릭)</mutableString>
+예시 ) - 20XX. X. X ~ 20XX. X. X 적용 (클릭)</string>
                                         <color key="textColor" systemColor="labelColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -3460,7 +3460,7 @@
         <image name="Record" width="25" height="25"/>
         <image name="Setting" width="25" height="25"/>
         <image name="calendar" catalog="system" width="128" height="107"/>
-        <image name="chartOn" width="1126" height="2436"/>
+        <image name="chartOn" width="1125" height="1932"/>
         <image name="defaultimage" width="1536" height="1536"/>
         <image name="jinperson" width="81" height="81"/>
         <image name="jinperson2" width="81" height="81"/>

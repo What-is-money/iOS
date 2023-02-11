@@ -227,19 +227,12 @@ class WholeSettingViewController: UIViewController {
     }
     
     @objc func showSIAlert(sender:UIGestureRecognizer){
-        let alert = UIAlertController(title: "개인정보 처리방침", message: "동의서 열람\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
-        alert.view.autoresizesSubviews = true
-        let textView = UITextView()
-        alert.view.addSubview(textView)
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.isUserInteractionEnabled = false
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .left
 
-        let leadConstraint = NSLayoutConstraint (item: alert.view!, attribute: .leading, relatedBy: .equal, toItem: textView, attribute: .leading, multiplier: 1.0, constant: -8.0)
-        let trailConstraint = NSLayoutConstraint (item: alert.view!, attribute: .trailing, relatedBy: .equal, toItem: textView, attribute: .trailing, multiplier: 1.0, constant: 8.0)
-        let topConstraint = NSLayoutConstraint (item: alert.view!, attribute: .top, relatedBy: .equal, toItem: textView, attribute: .top, multiplier: 1.0, constant: -64.0)
-        let bottomConstraint = NSLayoutConstraint (item: alert.view!, attribute: .bottom, relatedBy: .equal, toItem: textView, attribute: .bottom, multiplier: 1.0, constant: 64.0)
-      
-        textView.text = """
+        let messageText = NSMutableAttributedString(
+            string: """
+        
         < 머니뭐니 >('https://www.pigmoney.xyz/'이하 '머니뭐니')은(는) 「개인정보 보호법」 제30조에 따라 정보주체의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리방침을 수립·공개합니다.
 
         ○ 이 개인정보처리방침은 2023년 1월 1부터 적용됩니다.
@@ -554,13 +547,23 @@ class WholeSettingViewController: UIViewController {
         예시 ) - 20XX. X. X ~ 20XX. X. X 적용 (클릭)
 
         예시 ) - 20XX. X. X ~ 20XX. X. X 적용 (클릭)
-        """
-        textView.isScrollEnabled = true
         
-        NSLayoutConstraint.activate([leadConstraint, trailConstraint, topConstraint, bottomConstraint])
+        """,
+            attributes: [
+                NSAttributedString.Key.paragraphStyle: paragraphStyle,
+                NSAttributedString.Key.font : UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body),
+                NSAttributedString.Key.foregroundColor : UIColor.black
+            ]
+        )
+
+        
+
+        let alert = UIAlertController(title: "개인정보 처리방침", message: "", preferredStyle: .alert)
+        alert.setValue(messageText, forKey: "attributedMessage")
+
 
         let Done = UIAlertAction(title: "확인", style: .default) { (action:UIAlertAction) in
-            NSLog("%@", textView.text)
+            print("done")
         }
         alert.addAction(Done)
 

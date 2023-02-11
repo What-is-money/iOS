@@ -19,8 +19,8 @@
 		1531147929781A9F00C029D1 /* TabBarControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1531147829781A9F00C029D1 /* TabBarControllerViewController.swift */; };
 		15592C412983943900C678DD /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15592C402983943900C678DD /* AlertViewController.swift */; };
 		155D2C8D29937C0C004334EA /* ChartMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155D2C8C29937C0C004334EA /* ChartMainViewController.swift */; };
-		155D2C912993EF27004334EA /* 늑대배경.gif in Resources */ = {isa = PBXBuildFile; fileRef = 155D2C8E2993EF27004334EA /* 늑대배경.gif */; };
-		155D2C922993EF27004334EA /* 아기돼지.gif in Resources */ = {isa = PBXBuildFile; fileRef = 155D2C8F2993EF27004334EA /* 아기돼지.gif */; };
+		158AB62B2997C4CC00A33740 /* 아기돼지.gif in Resources */ = {isa = PBXBuildFile; fileRef = 158AB6292997C4CC00A33740 /* 아기돼지.gif */; };
+		158AB62C2997C4CC00A33740 /* 늑대배경.gif in Resources */ = {isa = PBXBuildFile; fileRef = 158AB62A2997C4CC00A33740 /* 늑대배경.gif */; };
 		3E130B4D2977B44100D63CF9 /* GoalDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E130B4C2977B44100D63CF9 /* GoalDetailViewController.swift */; };
 		3E18F0672976E48F008C5B5E /* GoalListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E18F0662976E48F008C5B5E /* GoalListViewController.swift */; };
 		3E1B0A4F2963044D0092B6E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1B0A4E2963044D0092B6E3 /* AppDelegate.swift */; };
@@ -67,8 +67,8 @@
 		1531147829781A9F00C029D1 /* TabBarControllerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarControllerViewController.swift; sourceTree = "<group>"; };
 		15592C402983943900C678DD /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		155D2C8C29937C0C004334EA /* ChartMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartMainViewController.swift; sourceTree = "<group>"; };
-		155D2C8E2993EF27004334EA /* 늑대배경.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "늑대배경.gif"; path = "../../iOS/WHAT_IS_MONEY/늑대배경.gif"; sourceTree = "<group>"; };
-		155D2C8F2993EF27004334EA /* 아기돼지.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "아기돼지.gif"; path = "../../iOS/WHAT_IS_MONEY/아기돼지.gif"; sourceTree = "<group>"; };
+		158AB6292997C4CC00A33740 /* 아기돼지.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "아기돼지.gif"; path = "../../../../Documents/아기돼지.gif"; sourceTree = "<group>"; };
+		158AB62A2997C4CC00A33740 /* 늑대배경.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "늑대배경.gif"; path = "../../../../Documents/늑대배경.gif"; sourceTree = "<group>"; };
 		3E130B4C2977B44100D63CF9 /* GoalDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalDetailViewController.swift; sourceTree = "<group>"; };
 		3E18F0662976E48F008C5B5E /* GoalListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalListViewController.swift; sourceTree = "<group>"; };
 		3E1B0A4B2963044D0092B6E3 /* WHAT_IS_MONEY.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WHAT_IS_MONEY.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -166,8 +166,8 @@
 				3ECCB81729962A490086A871 /* 아기돼지공사배경.mp3 */,
 				3ECCB819299635EE0086A871 /* 늑대배경음악.mp3 */,
 				3ECCB80D299613110086A871 /* 목표화면배경2.gif */,
-				155D2C8E2993EF27004334EA /* 늑대배경.gif */,
-				155D2C8F2993EF27004334EA /* 아기돼지.gif */,
+				158AB62A2997C4CC00A33740 /* 늑대배경.gif */,
+				158AB6292997C4CC00A33740 /* 아기돼지.gif */,
 				3ECCB80F299613260086A871 /* 늑대애니메이션.gif */,
 				3ECCB8112996132C0086A871 /* 우는돼지.gif */,
 				15592C402983943900C678DD /* AlertViewController.swift */,
@@ -265,14 +265,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				155D2C912993EF27004334EA /* 늑대배경.gif in Resources */,
 				3E1B0A5B2963044E0092B6E3 /* LaunchScreen.storyboard in Resources */,
 				3E1B0A582963044E0092B6E3 /* Assets.xcassets in Resources */,
 				3ECCB8122996132C0086A871 /* 우는돼지.gif in Resources */,
-				155D2C922993EF27004334EA /* 아기돼지.gif in Resources */,
 				15279A55296D71CD00C14AC6 /* RecordTableViewCell.xib in Resources */,
 				3ECCB81829962A490086A871 /* 아기돼지공사배경.mp3 in Resources */,
+				158AB62C2997C4CC00A33740 /* 늑대배경.gif in Resources */,
 				3ECCB810299613260086A871 /* 늑대애니메이션.gif in Resources */,
+				158AB62B2997C4CC00A33740 /* 아기돼지.gif in Resources */,
 				3ECCB81A299635EE0086A871 /* 늑대배경음악.mp3 in Resources */,
 				3E1B0A562963044D0092B6E3 /* Main.storyboard in Resources */,
 				3ECCB80E299613110086A871 /* 목표화면배경2.gif in Resources */,
