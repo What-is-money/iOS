@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 import DropDown
-
+import AVFoundation
 
 struct goalresult: Codable {
     let id: Int
@@ -42,8 +42,12 @@ class GoalListViewController: UIViewController {
     var goalList: [goalresult] = []
     
     override func viewWillAppear(_ animated: Bool) {
+        
         print("viewwillappear")
         TokenClass.handlingToken()
+        
+        //guard let goaldetailviewcontroller = self.storyboard?.instantiateViewController(withIdentifier: "GoalDetailViewController") else {return}
+        //goaldetailviewcontroller.AudioPlayer.stop()
         getGoalList()
         tableView.reloadData()
     }

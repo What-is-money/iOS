@@ -21,7 +21,6 @@
 		155D2C8D29937C0C004334EA /* ChartMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155D2C8C29937C0C004334EA /* ChartMainViewController.swift */; };
 		155D2C912993EF27004334EA /* 늑대배경.gif in Resources */ = {isa = PBXBuildFile; fileRef = 155D2C8E2993EF27004334EA /* 늑대배경.gif */; };
 		155D2C922993EF27004334EA /* 아기돼지.gif in Resources */ = {isa = PBXBuildFile; fileRef = 155D2C8F2993EF27004334EA /* 아기돼지.gif */; };
-		155D2C932993EF27004334EA /* 목표화면배경2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 155D2C902993EF27004334EA /* 목표화면배경2.gif */; };
 		3E130B4D2977B44100D63CF9 /* GoalDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E130B4C2977B44100D63CF9 /* GoalDetailViewController.swift */; };
 		3E18F0672976E48F008C5B5E /* GoalListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E18F0662976E48F008C5B5E /* GoalListViewController.swift */; };
 		3E1B0A4F2963044D0092B6E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1B0A4E2963044D0092B6E3 /* AppDelegate.swift */; };
@@ -45,6 +44,11 @@
 		3E9A9246299259A10014B58A /* Circularprogress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9A9245299259A10014B58A /* Circularprogress.swift */; };
 		3EB4E0ED2970339F006EF640 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB4E0EC2970339F006EF640 /* Record.swift */; };
 		3EC798EC2993CE3B0060D22A /* ConsumeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC798EB2993CE3B0060D22A /* ConsumeViewController.swift */; };
+		3ECCB80E299613110086A871 /* 목표화면배경2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3ECCB80D299613110086A871 /* 목표화면배경2.gif */; };
+		3ECCB810299613260086A871 /* 늑대애니메이션.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3ECCB80F299613260086A871 /* 늑대애니메이션.gif */; };
+		3ECCB8122996132C0086A871 /* 우는돼지.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3ECCB8112996132C0086A871 /* 우는돼지.gif */; };
+		3ECCB81829962A490086A871 /* 아기돼지공사배경.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3ECCB81729962A490086A871 /* 아기돼지공사배경.mp3 */; };
+		3ECCB81A299635EE0086A871 /* 늑대배경음악.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3ECCB819299635EE0086A871 /* 늑대배경음악.mp3 */; };
 		3EE5DB53296E85A2009E6FA2 /* RecordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE5DB52296E85A2009E6FA2 /* RecordDetailViewController.swift */; };
 		3EE5DB55296E866F009E6FA2 /* RecordDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE5DB54296E866F009E6FA2 /* RecordDetailTableViewCell.swift */; };
 		CEC186D868B45BED813D68E8 /* Pods_WHAT_IS_MONEY.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED68B39754FB3F11BE7450CB /* Pods_WHAT_IS_MONEY.framework */; };
@@ -65,7 +69,6 @@
 		155D2C8C29937C0C004334EA /* ChartMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartMainViewController.swift; sourceTree = "<group>"; };
 		155D2C8E2993EF27004334EA /* 늑대배경.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "늑대배경.gif"; path = "../../iOS/WHAT_IS_MONEY/늑대배경.gif"; sourceTree = "<group>"; };
 		155D2C8F2993EF27004334EA /* 아기돼지.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "아기돼지.gif"; path = "../../iOS/WHAT_IS_MONEY/아기돼지.gif"; sourceTree = "<group>"; };
-		155D2C902993EF27004334EA /* 목표화면배경2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "목표화면배경2.gif"; path = "../../iOS/WHAT_IS_MONEY/목표화면배경2.gif"; sourceTree = "<group>"; };
 		3E130B4C2977B44100D63CF9 /* GoalDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalDetailViewController.swift; sourceTree = "<group>"; };
 		3E18F0662976E48F008C5B5E /* GoalListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalListViewController.swift; sourceTree = "<group>"; };
 		3E1B0A4B2963044D0092B6E3 /* WHAT_IS_MONEY.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WHAT_IS_MONEY.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -91,6 +94,11 @@
 		3E9A9245299259A10014B58A /* Circularprogress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Circularprogress.swift; sourceTree = "<group>"; };
 		3EB4E0EC2970339F006EF640 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		3EC798EB2993CE3B0060D22A /* ConsumeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumeViewController.swift; sourceTree = "<group>"; };
+		3ECCB80D299613110086A871 /* 목표화면배경2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "목표화면배경2.gif"; path = "../../../../Downloads/목표화면배경2.gif"; sourceTree = "<group>"; };
+		3ECCB80F299613260086A871 /* 늑대애니메이션.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "늑대애니메이션.gif"; path = "../../../../Downloads/늑대애니메이션.gif"; sourceTree = "<group>"; };
+		3ECCB8112996132C0086A871 /* 우는돼지.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "우는돼지.gif"; path = "../../../../Downloads/우는돼지.gif"; sourceTree = "<group>"; };
+		3ECCB81729962A490086A871 /* 아기돼지공사배경.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "아기돼지공사배경.mp3"; sourceTree = "<group>"; };
+		3ECCB819299635EE0086A871 /* 늑대배경음악.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "늑대배경음악.mp3"; sourceTree = "<group>"; };
 		3EE5DB52296E85A2009E6FA2 /* RecordDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailViewController.swift; sourceTree = "<group>"; };
 		3EE5DB54296E866F009E6FA2 /* RecordDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailTableViewCell.swift; sourceTree = "<group>"; };
 		67731961D65FD9E93C8616EA /* Pods-WHAT_IS_MONEY.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WHAT_IS_MONEY.debug.xcconfig"; path = "Target Support Files/Pods-WHAT_IS_MONEY/Pods-WHAT_IS_MONEY.debug.xcconfig"; sourceTree = "<group>"; };
@@ -155,9 +163,13 @@
 				3E1B0A642963EA4C0092B6E3 /* WholeSettingViewController.swift */,
 				1531147829781A9F00C029D1 /* TabBarControllerViewController.swift */,
 				3E1B0A542963044D0092B6E3 /* Main.storyboard */,
-				155D2C902993EF27004334EA /* 목표화면배경2.gif */,
+				3ECCB81729962A490086A871 /* 아기돼지공사배경.mp3 */,
+				3ECCB819299635EE0086A871 /* 늑대배경음악.mp3 */,
+				3ECCB80D299613110086A871 /* 목표화면배경2.gif */,
 				155D2C8E2993EF27004334EA /* 늑대배경.gif */,
 				155D2C8F2993EF27004334EA /* 아기돼지.gif */,
+				3ECCB80F299613260086A871 /* 늑대애니메이션.gif */,
+				3ECCB8112996132C0086A871 /* 우는돼지.gif */,
 				15592C402983943900C678DD /* AlertViewController.swift */,
 				15279A56296ED3F000C14AC6 /* ChartViewController.swift */,
 				155D2C8C29937C0C004334EA /* ChartMainViewController.swift */,
@@ -254,12 +266,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				155D2C912993EF27004334EA /* 늑대배경.gif in Resources */,
-				155D2C932993EF27004334EA /* 목표화면배경2.gif in Resources */,
 				3E1B0A5B2963044E0092B6E3 /* LaunchScreen.storyboard in Resources */,
 				3E1B0A582963044E0092B6E3 /* Assets.xcassets in Resources */,
+				3ECCB8122996132C0086A871 /* 우는돼지.gif in Resources */,
 				155D2C922993EF27004334EA /* 아기돼지.gif in Resources */,
 				15279A55296D71CD00C14AC6 /* RecordTableViewCell.xib in Resources */,
+				3ECCB81829962A490086A871 /* 아기돼지공사배경.mp3 in Resources */,
+				3ECCB810299613260086A871 /* 늑대애니메이션.gif in Resources */,
+				3ECCB81A299635EE0086A871 /* 늑대배경음악.mp3 in Resources */,
 				3E1B0A562963044D0092B6E3 /* Main.storyboard in Resources */,
+				3ECCB80E299613110086A871 /* 목표화면배경2.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -492,7 +508,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3DL5M9WTXB;
+				DEVELOPMENT_TEAM = KSR8K3JPUM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WHAT_IS_MONEY/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -521,7 +537,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3DL5M9WTXB;
+				DEVELOPMENT_TEAM = KSR8K3JPUM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WHAT_IS_MONEY/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

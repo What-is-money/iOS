@@ -7,7 +7,7 @@
 
 import UIKit
 import Gifu
-
+import AVFoundation
 
 
 struct goalresponse: Codable {
@@ -51,13 +51,26 @@ class GoalDetailViewController: UIViewController {
     var goaldetail: goalresult?
     var goaldeleteresponse: goaldeleteresponse?
     
-    var goalanimationflag: Int = 0
+    var audioPlayer: AVAudioPlayer?
+    let url = Bundle.main.url(forResource: "아기돼지공사배경", withExtension: "mp3")!
     
     override func viewWillAppear(_ animated: Bool) {
         print("viewwillappear")
         TokenClass.handlingToken()
         print(goalIdx)
         getGoal()
+        do {
+             try audioPlayer = AVAudioPlayer(contentsOf: url)
+             }catch {
+                fatalError()
+             }
+        audioPlayer?.prepareToPlay()
+        audioPlayer?.play()
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        audioPlayer?.stop()
     }
     
     override func viewDidLoad() {
@@ -74,12 +87,14 @@ class GoalDetailViewController: UIViewController {
             let goalIdx = self.goalIdx
            recordViewController.goalIdx = goalIdx
             print(recordViewController.goalIdx as Any)
+           
             self.navigationController?.pushViewController(recordViewController, animated: true)})
         
-        let addrecord = UIAction(title: "기록 추가하기", handler: { _ in
+        let addrecord = UIAction(title: "기록 추가하기", handler: { [self] _ in
             guard let writerecordViewController = self.storyboard?.instantiateViewController(withIdentifier: "WriteRecordViewController") as? WriteRecordViewController else {return}
             let goalIdx = self.goalIdx
            writerecordViewController.goalIdx = goalIdx
+            
             self.navigationController?.pushViewController(writerecordViewController, animated: true)})
  
         let editgoal = UIAction(title: "목표 수정하기", handler: { _ in
