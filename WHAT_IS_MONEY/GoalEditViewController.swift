@@ -458,7 +458,7 @@ class GoalEditViewController: UIViewController, UINavigationControllerDelegate &
                 print("")
                 
                 img = (img as? UIImage)!.resized(toWidth: 240.0) ?? img
-                let newimg = (img as? UIImage)!.resized(toWidth: 210.0) ?? img
+                let newimg = (img as? UIImage)!.resized(toWidth: 90.0) ?? img
                 ImgUI.layer.cornerRadius = ImgUI.layer.frame.size.width / 2
                 ImgUI.setImage(newimg as? UIImage, for: .normal)
                 // [이미지 뷰에 앨범에서 선택한 사진 표시 실시]

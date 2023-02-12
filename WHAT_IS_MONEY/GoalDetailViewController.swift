@@ -76,8 +76,8 @@ class GoalDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         progressView.transform = progressView.transform.scaledBy(x: 1, y: 7)
-        gifImageView.animate(withGIFNamed: "목표화면배경2")
-        gifImageView2.animate(withGIFNamed: "아기돼지")
+        gifImageView.animate(withGIFNamed: "목표화면배경3")
+        gifImageView2.animate(withGIFNamed: "돼지뚝딱")
         getGoal()
         print(goaldetail?.category_name as Any)
         configureView()
