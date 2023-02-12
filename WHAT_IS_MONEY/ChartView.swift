@@ -65,6 +65,8 @@ struct PieChart: View {
                     }.scaleEffect((self.selectedCell == dataSet.id) ? 1.05 : 1.0)
                 }
             }
+        
+        
     }
 
     
@@ -78,15 +80,17 @@ struct ChartView: View {
     @State var thisSelectedPie: String = ""
     @EnvironmentObject var network: Network 
     
+   
+    
     var body: some View {
         ScrollView {
             
-            VStack(alignment: .leading, spacing: 0) {
-                Text("저번달")
-                    .fontWeight(.bold)
-                    .font(.system(size: 20))
+            VStack(alignment: .center, spacing: 0) {
+                Text("지난 달 소비")
+                    .fontWeight(.semibold)
+                    .font(.system(size: 16))
                     .padding(.top, 20)
-                    .padding(.leading, 30)
+                //                    .padding(.leading, 30)
                 if network.lastMonth.count == 0 {
                     VStack(alignment: .center) {
                         Text("📊저번달 지출내역이 없습니다📊")
@@ -96,47 +100,80 @@ struct ChartView: View {
                         
                     }
                 }
-                HStack(spacing: 20){
-                    
-                    PieChart(dataModel: ChartDataModel.init(dataModel: network.lastMonth), onTap: {
-                        dataModel in
-                        if let dataModel = dataModel {
-                            self.selectedPie = "종류: \(dataModel.name)\n비율: \(dataModel.value)%"
-                        } else {
-                            self.selectedPie = ""
+                else {
+                    HStack(spacing: 20){
+                        ZStack{
+                            PieChart(dataModel: ChartDataModel.init(dataModel: network.lastMonth), onTap: {
+                                dataModel in
+                                if let dataModel = dataModel {
+                                    self.selectedPie = "종류: \(dataModel.name)\n비율: \(dataModel.value)%"
+                                } else {
+                                    self.selectedPie = ""
+                                }
+                                
+                                
+                            })
+                            .frame(width: 150, height: 150, alignment: .center)
+                            .padding(30)
+                            
+                            Circle()
+                                .fill(Color.white)
+                                .frame(width: 55, height: 55)
+                                .overlay(
+                                    ZStack{
+                                        Circle()
+                                            .stroke(Color.white, lineWidth: 20)
+                                            .frame(width: 74, height: 74)
+                                            .opacity(0)
+                                        Circle()
+                                            .stroke(Color.white, lineWidth: 10)
+                                            .frame(width: 82, height: 82)
+                                    }
+                                )
+                            
+                            
+                            
+                            VStack {
+                                Image(uiImage: UIImage(named: "logo")!)
+                                    .resizable()
+                                    .frame(width: 23, height: 16)
+                                
+                            }
                         }
                         
                         
-                    })
-                    .frame(width: 150, height: 150, alignment: .center)
-                    .padding(30)
-                    Text(selectedPie)
-                        .font(.system(size: 12))
-                        .multilineTextAlignment(.leading)
-                    Spacer()
-                }
-                
-                Spacer()
-                
-                HStack(alignment: .center) {
+                        
+                        Text(selectedPie)
+                            .font(.system(size: 12))
+                            .multilineTextAlignment(.leading)
+                        Spacer()
+                    }
                     
-                    ForEach(network.lastMonth) { dataSet in
-                        HStack {
-                            Rectangle().foregroundColor(dataSet.color).frame(width: 10, height: 10)
-                            Text(dataSet.name).font(.footnote)
+                    Spacer()
+                    
+                    HStack(alignment: .center) {
+                        
+                        ForEach(network.lastMonth) { dataSet in
+                            HStack {
+                                Rectangle().foregroundColor(dataSet.color).frame(width: 10, height: 10)
+                                Text(dataSet.name).font(.footnote)
+                            }.padding(.trailing, 18)
                         }
                     }
                     
                     
-                }.padding(.leading, 30)
-            }.padding(.bottom, 20)
+                }
+                
+           
+//        }
+        }.padding(.bottom, 20)
             Divider()
-            VStack(alignment: .leading, spacing: 0) {
-                Text("이번달")
-                    .fontWeight(.bold)
-                    .font(.system(size: 20))
+            VStack(alignment: .center, spacing: 0) {
+                Text("이번 달 소비")
+                    .fontWeight(.semibold)
+                    .font(.system(size: 16))
                     .padding(.top, 30)
-                    .padding(.leading, 30)
+                    .padding(.leading, 0)
                 
                 if network.thisMonth.count == 0 {
                     VStack(alignment: .center) {
@@ -147,34 +184,64 @@ struct ChartView: View {
 
                     }
                 }
-                    
+                else {
                     HStack(spacing: 20){
-                        PieChart(dataModel: ChartDataModel.init(dataModel: network.thisMonth), onTap: {
-                            dataModel in
-                            if let dataModel = dataModel {
-                                self.thisSelectedPie = "종류: \(dataModel.name)\n비율: \(dataModel.value)%"
-                            } else {
-                                self.thisSelectedPie = ""
+                        ZStack{
+                            PieChart(dataModel: ChartDataModel.init(dataModel: network.thisMonth), onTap: {
+                                dataModel in
+                                if let dataModel = dataModel {
+                                    self.thisSelectedPie = "종류: \(dataModel.name)\n비율: \(dataModel.value)%"
+                                } else {
+                                    self.thisSelectedPie = ""
+                                }
+                                
+                                
+                            })
+                            .frame(width: 150, height: 150, alignment: .center)
+                            .padding(30)
+     
+                            Circle()
+                                .fill(Color.white)
+                                .frame(width: 55, height: 55)
+                                .overlay(
+                                    ZStack{
+                                        Circle()
+                                            .stroke(Color.white, lineWidth: 20)
+                                            .frame(width: 74, height: 74)
+                                            .opacity(0)
+                                        Circle()
+                                            .stroke(Color.white, lineWidth: 10)
+                                            .frame(width: 82, height: 82)
+                                    }
+                                )
+                           
+                       
+                       
+                            VStack {
+                                Image(uiImage: UIImage(named: "logo")!)
+                                    .resizable()
+                                    .frame(width: 23, height: 16)
+
                             }
-                            
-                        })
-                        .frame(width: 150, height: 150, alignment: .center)
-                        .padding(30)
+                        }
+                        
                         Text(thisSelectedPie)
                             .font(.system(size: 12))
                             .multilineTextAlignment(.leading)
                         Spacer()
                     }
                     Spacer()
-                    HStack(alignment: .center) {
-                        ForEach(network.thisMonth) { dataSet in
-                            HStack {
-                                Rectangle().foregroundColor(dataSet.color).frame(width: 10, height: 10)
-                                Text(dataSet.name).font(.footnote)
-                            }
-                        }
-                    }.padding(.leading, 30)
+                HStack(alignment: .center) {
+                    ForEach(network.thisMonth) { dataSet in
+                        HStack {
+                            Rectangle().foregroundColor(dataSet.color).frame(width: 10, height: 10)
+                            Text(dataSet.name).font(.footnote)
+                        }.padding(.trailing, 18)
+                    }
                 }
+            }
+                }
+            
             }.onAppear {
                 DispatchQueue.main.async {
                     network.loadLastChartData()
@@ -349,38 +416,11 @@ final class ChartDataModel: ObservableObject {
 }
 
 
-let Color_Cat = ["NPeach", "NOrange", "NYellow", "NGreen", "NBlue"]
-
-//var sample = [ ChartCellModel(color: Color(Color_Cat[0]), value: 2000, name: "고정지출"),
-//               ChartCellModel(color: Color(Color_Cat[1]), value: 1000, name: "배달음식"),
-//               ChartCellModel(color: Color(Color_Cat[2]), value: 2000, name: "의류"),
-//               ChartCellModel(color: Color(Color_Cat[3]), value: 1000, name: "식재료"),
-//               ChartCellModel(color: Color(Color_Cat[4]), value: 20, name: "교통")]
-//
-//
-//let lastArray = [
-//    resultArray(category_name: "category1", total_amount: 2000),
-//    resultArray(category_name: "category2", total_amount: 1000),
-//    resultArray(category_name: "category3", total_amount: 2500),
-//    resultArray(category_name: "car", total_amount: 1500)
-//]
-//let thisArray = [
-//    resultArray(category_name: "category11", total_amount: 20),
-//    resultArray(category_name: "category22", total_amount: 10),
-//    resultArray(category_name: "category33", total_amount: 25),
-//    resultArray(category_name: "carrrr", total_amount: 15)
-//]
+let Color_Cat = ["NPeach0", "NPeach1", "NPeach2", "NPeach3", "NPeach4"]
 
 
-//let sample = [ ChartCellModel(color: Color("NPeach"), value: chartViewData[0].total_amount, name: chartViewData[0].category_name),
-//               ChartCellModel(color: Color("NOrange"), value: chartViewData[1].total_amount, name: chartViewData[1].category_name),
-//               ChartCellModel(color: Color("NYellow"), value: chartViewData[2].total_amount, name: chartViewData[2].category_name),
-//               ChartCellModel(color: Color("NGreen"), value: chartViewData[3].total_amount, name: chartViewData[3].category_name),
-//               ChartCellModel(color: Color("NBlue"), value: chartViewData[4].total_amount, name: chartViewData[4].category_name)]
-//
-
-struct ChartView_Previews: PreviewProvider{
-    static var previews: some View {
-        ChartView().environmentObject(Network())
-    }
-}
+//struct ChartView_Previews: PreviewProvider{
+//    static var previews: some View {
+//        ChartView().environmentObject(Network())
+//    }
+//}

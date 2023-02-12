@@ -31,9 +31,11 @@ class ChartMainViewController: UIViewController {
         if SwitchBtn.isOn != true {
             PigImage.image = UIImage(named: "chartOff")
             SwitchLabel.text = "다크 모드"
+            SwitchLabel.textColor = UIColor.white
         } else {
             PigImage.image = UIImage(named: "chartOn")
             SwitchLabel.text = "라이트 모드"
+            SwitchLabel.textColor = UIColor.lightGray
         }
     }
     
