@@ -393,7 +393,7 @@ extension GoalListViewController: UITableViewDataSource {
         let data = Data(base64Encoded: goalList[indexPath.row].image, options: .ignoreUnknownCharacters) ?? Data()
             let decodeImg = UIImage(data: data)
          //let defaultImg = UIImage(named: "defaultimage")
-        cell.GoalImage.image = decodeImg?.resized(toWidth: 63)
+        cell.GoalImage.image = decodeImg?.resized(toWidth: 58)
         cell.GoalNameLabel.text = goalList[indexPath.row].category_name
         cell.CurrentMoney.text = String(goalList[indexPath.row].amount)
         cell.GoalMoney.text = String(goalList[indexPath.row].goal_amount)

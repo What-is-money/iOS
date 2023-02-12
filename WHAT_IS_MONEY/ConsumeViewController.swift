@@ -40,8 +40,8 @@ class ConsumeViewController: UIViewController {
         super.viewDidLoad()
         getGoal()
         print("늑대2\n\n\n\n", goalIdx as Any)
-        gifImageView.animate(withGIFNamed: "늑대배경")
-        WolfgifImageView.animate(withGIFNamed: "늑대애니메이션")
+        gifImageView.animate(withGIFNamed: "늑대배경2")
+        WolfgifImageView.animate(withGIFNamed: "늑대애니메이션2")
         crygifImageView.animate(withGIFNamed: "우는돼지")
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 10) { // [6초 후에 동작 실시]
