@@ -38,7 +38,7 @@ struct goalpatchresponse: Codable {
 }
 
 
-class GoalEditViewController: UIViewController, UINavigationControllerDelegate & UIImagePickerControllerDelegate {
+class GoalEditViewController: UIViewController, UINavigationControllerDelegate & UIImagePickerControllerDelegate, UITextFieldDelegate {
 
  
     @IBOutlet weak var ImgLabel: UILabel!
@@ -65,9 +65,21 @@ class GoalEditViewController: UIViewController, UINavigationControllerDelegate &
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        GoalNameTextField.delegate = self
+        GoalPriceTextField.delegate = self
+        PriceTextField.delegate = self
         picker.delegate = self
         picker.sourceType = .photoLibrary // 앨범에서 가져옴
         picker.allowsEditing = true
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder() // TextField 비활성화
+        return true
     }
     
     

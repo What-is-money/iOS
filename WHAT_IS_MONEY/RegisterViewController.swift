@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RegisterViewController: UIViewController {
+class RegisterViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var NameInput: UITextField!
     @IBOutlet weak var EmailInput: UITextField!
@@ -21,8 +21,24 @@ class RegisterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NameInput.delegate = self
+        EmailInput.delegate = self
+        IDInput.delegate = self
+        PWInput.delegate = self
+        ConfirmPWInput.delegate = self
+        
         self.IDInput.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder() // TextField 비활성화
+        return true
+    }
+    
     @objc func textFieldDidChange(_ sender: Any?) {
         self.IDCheckBtn.isEnabled = true
     }

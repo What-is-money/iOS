@@ -105,6 +105,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="Zj7-X9-HMq"/>
                     <connections>
+                        <outlet property="ContentsTextField" destination="QEo-yR-lVs" id="67I-jS-HSh"/>
+                        <outlet property="EmailTextField" destination="8S4-tE-saG" id="Nu8-5T-0pe"/>
                         <outlet property="questionView" destination="QEo-yR-lVs" id="bpz-NV-xTw"/>
                     </connections>
                 </viewController>
@@ -2036,7 +2038,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="80" translatesAutoresizingMaskIntoConstraints="NO" id="1OG-e2-0mc">
-                                <rect key="frame" x="0.0" y="196.66666666666663" width="375" height="419.00000000000011"/>
+                                <rect key="frame" x="0.0" y="196.66666666666663" width="375" height="419"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="l1g-4k-G61">
                                         <rect key="frame" x="71.666666666666686" y="0.0" width="232" height="73"/>

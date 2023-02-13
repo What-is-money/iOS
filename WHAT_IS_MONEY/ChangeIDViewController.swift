@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ChangeIDViewController: UIViewController {
+class ChangeIDViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var currentIdLabel: UILabel!
     @IBOutlet weak var newId: UITextField!
@@ -19,9 +19,20 @@ class ChangeIDViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        newId.delegate = self
         getUserID()
         self.newId.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder() // TextField 비활성화
+        return true
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         TokenClass.handlingToken()
     }

@@ -14,11 +14,6 @@ final class UserModel {
         var password: String
     }
     
-//    var users: [User] = [
-//        User(email: "abc1234@naver.com", password: "qwerty1234"),
-//        User(email: "dazzlynnnn@gmail.com", password: "asdfasdf5678")
-//    ]
-//
     
     // 아이디 형식 검사
     func isValidEmail(id: String) -> Bool {
@@ -52,12 +47,7 @@ struct ResultData: Codable {
     static let refreshToken = "".self
     static let accessToken = ""
 }
-//struct ResponseData : Codable {
-//     let message: String
-//   let result: AnyObject
-//    let code: Int
-//     let isSuccess: Bool
-//}
+
 final class TokenClass {
     class func handlingToken() {
         // AccessToken의 만료 기간이 지나거나, 30초 미만으로 남았거나 응답코드가 401에러면, Reissue 요청
@@ -183,7 +173,7 @@ final class TokenClass {
         }
     }
 }
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController , UITextFieldDelegate{
     
     
     @IBOutlet weak var IDInput: UITextField!
@@ -191,9 +181,11 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var LoginBtn: UIButton!
     
     var successed = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        IDInput.delegate = self
+        PWInput.delegate = self
     }
     
     @objc func popStartScreen() {
@@ -201,6 +193,15 @@ class LoginViewController: UIViewController {
         start.modalPresentationStyle = .overFullScreen
         present(start, animated: true, completion: nil)
         
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder() // TextField 비활성화
+        return true
     }
     
     @IBAction func LoginClicked(_ sender: UIButton) {

@@ -21,7 +21,7 @@ struct Result: Codable {
 }
 
 
-class GoalAddViewController: UIViewController, UINavigationControllerDelegate & UIImagePickerControllerDelegate {
+class GoalAddViewController: UIViewController, UINavigationControllerDelegate & UIImagePickerControllerDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var ImgUI: UIButton!
     @IBOutlet weak var GoalTextField: UITextField!
@@ -36,14 +36,25 @@ class GoalAddViewController: UIViewController, UINavigationControllerDelegate & 
     override func viewDidLoad() {
         super.viewDidLoad()
         picker.delegate = self
+        GoalTextField.delegate = self
+        GoalPriceTextField.delegate = self
+        InitPriceTextField.delegate = self
         
         // Do any additional setup after loading the view.
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         TokenClass.handlingToken()
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder() // TextField 비활성화
+        return true
+    }
     
     
     // MARK: - [URL Session Post 멀티 파트 사진 데이터 업로드]

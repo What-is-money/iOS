@@ -46,7 +46,7 @@ struct categoryresult: Codable {
 
 
 
-class WriteRecordViewController: UIViewController {
+class WriteRecordViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var RegisterCellDatePicker: UIDatePicker!
    
@@ -76,6 +76,17 @@ class WriteRecordViewController: UIViewController {
         self.initUI()
         self.setDropdown()
         self.diaryDate = RegisterCellDatePicker.date
+        MoneyTextField.delegate = self
+        
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder() // TextField 비활성화
+        return true
     }
     
     private var diaryDate: Date? // 2. 현 화면에서 정보를 담을 각 변수 있는지 확인!

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FindIdPwViewController: UIViewController {
+class FindIdPwViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var EmailInput: UITextField!
     @IBOutlet weak var IdInput: UITextField!
@@ -16,9 +16,22 @@ class FindIdPwViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        EmailInput.delegate = self
+        IdInput.delegate = self
+        EmailInputForPw.delegate = self
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         TokenClass.handlingToken()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder() // TextField 비활성화
+        return true
     }
     
     @IBAction func findIDclicked(_ sender: UIButton) {
@@ -31,6 +44,7 @@ class FindIdPwViewController: UIViewController {
         if !isValidEmail(testStr: email) {
             let sheet = UIAlertController(title: "경고", message: "이메일 형식이 올바르지 않습니다", preferredStyle: .alert)
             sheet.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in print("이메일 확인") }))
+            
             present(sheet, animated: true)
         }
         
@@ -98,7 +112,10 @@ class FindIdPwViewController: UIViewController {
                         if isSuccess == true {
                             print("아이디찾기 성공")
                             let sheet = UIAlertController(title: "안내", message: "메일 발송 완료", preferredStyle: .alert)
-                            sheet.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in print("아이디 메일 발송 완료") }))
+                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+                            vc.modalPresentationStyle = .fullScreen
+                            sheet.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ -> Void in
+                                self.present(vc, animated: true) }))
                             self.present(sheet, animated: true)
                             
                         } else {
@@ -196,7 +213,10 @@ class FindIdPwViewController: UIViewController {
                         if isSuccess == true {
                             print("비밀번호찾기 성공")
                             let sheet = UIAlertController(title: "안내", message: "메일 발송 완료", preferredStyle: .alert)
-                            sheet.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in print("메일 발송 완료") }))
+                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+                            vc.modalPresentationStyle = .fullScreen
+                            sheet.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ -> Void in
+                                self.present(vc, animated: true) }))
                             self.present(sheet, animated: true)
                             
                         } else {

@@ -7,18 +7,28 @@
 
 import UIKit
 
-class ChangeSNViewController: UIViewController {
+class ChangeSNViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var newPWInput: UITextField!
     @IBOutlet weak var PWConfirmInput: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
+        newPWInput.delegate = self
+        PWConfirmInput.delegate = self
     
     }
     override func viewWillAppear(_ animated: Bool) {
         TokenClass.handlingToken()
     }
 
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder() // TextField 비활성화
+        return true
+    }
     
     @IBAction func changePWCompleted(_ sender: UIButton) {
         guard let pw = newPWInput.text, !pw.isEmpty else { return }

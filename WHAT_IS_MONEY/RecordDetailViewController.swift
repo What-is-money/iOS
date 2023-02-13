@@ -41,7 +41,7 @@ struct resultlist: Codable {
     let amount: Int
 }
 
-class RecordDetailViewController: UIViewController {
+class RecordDetailViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var DateTextField: UITextField!
     
@@ -71,9 +71,18 @@ class RecordDetailViewController: UIViewController {
         //print(recordList)
         tableView.dataSource = self
         tableView.delegate = self
+        DateTextField.delegate = self
+        
     }
     
-
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder() // TextField 비활성화
+        return true
+    }
     
     func getrecordList(){
         

@@ -36,7 +36,7 @@ struct patchrecord: Codable {
     
 }
 
-class FixedRecordViewController: UIViewController {
+class FixedRecordViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var RecordDatePicker: UIDatePicker!
     
@@ -65,10 +65,20 @@ class FixedRecordViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        MoneyTextField.delegate = self
         self.loadcategory()
         self.getRecord()
         self.initUI()
         self.setDropdown()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder() // TextField 비활성화
+        return true
     }
     
     var recordIdx: Int?
