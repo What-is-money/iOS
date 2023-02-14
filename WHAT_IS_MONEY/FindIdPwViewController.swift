@@ -95,16 +95,7 @@ class FindIdPwViewController: UIViewController, UITextFieldDelegate {
                             print("Error: Cannot convert data to JSON object")
                             return
                         }
-                        guard let prettyJsonData = try? JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted) else {
-                            print("Error: Cannot convert JSON object to Pretty JSON data")
-                            return
-                        }
-                        guard let prettyPrintedJson = String(data: prettyJsonData, encoding: .utf8) else {
-                            print("Error: Couldn't print JSON in String")
-                            return
-                        }
-                    
-                        
+                
                         let isSuccess = jsonObject["isSuccess"] as? Bool
                         
                         if isSuccess == true {
@@ -197,19 +188,10 @@ class FindIdPwViewController: UIViewController, UITextFieldDelegate {
                             print("Error: Cannot convert data to JSON object")
                             return
                         }
-                        guard let prettyJsonData = try? JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted) else {
-                            print("Error: Cannot convert JSON object to Pretty JSON data")
-                            return
-                        }
-                        guard let prettyPrintedJson = String(data: prettyJsonData, encoding: .utf8) else {
-                            print("Error: Couldn't print JSON in String")
-                            return
-                        }
-
                         
                         let isSuccess = jsonObject["isSuccess"] as? Bool
                         if isSuccess == true {
-                            print("비밀번호찾기 성공")
+                   
                             let sheet = UIAlertController(title: "안내", message: "메일 발송 완료", preferredStyle: .alert)
                             let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
                             vc.modalPresentationStyle = .fullScreen

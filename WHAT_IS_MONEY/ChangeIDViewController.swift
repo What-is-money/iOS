@@ -225,7 +225,7 @@ class ChangeIDViewController: UIViewController, UITextFieldDelegate {
 
                         let isSuccess = jsonObject["isSuccess"] as? Bool
                         if isSuccess == true {
-                            print("아이디 변경 성공")
+    
                             let sheet = UIAlertController(title: "안내", message: "아이디 변경 완료", preferredStyle: .alert)
                             let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
                             vc.modalPresentationStyle = .fullScreen

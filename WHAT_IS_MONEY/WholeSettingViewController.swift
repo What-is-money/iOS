@@ -604,7 +604,6 @@ class WholeSettingViewController: UIViewController {
                         return
                     }
 
-                    print(String(data: data, encoding: .utf8)!)
                     
                     guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
                         print("Error: HTTP request failed")
@@ -707,7 +706,7 @@ class WholeSettingViewController: UIViewController {
                         print("Error: Did not receive data")
                         return
                     }
-                    print(String(data: data, encoding: .utf8)!)
+           
                     guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
                         print("Error: HTTP request failed")
                         return
@@ -718,16 +717,6 @@ class WholeSettingViewController: UIViewController {
                                 print("Error: Cannot convert data to JSON object")
                                 return
                             }
-                            guard let prettyJsonData = try? JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted) else {
-                                print("Error: Cannot convert JSON object to Pretty JSON data")
-                                return
-                            }
-                            guard let prettyPrintedJson = String(data: prettyJsonData, encoding: .utf8) else {
-                                print("Error: Couldn't print JSON in String")
-                                return
-                            }
-     
-                            
                             let isSuccess = jsonObject["isSuccess"] as? Bool
                             
                             if isSuccess == true {
