@@ -68,12 +68,12 @@ class FindIdPwViewController: UIViewController, UITextFieldDelegate {
         // Create the url request
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        //request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "X-ACCESS-TOKEN")
+
         request.setValue(accessToken, forHTTPHeaderField: "X-ACCESS-TOKEN")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type") // the request is JSON
         request.setValue("application/json", forHTTPHeaderField: "Accept") // the response expected to be in JSON format
         request.httpBody = jsonData
-        print(String(data: jsonData, encoding: .utf8)!)
+
         DispatchQueue.main.async {
             URLSession.shared.dataTask(with: request) { data, response, error in
                 guard error == nil else {
@@ -85,7 +85,6 @@ class FindIdPwViewController: UIViewController, UITextFieldDelegate {
                     print("Error: Did not receive data")
                     return
                 }
-                print(String(data: data, encoding: .utf8)!)
                 guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
                     print("Error: HTTP request failed")
                     return
@@ -104,18 +103,17 @@ class FindIdPwViewController: UIViewController, UITextFieldDelegate {
                             print("Error: Couldn't print JSON in String")
                             return
                         }
-                        print(prettyPrintedJson)
+                    
                         
                         let isSuccess = jsonObject["isSuccess"] as? Bool
-//                        let result = jsonObject["result"] as? String
                         
                         if isSuccess == true {
-                            print("아이디찾기 성공")
+      
                             let sheet = UIAlertController(title: "안내", message: "메일 발송 완료", preferredStyle: .alert)
                             let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
                             vc.modalPresentationStyle = .fullScreen
                             sheet.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ -> Void in
-                                self.present(vc, animated: true) }))
+                                self.navigationController?.popToRootViewController(animated: true) }))
                             self.present(sheet, animated: true)
                             
                         } else {
@@ -176,7 +174,7 @@ class FindIdPwViewController: UIViewController, UITextFieldDelegate {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type") // the request is JSON
         request.setValue("application/json", forHTTPHeaderField: "Accept") // the response expected to be in JSON format
         request.httpBody = jsonData
-        print(String(data: jsonData, encoding: .utf8)!)
+
         DispatchQueue.main.async {
             URLSession.shared.dataTask(with: request) { data, response, error in
                 guard error == nil else {
@@ -188,7 +186,7 @@ class FindIdPwViewController: UIViewController, UITextFieldDelegate {
                     print("Error: Did not receive data")
                     return
                 }
-                print(String(data: data, encoding: .utf8)!)
+      
                 guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
                     print("Error: HTTP request failed")
                     return
@@ -207,7 +205,7 @@ class FindIdPwViewController: UIViewController, UITextFieldDelegate {
                             print("Error: Couldn't print JSON in String")
                             return
                         }
-                        print(prettyPrintedJson)
+
                         
                         let isSuccess = jsonObject["isSuccess"] as? Bool
                         if isSuccess == true {
@@ -216,7 +214,7 @@ class FindIdPwViewController: UIViewController, UITextFieldDelegate {
                             let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
                             vc.modalPresentationStyle = .fullScreen
                             sheet.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ -> Void in
-                                self.present(vc, animated: true) }))
+                                self.navigationController?.popToRootViewController(animated: true) }))
                             self.present(sheet, animated: true)
                             
                         } else {

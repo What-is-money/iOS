@@ -22,12 +22,10 @@ class ChartMainViewController: UIViewController {
         SwitchBtn.backgroundColor = UIColor(named: "NPeach")
         SwitchBtn.clipsToBounds = true
         
-       
-        // Do any additional setup after loading the view.
     }
     
     @IBAction func SwitchClicked(_ sender: UISwitch) {
-        print(SwitchBtn.isOn)
+
         if SwitchBtn.isOn != true {
             PigImage.image = UIImage(named: "chartOff")
             SwitchLabel.text = "다크 모드"

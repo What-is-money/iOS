@@ -27,7 +27,6 @@
 		3E18F0672976E48F008C5B5E /* GoalListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E18F0662976E48F008C5B5E /* GoalListViewController.swift */; };
 		3E1B0A4F2963044D0092B6E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1B0A4E2963044D0092B6E3 /* AppDelegate.swift */; };
 		3E1B0A512963044D0092B6E3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1B0A502963044D0092B6E3 /* SceneDelegate.swift */; };
-		3E1B0A532963044D0092B6E3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1B0A522963044D0092B6E3 /* ViewController.swift */; };
 		3E1B0A562963044D0092B6E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E1B0A542963044D0092B6E3 /* Main.storyboard */; };
 		3E1B0A582963044E0092B6E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E1B0A572963044E0092B6E3 /* Assets.xcassets */; };
 		3E1B0A5B2963044E0092B6E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E1B0A592963044E0092B6E3 /* LaunchScreen.storyboard */; };
@@ -77,7 +76,6 @@
 		3E1B0A4B2963044D0092B6E3 /* WHAT_IS_MONEY.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WHAT_IS_MONEY.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E1B0A4E2963044D0092B6E3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3E1B0A502963044D0092B6E3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		3E1B0A522963044D0092B6E3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3E1B0A552963044D0092B6E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3E1B0A572963044E0092B6E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3E1B0A5A2963044E0092B6E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -160,7 +158,6 @@
 			children = (
 				3E1B0A4E2963044D0092B6E3 /* AppDelegate.swift */,
 				3E1B0A502963044D0092B6E3 /* SceneDelegate.swift */,
-				3E1B0A522963044D0092B6E3 /* ViewController.swift */,
 				3E1B0A622963E9310092B6E3 /* WelcomeViewController.swift */,
 				3E1B0A642963EA4C0092B6E3 /* WholeSettingViewController.swift */,
 				1531147829781A9F00C029D1 /* TabBarControllerViewController.swift */,
@@ -336,7 +333,6 @@
 				3E808BE2297A8B2500A503F2 /* GoalAddViewController.swift in Sources */,
 				3E808BE0297A8B1200A503F2 /* GoalEditViewController.swift in Sources */,
 				3EE5DB53296E85A2009E6FA2 /* RecordDetailViewController.swift in Sources */,
-				3E1B0A532963044D0092B6E3 /* ViewController.swift in Sources */,
 				155D2C8D29937C0C004334EA /* ChartMainViewController.swift in Sources */,
 				15279A472969D17300C14AC6 /* RegisterViewController.swift in Sources */,
 				3E3A0669296FCE2F0023BBFB /* WriteRecordViewController.swift in Sources */,
@@ -512,7 +508,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KSR8K3JPUM;
+				DEVELOPMENT_TEAM = 3DL5M9WTXB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WHAT_IS_MONEY/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = test;

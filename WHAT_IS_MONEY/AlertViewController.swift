@@ -20,11 +20,9 @@ class AlertViewController: UIViewController {
     @IBAction func goAlert(_ sender: Any) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
         vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true)
-        //self.navigationController?.pushViewController(vc, animated: true)
-        //present(vc, animated: true, completion: nil)
-        //vc.present(<#T##viewControllerToPresent: UIViewController##UIViewController#>, animated: true)
+        self.navigationController?.popToRootViewController(animated: true)
+
     }
-    
+
   
 }

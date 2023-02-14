@@ -63,8 +63,6 @@ class ChangeSNViewController: UIViewController, UITextFieldDelegate {
         }
         let userIdx = UserDefaults.standard.integer(forKey: "userIdx")
         let accessToken = UserDefaults.standard.string(forKey: "accessToken")
-        // Add data to the model
-        print(UserDefaults.standard.dictionaryRepresentation())
         
         let uploadDataModel = UploadData(userIdx: userIdx, newPassword: pw, confirmNewPassword: confirmpw)
         
@@ -84,8 +82,7 @@ class ChangeSNViewController: UIViewController, UITextFieldDelegate {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type") // the request is JSON
         request.setValue("application/json", forHTTPHeaderField: "Accept") // the response expected to be in JSON format
         request.httpBody = jsonData
-        print(request)
-        print(String(data: jsonData, encoding: .utf8)!)
+
         DispatchQueue.main.async {
             URLSession.shared.dataTask(with: request) { data, response, error in
                 guard error == nil else {
@@ -97,7 +94,7 @@ class ChangeSNViewController: UIViewController, UITextFieldDelegate {
                     print("Error: Did not receive data")
                     return
                 }
-                print(String(data: data, encoding: .utf8)!)
+
                 guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
                     print("Error: HTTP request failed")
                     return
@@ -116,14 +113,14 @@ class ChangeSNViewController: UIViewController, UITextFieldDelegate {
                             print("Error: Couldn't print JSON in String")
                             return
                         }
-                        print(prettyPrintedJson)
+
                         let isSuccess = jsonObject["isSuccess"] as? Bool
                         if isSuccess == true {
                             let sheet = UIAlertController(title: "안내", message: "비밀번호 변경 완료", preferredStyle: .alert)
                             let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
                             vc.modalPresentationStyle = .fullScreen
                             sheet.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ -> Void in
-                                self.present(vc, animated: true) }))
+                                self.navigationController?.popToRootViewController(animated: true) }))
                             self.present(sheet, animated: true)
                             
                         } else {

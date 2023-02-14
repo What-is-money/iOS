@@ -21,16 +21,12 @@ class ProfileEditViewController: UIViewController {
     
     let picker = UIImagePickerController()
     var imageData : NSData? = nil
-    
-    
      
     override func viewWillAppear(_ animated: Bool) {
         TokenClass.handlingToken()
         getUserInfo()
     }
 
-     
-     
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -46,7 +42,7 @@ class ProfileEditViewController: UIViewController {
     func getUserInfo() {
         let useridx = UserDefaults.standard.integer(forKey: "userIdx")
         let accessToken = UserDefaults.standard.string(forKey: "accessToken")
-        print(useridx)
+
         guard let url = URL(string: "https://www.pigmoney.xyz/users/profile/\(useridx)") else {
                 print("Error: cannot create URL")
                 return
@@ -66,7 +62,6 @@ class ProfileEditViewController: UIViewController {
                     return
                 }
 
-                print(String(data: data, encoding: .utf8)!)
                 guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
                     print("Error: HTTP request failed")
                     return
@@ -92,7 +87,7 @@ class ProfileEditViewController: UIViewController {
                         let name = result ["name"] as? String
                         let id = result ["userId"] as? String
                         let image = result ["image"] as? String
-                        print(result)
+    
                         if (image?.count == 0 || image == nil) {
                             self.imagepickButton.setImage(UIImage(named: "jinperson2"), for: .normal)
                             //self.ProfileImg.image = UIImage(named: "jinperson")
@@ -191,12 +186,6 @@ class ProfileEditViewController: UIViewController {
            // [boundary 설정 : 바운더리 라인 구분 필요 위함]
            let boundary = "Boundary-\(UUID().uuidString)" // 고유값 지정
            
-           print("")
-           print("====================================")
-           print("[A_Image >> requestPOST() :: 바운더리 라인 구분 확인 실시]")
-           print("boundary :: ", boundary)
-           print("====================================")
-           print("")
            
            
            // [http 통신 타입 및 헤더 지정 실시]
@@ -204,7 +193,7 @@ class ProfileEditViewController: UIViewController {
            requestURL.httpMethod = "POST" // POST 방식
            requestURL.setValue(accessToken!, forHTTPHeaderField: "X-ACCESS-TOKEN")
            requestURL.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type") // 멀티 파트 타입
-           print("header!!!",requestURL.allHTTPHeaderFields as Any)
+    
            
            // [서버로 전송할 uploadData 데이터 형식 설정]
            var uploadData = Data()
@@ -217,14 +206,6 @@ class ProfileEditViewController: UIViewController {
            // [멀티 파트 전송 파라미터 삽입 : 딕셔너리 for 문 수행]
            for (key, value) in reqestParam {
                if "\(key)" == "\(file)" { // MARK: [사진 파일 인 경우]
-                   print("")
-                   print("====================================")
-                   print("[A_Image >> requestPOST() :: 멀티 파트 전송 파라미터 확인 실시]")
-                   print("타입 :: ", "사진 파일")
-                   print("key :: ", key)
-                   print("value :: ", value)
-                   print("====================================")
-                   print("")
                    
                    uploadData.append(boundaryPrefix.data(using: .utf8)!)
                    uploadData.append("Content-Disposition: form-data; name=\"\(file)\"; filename=\"\(file)\"\r\n".data(using: .utf8)!) // [파라미터 key 지정]
@@ -234,14 +215,6 @@ class ProfileEditViewController: UIViewController {
                    uploadData.append("--\(boundary)--".data(using: .utf8)!)
                }
                else { // MARK: [일반 파라미터인 경우]
-                   print("")
-                   print("====================================")
-                   print("[A_Image >> requestPOST() :: 멀티 파트 전송 파라미터 확인 실시]")
-                   print("타입 :: ", "일반 파라미터")
-                   print("key :: ", key)
-                   print("value :: ", value)
-                   print("====================================")
-                   print("")
                    
                    uploadData.append(boundaryPrefix.data(using: .utf8)!)
                    uploadData.append("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n".data(using: .utf8)!) // [파라미터 key 지정]
@@ -250,15 +223,7 @@ class ProfileEditViewController: UIViewController {
            }
 
            
-           
-           // [http 요쳥을 위한 URLSessionDataTask 생성]
-           print("")
-           print("====================================")
-           print("[A_Image >> requestPOST() :: 사진 업로드 요청 실시]")
-           print("url :: ", requestURL)
-           print("uploadData :: ", uploadData)
-           print("====================================")
-           print("")
+        
            
            // MARK: [URLSession uploadTask 수행 실시]
            let dataTask = URLSession(configuration: .default)
@@ -268,12 +233,7 @@ class ProfileEditViewController: UIViewController {
 
                // [error가 존재하면 종료]
                guard error == nil else {
-                   print("")
-                   print("====================================")
-                   print("[A_Image >> requestPOST() :: 사진 업로드 요청 실패]")
-                   print("fail : ", error?.localizedDescription ?? "")
-                   print("====================================")
-                   print("")
+
                    return
                }
 
@@ -283,14 +243,7 @@ class ProfileEditViewController: UIViewController {
                else {
                    DispatchQueue.main.async {
                        self.present(sheet, animated: true)
-                       print("")
-                       print("====================================")
-                       print("[A_Image >> requestPOST() :: 사진 업로드 요청 에러]")
-                       print("error : ", (response as? HTTPURLResponse)?.statusCode ?? 0)
-                       print("allHeaderFields : ", (response as? HTTPURLResponse)?.allHeaderFields ?? "")
-                       print("msg : ", (response as? HTTPURLResponse)?.description ?? "")
-                       print("====================================")
-                       print("")
+
                        
                      
                    }
@@ -302,51 +255,18 @@ class ProfileEditViewController: UIViewController {
                let resultLen = data! // 데이터 길이
                do {
                    guard let jsonConvert = try JSONSerialization.jsonObject(with: data!) as? [String: Any] else {
-                       print("")
-                       print("====================================")
-                       print("[A_Image >> requestPOST() :: 사진 업로드 요청 에러]")
-                       print("error : ", "json 형식 데이터 convert 에러")
-                       print("====================================")
-                       print("")
+
                        return
                    }
                    guard let JsonResponse = try? JSONSerialization.data(withJSONObject: jsonConvert, options: .prettyPrinted) else {
-                       print("")
-                       print("====================================")
-                       print("[A_Image >> requestPOST() :: 사진 업로드 요청 에러]")
-                       print("error : ", "json 형식 데이터 변환 에러")
-                       print("====================================")
-                       print("")
+
                        return
                    }
-                   guard let resultString = String(data: JsonResponse, encoding: .utf8) else {
-                       print("")
-                       print("====================================")
-                       print("[A_Image >> requestPOST() :: 사진 업로드 요청 에러]")
-                       print("error : ", "json 형식 데이터 >> String 변환 에러")
-                       print("====================================")
-                       print("")
-                       return
-                   }
+               
                    DispatchQueue.main.async {
                        self.present(sheet2, animated: true)
-                       print("")
-                       print("====================================")
-                       print("[A_Image >> requestPOST() :: 사진 업로드 요청 성공]")
-                       print("allHeaderFields : ", (response as? HTTPURLResponse)?.allHeaderFields ?? "")
-                       print("resultCode : ", resultCode)
-                       print("resultLen : ", resultLen)
-                       print("resultString : ", resultString)
-                       print("====================================")
-                       print("")
                    }
                } catch {
-                   print("")
-                   print("====================================")
-                   print("[A_Image >> requestPOST() :: 사진 업로드 요청 에러]")
-                   print("error : ", "Trying to convert JSON data to string")
-                   print("====================================")
-                   print("")
                    return
                }
            }.resume()
@@ -379,21 +299,11 @@ extension ProfileEditViewController: UIImagePickerControllerDelegate, UINavigati
     // MARK: [사진, 비디오 선택을 했을 때 호출되는 메소드]
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if var img = info[UIImagePickerController.InfoKey.originalImage]{
-            //img = img.resized(toWidth: 90.0) ?? img
-            // [앨범에서 선택한 사진 정보 확인]
-            print("")
-            print("====================================")
-            print("[A_Image >> imagePickerController() :: 앨범에서 선택한 사진 정보 확인 및 사진 표시 실시]")
-            print("[사진 정보 :: ", info)
-            print("====================================")
-            print("")
             
             img = (img as? UIImage)!.resized(toWidth: 90.0) ?? img
             imagepickButton.layer.cornerRadius = imagepickButton.layer.frame.size.width / 2
             imagepickButton.setImage(img as? UIImage, for: .normal)
             // [이미지 뷰에 앨범에서 선택한 사진 표시 실시]
-            //self.imageView.image = img as? UIImage
-            //imagepickButton.setImage((img as! UIImage), for: .normal)
             
             // [이미지 데이터에 선택한 이미지 지정 실시]
             self.imageData = (img as? UIImage)!.jpegData(compressionQuality: 0.8) as NSData? // jpeg 압축 품질 설정
@@ -412,11 +322,6 @@ extension ProfileEditViewController: UIImagePickerControllerDelegate, UINavigati
     
     // MARK: [사진, 비디오 선택을 취소했을 때 호출되는 메소드]
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        print("")
-        print("===============================")
-        print("[A_Image >> imagePickerControllerDidCancel() :: 사진, 비디오 선택 취소 수행 실시]")
-        print("===============================")
-        print("")
         
         // [이미지 파커 닫기 수행]
         self.dismiss(animated: true, completion: nil)

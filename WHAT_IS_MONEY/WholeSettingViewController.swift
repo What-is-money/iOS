@@ -51,7 +51,7 @@ class WholeSettingViewController: UIViewController {
     func getUserInfo() {
         let useridx = UserDefaults.standard.integer(forKey: "userIdx")
         let accessToken = UserDefaults.standard.string(forKey: "accessToken")
-        print(useridx)
+
         guard let url = URL(string: "https://www.pigmoney.xyz/users/profile/\(useridx)") else {
                 print("Error: cannot create URL")
                 return
@@ -71,7 +71,6 @@ class WholeSettingViewController: UIViewController {
                     return
                 }
 
-                print(String(data: data, encoding: .utf8)!)
                 guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
                     print("Error: HTTP request failed")
                     return
@@ -98,7 +97,6 @@ class WholeSettingViewController: UIViewController {
                         let id = result ["userId"] as? String
                         let image = result ["image"] as? String
                       
-                        print(result)
                     
                         if (image?.count == 0 || image == nil) {
                             self.ProfileImg.image = UIImage(named: "jinperson")
@@ -112,7 +110,6 @@ class WholeSettingViewController: UIViewController {
                                 // 뷰의 경계에 맞춰준다
                                 self.ProfileImg.clipsToBounds = true
                                 self.ProfileImg.image = decodedImg
-                                print("img attached")
                                 
                             }
                         }
@@ -136,7 +133,6 @@ class WholeSettingViewController: UIViewController {
        }
  
     @IBAction func toggleClicked(_ sender: UISwitch) {
-        print(AlertSwitch.isOn)
         let accessToken = UserDefaults.standard.string(forKey: "accessToken")
         let userIdx = UserDefaults.standard.integer(forKey: "userIdx")
         guard let url = URL(string: "https://www.pigmoney.xyz/users/alarm") else {
@@ -165,7 +161,7 @@ class WholeSettingViewController: UIViewController {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type") // the request is JSON
         request.setValue("application/json", forHTTPHeaderField: "Accept") // the response expected to be in JSON format
         request.httpBody = jsonData
-        print(String(data: jsonData, encoding: .utf8)!)
+
         DispatchQueue.main.async {
             URLSession.shared.dataTask(with: request) { data, response, error in
                 guard error == nil else {
@@ -177,7 +173,7 @@ class WholeSettingViewController: UIViewController {
                     print("Error: Did not receive data")
                     return
                 }
-                print(String(data: data, encoding: .utf8)!)
+ 
                 guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
                     print("Error: HTTP request failed")
                     return
@@ -196,7 +192,6 @@ class WholeSettingViewController: UIViewController {
                             print("Error: Couldn't print JSON in String")
                             return
                         }
-                        print(prettyPrintedJson)
                         
                         let isSuccess = jsonObject["isSuccess"] as? Bool
                         let result = jsonObject["result"] as? String
@@ -566,7 +561,7 @@ class WholeSettingViewController: UIViewController {
     @objc func showLogoutAlert(sender:UIGestureRecognizer){
         let alert = UIAlertController(title: "로그아웃", message: "로그아웃 하시겠습니까?", preferredStyle: .alert)
         let confirm = UIAlertAction(title: "로그아웃", style: .destructive, handler: {(_) -> Void in
-            print("Ok button tapped")
+
             let accessToken = UserDefaults.standard.string(forKey: "accessToken")
             let refreshToken = UserDefaults.standard.string(forKey: "refreshToken")
             
@@ -608,6 +603,7 @@ class WholeSettingViewController: UIViewController {
                         print("Error: Did not receive data")
                         return
                     }
+
                     print(String(data: data, encoding: .utf8)!)
                     
                     guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
@@ -628,19 +624,17 @@ class WholeSettingViewController: UIViewController {
                                 print("Error: Couldn't print JSON in String")
                                 return
                             }
-                            print(prettyPrintedJson)
-                            
+    
+                     
                             let isSuccess = jsonObject["isSuccess"] as? Bool
                             
                             if isSuccess == true {
-                                print("로그아웃 완료")
                                 UserDefaults.standard.removeObject(forKey: "userIdx") //제거
                                 UserDefaults.standard.removeObject(forKey: "accessToken") //제거
                                 UserDefaults.standard.removeObject(forKey: "refreshToken") //제거
                                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
                                 vc.modalPresentationStyle = .fullScreen
-                                print(UserDefaults.standard.dictionaryRepresentation())
-                                self.present(vc, animated: true)
+                                self.navigationController?.pushViewController(vc, animated: true)
                             } else {
                               print("오류 발생")
                             }
@@ -671,7 +665,7 @@ class WholeSettingViewController: UIViewController {
         let alert = UIAlertController(title: "경고", message: "그동안 열심히 노력하신 목표와 여러분의 일꾼 아기돼지들을 다신 볼 수 없습니다. 탈퇴하시겠습니까?", preferredStyle: .alert)
         alert.setValue(attributedString, forKey: "attributedMessage")
         let confirm = UIAlertAction(title: "탈퇴", style: .destructive, handler: {(_) -> Void in
-            print("Ok button tapped")
+
             let userIdx = UserDefaults.standard.integer(forKey: "userIdx")
             let accessToken = UserDefaults.standard.string(forKey: "accessToken")
     
@@ -701,7 +695,7 @@ class WholeSettingViewController: UIViewController {
             request.setValue("application/json", forHTTPHeaderField: "Content-Type") // the request is JSON
             request.setValue("application/json", forHTTPHeaderField: "Accept") // the response expected to be in JSON format
             request.httpBody = jsonData
-            print(String(data: jsonData, encoding: .utf8)!)
+
             DispatchQueue.main.async {
                 URLSession.shared.dataTask(with: request) { data, response, error in
                     guard error == nil else {
@@ -732,22 +726,24 @@ class WholeSettingViewController: UIViewController {
                                 print("Error: Couldn't print JSON in String")
                                 return
                             }
-                            print(prettyPrintedJson)
+     
                             
                             let isSuccess = jsonObject["isSuccess"] as? Bool
                             
                             if isSuccess == true {
-                                print("회원탈퇴 완료")
                                 UserDefaults.standard.removeObject(forKey: "userIdx") //제거
                                 UserDefaults.standard.removeObject(forKey: "accessToken") //제거
                                 UserDefaults.standard.removeObject(forKey: "refreshToken") //제거
                                 let sheet = UIAlertController(title: "안내", message: "안전하게 회원탈퇴 되었습니다", preferredStyle: .alert)
+                                
                                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
                                 vc.modalPresentationStyle = .fullScreen
                                 sheet.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ -> Void in
-                                    self.present(vc, animated: true) }))
+                                    self.navigationController?.pushViewController(vc, animated: true)
+                                    
+                                }))
                                 self.present(sheet, animated: true)
-                                print(UserDefaults.standard.dictionaryRepresentation())
+   
                                 
                             } else {
                               print("오류 발생")

@@ -47,7 +47,7 @@ class AgreePrivacyPolicyViewController: UIViewController {
     
     @IBAction func AgreeClicked(_ sender: UIButton) {
         let uploadDataModel = RegisterData(userId: userId!, password: password!, confirmPassword: confirmPassword!, name: name!, email: email!, agree: true, idCheck: true)
-        print(uploadDataModel)
+
         guard let url = URL(string: "https://www.pigmoney.xyz/users/signup") else {
             print("Error: cannot create URL")
             return
@@ -63,7 +63,7 @@ class AgreePrivacyPolicyViewController: UIViewController {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type") // the request is JSON
         request.setValue("application/json", forHTTPHeaderField: "Accept") // the response expected to be in JSON format
         request.httpBody = jsonData
-        print(String(data: jsonData, encoding: .utf8)!)
+
         DispatchQueue.main.async {
             URLSession.shared.dataTask(with: request) { data, response, error in
                 guard error == nil else {
@@ -75,7 +75,7 @@ class AgreePrivacyPolicyViewController: UIViewController {
                     print("Error: Did not receive data")
                     return
                 }
-                print(String(data: data, encoding: .utf8)!)
+ 
                 guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
                     print("Error: HTTP request failed")
                     return
@@ -94,7 +94,7 @@ class AgreePrivacyPolicyViewController: UIViewController {
                         print("Error: Couldn't print JSON in String")
                         return
                     }
-                    print(prettyPrintedJson)
+ 
                     let isSuccess = jsonObject["isSuccess"] as? Bool
                     if isSuccess == true {
                         print("회원가입 성공")
