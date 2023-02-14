@@ -62,7 +62,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                         return
                     }
                     
-                    print(String(data: data, encoding: .utf8)!)
+            
                     guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
                         print("Error: HTTP request failed")
                         return
@@ -87,10 +87,10 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                                 self.IDCheckLabel?.text = "사용가능한 아이디입니다."
                                 self.IDCheckBtn.isEnabled = false
                                 self.isIdChecked = true
-                                print("사용가능한 아이디입니다.")
+                     
                             } else if result == "이미 사용중인 아이디입니다." {
                                 self.IDCheckLabel?.text = "이미 사용중인 아이디입니다."
-                                print("이미 사용중인 아이디입니다.")
+                        
                             } else {
                                 self.IDCheckLabel?.text = "아이디 형식이 올바르지 않습니다."
                             }

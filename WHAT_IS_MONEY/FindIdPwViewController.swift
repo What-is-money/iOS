@@ -161,7 +161,7 @@ class FindIdPwViewController: UIViewController, UITextFieldDelegate {
         // Create the url request
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        request.setValue(accessToken!, forHTTPHeaderField: "X-ACCESS-TOKEN")
+        request.setValue(accessToken, forHTTPHeaderField: "X-ACCESS-TOKEN")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type") // the request is JSON
         request.setValue("application/json", forHTTPHeaderField: "Accept") // the response expected to be in JSON format
         request.httpBody = jsonData
