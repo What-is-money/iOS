@@ -9,11 +9,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" restorationIdentifier="RecordTableViewCell" selectionStyle="default" indentationWidth="1" reuseIdentifier="RecordTableViewCell" rowHeight="200" id="KGk-i7-Jjw" customClass="RecordTableViewCell" customModule="WHAT_IS_MONEY" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="RecordTableViewCell" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="1" reuseIdentifier="RecordTableViewCell" rowHeight="200" id="KGk-i7-Jjw" customClass="RecordTableViewCell" customModule="WHAT_IS_MONEY" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="372" height="136"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="372" height="136"/>
+                <rect key="frame" x="0.0" y="0.0" width="341.66666666666669" height="136"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="2BM-Zv-lW7">
@@ -55,9 +55,9 @@
                                             <constraint firstAttribute="bottom" secondItem="QMY-EW-ZWb" secondAttribute="bottom" id="4hg-zt-pBq"/>
                                             <constraint firstAttribute="bottom" secondItem="mXE-R5-1II" secondAttribute="bottom" id="7kQ-qC-Ppj"/>
                                             <constraint firstItem="mXE-R5-1II" firstAttribute="leading" secondItem="aas-cA-YGD" secondAttribute="leading" id="BNV-tc-J8p"/>
-                                            <constraint firstItem="eN3-tm-75c" firstAttribute="leading" secondItem="mXE-R5-1II" secondAttribute="trailing" constant="69" id="DbG-Sh-jav"/>
+                                            <constraint firstItem="eN3-tm-75c" firstAttribute="leading" relation="lessThanOrEqual" secondItem="mXE-R5-1II" secondAttribute="trailing" constant="69" id="DbG-Sh-jav"/>
                                             <constraint firstItem="QMY-EW-ZWb" firstAttribute="top" secondItem="aas-cA-YGD" secondAttribute="top" id="Mpj-Bd-ZvP"/>
-                                            <constraint firstItem="QMY-EW-ZWb" firstAttribute="leading" secondItem="eN3-tm-75c" secondAttribute="trailing" constant="69" id="p5P-Tv-f4s"/>
+                                            <constraint firstItem="QMY-EW-ZWb" firstAttribute="leading" relation="lessThanOrEqual" secondItem="eN3-tm-75c" secondAttribute="trailing" constant="69" id="p5P-Tv-f4s"/>
                                             <constraint firstItem="eN3-tm-75c" firstAttribute="top" secondItem="aas-cA-YGD" secondAttribute="top" id="qVb-6y-gEi"/>
                                             <constraint firstAttribute="bottom" secondItem="eN3-tm-75c" secondAttribute="bottom" id="u5d-P0-wc7"/>
                                         </constraints>
@@ -85,8 +85,8 @@
                                             </label>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="HSS-UI-OqW" firstAttribute="leading" secondItem="knx-wq-YwB" secondAttribute="trailing" constant="69" id="LIh-mJ-ezi"/>
-                                            <constraint firstItem="knx-wq-YwB" firstAttribute="leading" secondItem="old-57-24M" secondAttribute="trailing" constant="69" id="a3z-iS-RPR"/>
+                                            <constraint firstItem="HSS-UI-OqW" firstAttribute="leading" relation="lessThanOrEqual" secondItem="knx-wq-YwB" secondAttribute="trailing" constant="69" id="LIh-mJ-ezi"/>
+                                            <constraint firstItem="knx-wq-YwB" firstAttribute="leading" relation="lessThanOrEqual" secondItem="old-57-24M" secondAttribute="trailing" constant="69" id="a3z-iS-RPR"/>
                                             <constraint firstAttribute="bottom" secondItem="old-57-24M" secondAttribute="bottom" id="hPS-1d-Isy"/>
                                             <constraint firstAttribute="bottom" secondItem="HSS-UI-OqW" secondAttribute="bottom" id="lXD-PS-5Pb"/>
                                             <constraint firstItem="knx-wq-YwB" firstAttribute="top" secondItem="aux-Nh-MCY" secondAttribute="top" id="qim-g4-vb1"/>
@@ -124,33 +124,25 @@
                                             <constraint firstItem="mU5-Zv-4bS" firstAttribute="top" secondItem="xPO-9R-2HM" secondAttribute="top" id="FBq-8M-8VW"/>
                                             <constraint firstAttribute="bottom" secondItem="k0Y-th-v2E" secondAttribute="bottom" id="Rn6-QD-bGd"/>
                                             <constraint firstItem="FuU-II-bU3" firstAttribute="top" secondItem="xPO-9R-2HM" secondAttribute="top" id="TTt-5r-2rw"/>
-                                            <constraint firstItem="k0Y-th-v2E" firstAttribute="leading" secondItem="mU5-Zv-4bS" secondAttribute="trailing" constant="69" id="hxr-F6-YGf"/>
+                                            <constraint firstItem="k0Y-th-v2E" firstAttribute="leading" relation="lessThanOrEqual" secondItem="mU5-Zv-4bS" secondAttribute="trailing" constant="69" id="hxr-F6-YGf"/>
                                             <constraint firstItem="mU5-Zv-4bS" firstAttribute="leading" secondItem="xPO-9R-2HM" secondAttribute="leading" id="rLD-2h-fbv"/>
                                             <constraint firstAttribute="bottom" secondItem="FuU-II-bU3" secondAttribute="bottom" id="umh-m9-5GD"/>
-                                            <constraint firstItem="FuU-II-bU3" firstAttribute="leading" secondItem="k0Y-th-v2E" secondAttribute="trailing" constant="69" id="xaB-iB-kqG"/>
+                                            <constraint firstItem="FuU-II-bU3" firstAttribute="leading" relation="lessThanOrEqual" secondItem="k0Y-th-v2E" secondAttribute="trailing" constant="69" id="xaB-iB-kqG"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
                             </stackView>
                         </subviews>
                     </stackView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sa3-HK-Vlv">
-                        <rect key="frame" x="305" y="55" width="31" height="26"/>
-                        <state key="normal" title="Button"/>
-                        <buttonConfiguration key="configuration" style="plain" image="Vector"/>
-                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="2BM-Zv-lW7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="36" id="8qA-Qx-TIr"/>
-                    <constraint firstAttribute="trailing" secondItem="Sa3-HK-Vlv" secondAttribute="trailing" constant="36" id="ZPa-tQ-hO3"/>
                     <constraint firstItem="2BM-Zv-lW7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="cX1-PC-J3a"/>
-                    <constraint firstItem="Sa3-HK-Vlv" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="mcx-SM-9F1"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="DateCell" destination="k28-wH-ovr" id="Xuf-e8-sVg"/>
-                <outlet property="arrowButton" destination="Sa3-HK-Vlv" id="5gA-SO-3KC"/>
                 <outlet property="firstCategoryLabel" destination="eN3-tm-75c" id="oYH-NK-HwD"/>
                 <outlet property="firstPriceLabel" destination="QMY-EW-ZWb" id="VI7-n8-Yhe"/>
                 <outlet property="firstSortLabel" destination="mXE-R5-1II" id="2PI-Vh-ByA"/>
@@ -164,7 +156,4 @@
             <point key="canvasLocation" x="76.33587786259541" y="-43.661971830985919"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="Vector" width="7" height="12"/>
-    </resources>
 </document>

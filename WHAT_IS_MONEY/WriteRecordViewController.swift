@@ -393,13 +393,24 @@ class WriteRecordViewController: UIViewController, UITextFieldDelegate {
         categorytype = sender.text
     }
     
-    @IBAction func enrollmoney(_ sender: UIButton) {
-        moneyAmount = MoneyTextField.text ?? "0"
-    }
     
     @IBAction func tapRegisterButton(_ sender: UIButton) { // 4. 각 변수들을 상수로 만들고 그 상수들을 record(각자 화면의 정보를 담을 구조체) 객체화 시킨 다음
+        MoneyTextField.endEditing(true)
+        moneyAmount = MoneyTextField.text ?? nil
+        
+        if moneyAmount?.isEmpty ?? true || categorytype?.isEmpty ?? true {
+            print(moneyAmount?.isEmpty as Any)
+            print(categorytype?.isEmpty as Any)
+            let sheet = UIAlertController(title: "경고", message: "모든 입력칸에 올바르게 입력하였는지 확인해주세요", preferredStyle: .alert)
+            sheet.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in print("빈 입력칸 확인") }))
+            present(sheet, animated: true)
+            return
+        }
+        
+        
         self.postRecord()
         if flag == 1 {
+            
             guard let consumeViewController = self.storyboard?.instantiateViewController(withIdentifier: "ConsumeViewController") as? ConsumeViewController else {return}
             consumeViewController.goalIdx = self.goalIdx
             consumeViewController.recordDate = self.RegisterCellDatePicker.date.toString()

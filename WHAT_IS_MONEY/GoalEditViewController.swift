@@ -495,6 +495,25 @@ class GoalEditViewController: UIViewController, UINavigationControllerDelegate &
     
     @IBAction func tapCompleteButton(_ sender: UIButton) {
         
+        let goaltext = GoalNameTextField.text
+        let goalpricetext = GoalPriceTextField.text
+        let initpricetext = PriceTextField.text
+        
+        
+        if ImgUI.currentImage == UIImage(named: "plus") || goaltext?.isEmpty ?? true || goalpricetext?.isEmpty ?? true || initpricetext?.isEmpty ?? true {
+            print(ImgUI.currentImage == UIImage(named: "plus"))
+            print(goaltext?.isEmpty as Any)
+            print(goalpricetext?.isEmpty as Any)
+            print(initpricetext?.isEmpty as Any)
+            let sheet = UIAlertController(title: "경고", message: "모든 입력칸에 올바르게 입력하였는지 확인해주세요", preferredStyle: .alert)
+            sheet.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in print("빈 입력칸 확인") }))
+            present(sheet, animated: true)
+            return
+        }
+        
+        
+        
+        
         self.progressStart(onView: self.view)
                
                

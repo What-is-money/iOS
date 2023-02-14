@@ -539,14 +539,6 @@ class WholeSettingViewController: UIViewController {
 
 
         ① 이 개인정보처리방침은 2023년 1월 1부터 적용됩니다.
-
-        ② 이전의 개인정보 처리방침은 아래에서 확인하실 수 있습니다.
-
-        예시 ) - 20XX. X. X ~ 20XX. X. X 적용 (클릭)
-
-        예시 ) - 20XX. X. X ~ 20XX. X. X 적용 (클릭)
-
-        예시 ) - 20XX. X. X ~ 20XX. X. X 적용 (클릭)
         
         """,
             attributes: [

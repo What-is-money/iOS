@@ -165,6 +165,8 @@ class RecordViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 cell.firstPriceLabel.textColor = UIColor(red: 0.3255, green: 0.4667, blue: 0.9647, alpha: 1.0)
             } else {
                 cell.firstSortLabel.text = "지출"
+                cell.firstSortLabel.textColor = UIColor(red: 0.92, green: 0.39, blue: 0.27, alpha: 1.00)
+                cell.firstPriceLabel.textColor = UIColor(red: 0.92, green: 0.39, blue: 0.27, alpha: 1.00)
                
             }
             cell.firstCategoryLabel.text = recorddata.records[0].category
@@ -176,6 +178,8 @@ class RecordViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 cell.secondPriceLabel.textColor = UIColor(red: 0.3255, green: 0.4667, blue: 0.9647, alpha: 1.0)
             } else {
                 cell.secondSortLabel.text = "지출"
+                cell.secondSortLabel.textColor = UIColor(red: 0.92, green: 0.39, blue: 0.27, alpha: 1.00)
+                cell.secondPriceLabel.textColor = UIColor(red: 0.92, green: 0.39, blue: 0.27, alpha: 1.00)
                 
             }
             cell.secondCategoryLabel.text = recorddata.records[1].category
@@ -187,7 +191,9 @@ class RecordViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 cell.thirdPriceLabel.textColor = UIColor(red: 0.3255, green: 0.4667, blue: 0.9647, alpha: 1.0)
             } else {
                 cell.thirdSortLabel.text = "지출"
-              
+                cell.thirdSortLabel.textColor = UIColor(red: 0.92, green: 0.39, blue: 0.27, alpha: 1.00)
+                cell.thirdPriceLabel.textColor = UIColor(red: 0.92, green: 0.39, blue: 0.27, alpha: 1.00)
+                
             }
             cell.thirdCategoryLabel.text = recorddata.records[2].category
             cell.thirdPriceLabel.text = String(recorddata.records[2].amount)
@@ -207,6 +213,8 @@ class RecordViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 cell.firstPriceLabel.textColor = UIColor(red: 0.3255, green: 0.4667, blue: 0.9647, alpha: 1.0)
             } else {
                 cell.firstSortLabel.text = "지출"
+                cell.firstSortLabel.textColor =  UIColor(red: 0.92, green: 0.39, blue: 0.27, alpha: 1.00)
+                cell.firstPriceLabel.textColor =  UIColor(red: 0.92, green: 0.39, blue: 0.27, alpha: 1.00)
             }
             cell.firstCategoryLabel.text = recorddata.records[0].category
             cell.firstPriceLabel.text = String(recorddata.records[0].amount)
@@ -216,6 +224,10 @@ class RecordViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 cell.secondPriceLabel.textColor = UIColor(red: 0.3255, green: 0.4667, blue: 0.9647, alpha: 1.0)
             } else {
                 cell.secondSortLabel.text = "지출"
+                cell.secondSortLabel.textColor = UIColor(red: 0.92, green: 0.39, blue: 0.27, alpha: 1.00)
+                cell.secondPriceLabel.textColor = UIColor(red: 0.92, green: 0.39, blue: 0.27, alpha: 1.00)
+                
+                
             }
             cell.secondCategoryLabel.text = recorddata.records[1].category
             cell.secondPriceLabel.text = String(recorddata.records[1].amount)
@@ -239,6 +251,8 @@ class RecordViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 cell.firstPriceLabel.textColor = UIColor(red: 0.3255, green: 0.4667, blue: 0.9647, alpha: 1.0)
             } else {
                 cell.firstSortLabel.text = "지출"
+                cell.firstSortLabel.textColor = UIColor(red: 0.92, green: 0.39, blue: 0.27, alpha: 1.00)
+                cell.firstPriceLabel.textColor = UIColor(red: 0.92, green: 0.39, blue: 0.27, alpha: 1.00)
             }
             cell.firstCategoryLabel.text = recorddata.records[0].category
             cell.firstPriceLabel.text = String(recorddata.records[0].amount)

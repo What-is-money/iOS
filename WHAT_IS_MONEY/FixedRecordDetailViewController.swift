@@ -409,9 +409,25 @@ class FixedRecordViewController: UIViewController, UITextFieldDelegate {
     
     
     @IBAction func tapEditButton(_ sender: UIButton) {
+        MoneyTextField.endEditing(true)
+        moneyAmount = MoneyTextField.text ?? nil
+        categorytype = tfInput.text ?? nil
+        if moneyAmount?.isEmpty ?? false || categorytype?.isEmpty ?? false {
+            print(moneyAmount?.isEmpty as Any)
+            print(categorytype?.isEmpty as Any)
+            let sheet = UIAlertController(title: "경고", message: "모든 입력칸에 올바르게 입력하였는지 확인해주세요", preferredStyle: .alert)
+            sheet.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in print("빈 입력칸 확인") }))
+            present(sheet, animated: true)
+            return
+        }
+        
+        
+        
         self.patchRecord()
         
         if flag == 1 {
+            
+            
             guard let consumeViewController = self.storyboard?.instantiateViewController(withIdentifier: "ConsumeViewController") as? ConsumeViewController else {return}
             consumeViewController.goalIdx = self.goalIdx
             consumeViewController.recordDate = self.RecordDatePicker.date.toString()
